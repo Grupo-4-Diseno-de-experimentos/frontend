@@ -1,0 +1,23 @@
+<section class="max-w-screen-xl mx-auto p-6">
+  <h2 class="text-3xl font-bold mb-8 text-center">Planes de Comida</h2>
+
+  <div class="flex gap-4">
+    <div class="mb-4">
+      <label for="goalFilter" class="block text-sm font-medium text-gray-700">Filtrar por Categoría</label>
+      <select id="goalFilter" [(ngModel)]="selectedCategory" (change)="filterByCategory()" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        <option value="">Todos</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="goalFilter" class="block text-sm font-medium text-gray-700">Filtrar por Objetivo</label>
+      <select id="goalFilter" [(ngModel)]="selectedGoal" (change)="filterByGoal()" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        <option value="">Todos</option>
+        <option *ngFor="let goal of goals" [value]="goal">{{ goal }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-meal-item  *ngFor="let plan of filteredMealPlans" [plan]="plan"></app-meal-item>
+  </div>
+</section>
