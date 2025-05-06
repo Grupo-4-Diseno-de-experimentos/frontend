@@ -7,9 +7,9 @@
     <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm.value)">
       <div class="name-row">
         <div class="form-group">
-          <label for="firstName">Nombre:</label>
-          <input type="text" id="firstName" name="firstName" ngModel required>
-          <div *ngIf="registerForm.controls['firstName']?.invalid && registerForm.controls['firstName']?.touched" class="error-message">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" ngModel required>
+          <div *ngIf="registerForm.controls['name']?.invalid && registerForm.controls['name']?.touched" class="error-message">
             El nombre es requerido.
           </div>
         </div>

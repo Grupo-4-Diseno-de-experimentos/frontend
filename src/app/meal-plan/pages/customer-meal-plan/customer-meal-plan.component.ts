@@ -10,8 +10,9 @@ import {MealItemComponent} from '../../components/meal-item/meal-item.component'
 @Component({
   selector: 'app-customer-meal-plan',
   imports: [MatCardActions, MatCardContent, MatCardModule, MatCard, RouterLink, MatButton, NgForOf, FormsModule
-  , MealItemComponent],
+    , MealItemComponent],
   templateUrl: './customer-meal-plan.component.html',
+  standalone: true,
   styleUrl: './customer-meal-plan.component.css'
 })
 export class CustomerMealPlanComponent implements OnInit {

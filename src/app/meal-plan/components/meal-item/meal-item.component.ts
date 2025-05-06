@@ -18,6 +18,7 @@ import {Router, RouterLink} from '@angular/router';
     RouterLink,
   ],
   templateUrl: './meal-item.component.html',
+  standalone: true,
   styleUrl: './meal-item.component.css'
 })
 export class MealItemComponent {
