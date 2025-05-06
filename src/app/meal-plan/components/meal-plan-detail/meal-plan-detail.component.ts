@@ -5,6 +5,8 @@ import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import {MealPlan, MealPlanRecipe, Recipe} from '../../model/meal-plan.entity';
 import {MealPlanService} from '../../services/meal-plan.service';
+import {UserService} from '../../../user/services/user.service';
+
 import {
   MatCard,
   MatCardActions, MatCardAvatar,
@@ -62,8 +64,11 @@ export class MealPlanDetailComponent implements OnInit{
   recipesIdsByMealPlanRecipes: number[] = [];
   isEditing = false;
 
-  constructor(private route: ActivatedRoute, private mealPlanService: MealPlanService) {}
+  constructor(private route: ActivatedRoute, private mealPlanService: MealPlanService, private userService: UserService) {}
 
+  get isNutricionist() {
+    return this.userService.currentRole === 'nutritionist';
+  }
   ngOnInit(): void {
     this.planId = this.route.snapshot.paramMap.get('id')!;
     this.fetchMealPlanDetails();

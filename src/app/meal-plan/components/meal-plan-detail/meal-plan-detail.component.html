@@ -18,7 +18,7 @@
           <mat-form-field class="w-full">
             <mat-label>Título</mat-label>
             <input matInput [(ngModel)]="mealPlan.name" [readonly]="!isEditing" class="text-gray-800" />
-            <mat-icon matSuffix>edit</mat-icon>
+            <!--<mat-icon matSuffix>edit</mat-icon>-->
           </mat-form-field>
 
           <mat-form-field class="w-full">
@@ -101,15 +101,15 @@
 
 
     <mat-card-actions class="p-6 bg-gray-50 flex flex-wrap justify-end gap-4 mt-10">
-      <button mat-raised-button color="primary" *ngIf="!isEditing" (click)="enableEdit()" class="bg-indigo-600 hover:bg-indigo-700">
+      <button mat-raised-button color="primary" *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="bg-indigo-600 hover:bg-indigo-700">
         <mat-icon class="mr-1">edit</mat-icon> Editar
       </button>
 
-      <button mat-raised-button color="accent" *ngIf="isEditing" (click)="saveChanges()" class="bg-emerald-600 hover:bg-emerald-700">
+      <button mat-raised-button color="accent" *ngIf="isNutricionist && isEditing" (click)="saveChanges()" class="bg-emerald-600 hover:bg-emerald-700">
         <mat-icon class="mr-1">save</mat-icon> Guardar Cambios
       </button>
 
-      <button mat-raised-button color="warn" *ngIf="isEditing" (click)="cancelEdit()" class="bg-red-600 hover:bg-red-700">
+      <button mat-raised-button color="warn" *ngIf="isNutricionist && isEditing" (click)="cancelEdit()" class="bg-red-600 hover:bg-red-700">
         <mat-icon class="mr-1">close</mat-icon> Cancelar
       </button>
     </mat-card-actions>

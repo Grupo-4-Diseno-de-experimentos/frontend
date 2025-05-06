@@ -5,8 +5,6 @@ import {CustomerMealPlanComponent} from './pages/customer-meal-plan/customer-mea
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 
-
-
 @NgModule({
   declarations: [
 
