@@ -57,11 +57,19 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #a0cb64;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.icon-container img {
+  max-width: 80%;
+  max-height: 80%;
+  height: auto;
+  width: auto;
 }
 
 .icon-container svg {
@@ -108,14 +116,22 @@ h2 {
 }
 
 .goal-icon {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: #e0f2f7;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 15px;
+  overflow: hidden;
+}
+
+.goal-icon img {
+  max-width: 80%;
+  max-height: 80%;
+  height: auto;
+  width: auto;
 }
 
 .goal-icon svg {

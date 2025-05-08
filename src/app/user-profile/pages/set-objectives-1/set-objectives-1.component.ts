@@ -14,7 +14,6 @@ export class SetObjectives1Component {
 
   selectGoal(goal: string) {
     console.log('Objetivo seleccionado:', goal);
-
-    this.router.navigate(['/user-profile/objective-settings']); // Cambia esto a la siguiente pantalla
+    this.router.navigate(['/set-objectives-2']);
   }
 }
