@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import {AuthService} from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,16 +20,24 @@ export class LoginPageComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   onSubmit(formData: any) {
-    this.authService.login(formData).subscribe({
-      next: (response:any) => {
-        console.log('Login exitoso: ', response);
-        this.router.navigate(['/']);
-      },
-      error: (err) =>{
-        console.error('Error en login', err);
-        this.errorMessage = 'Correo o contraseña incorrectos'
-      }
-    })
+    console.log('Datos de inicio de sesión:', formData);
 
+    this.authService.login(formData).subscribe({
+      next: (response: any) => {
+        console.log('Login exitoso: ', response);
+        if (formData.affiliateCode) {
+          console.log('Código de afiliado:', formData.affiliateCode);
+
+          this.router.navigate(['/']);
+        } else {
+
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => {
+        console.error('Error en login', err);
+        this.errorMessage = 'Correo o contraseña incorrectos';
+      }
+    });
   }
 }
