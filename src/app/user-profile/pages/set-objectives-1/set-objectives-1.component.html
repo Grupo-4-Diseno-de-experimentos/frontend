@@ -1,0 +1,51 @@
+<div class="set-goal-container">
+  <div class="header">
+    <button class="back-button" routerLink="/start-objectives">
+      <img src="https://i.postimg.cc/bvgMQ9T1/back.png" alt="Flecha de Retroceso">
+    </button>
+    <div class="progress-bar">
+      <div class="progress-indicator" style="width: 20%;"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="icon-container">
+    </div>
+    <h2>¿Cuál es tu objetivo?</h2>
+    <p class="subtitle">Calcularemos tus calorías necesarias para lograrlo</p>
+
+    <div class="goal-options">
+      <button class="goal-button" (click)="selectGoal('perder-grasa')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/hvXTCKqK/image.png" alt="Icono Perder Grasa">
+        </div>
+        <div class="goal-text">
+          <h3>Perder Grasa</h3>
+          <p>Optimiza la pérdida de peso y conserva tu masa muscular</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectGoal('ganar-musculo')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/FsKB4ShK/image.png" alt="Icono Ganar Músculo">
+        </div>
+        <div class="goal-text">
+          <h3>Ganar Músculo</h3>
+          <p>Incrementa tu peso y hazte más fuerte</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectGoal('mantener-peso')">
+        <div class="goal-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 12a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="goal-text">
+          <h3>Mantener Peso</h3>
+          <p>Mantén tu peso estable y busca la recomposición corporal</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

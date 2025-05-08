@@ -1,0 +1,52 @@
+.personalize-objectives-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+.illustration-container {
+  margin-bottom: 30px;
+}
+
+.simple-illustration {
+  width: 100px;
+  height: 100px;
+}
+
+.text-content {
+  margin-bottom: 40px;
+  max-width: 80%;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 15px;
+
+}
+
+p {
+  color: #666;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.start-button {
+  background-color: #a0cb64;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #87b34d;
+}
