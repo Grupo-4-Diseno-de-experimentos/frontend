@@ -89,9 +89,11 @@ export class RecipeService {
       map(data => MacrosAssembler.toEntityFromResponseArray(data))
     )
   }
-  getIngredientById(id: string): Observable<Ingredient[]> {
-    return this.http.get<IngredientResponse[]>(`${env.apiUrl}ingredients${id}`).pipe(
-      map(data => IngredientAssembler.toEntityFromResponseArray(data))
+  getIngredientsByRecipeId(id: string): Observable<Ingredient[]> {
+    return this.http.get<IngredientResponse[]>(`${env.apiUrl}ingredients`).pipe(
+      map(data => IngredientAssembler.toEntityFromResponseArray(data)
+        .filter(ingredient => ingredient.id.toString() === id)
+      )
     );
   }
   updateRecipe(recipeId: string, data: {recipe: Recipe; recipesIngredient: RecipeIngredient[]}): Observable<any> {

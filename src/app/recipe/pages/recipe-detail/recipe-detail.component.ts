@@ -81,22 +81,22 @@ export class RecipeDetailComponent implements OnInit {
     });
     this.recipeId = this.route.snapshot.paramMap.get('id')!;
     console.log(this.recipeId);
-    this.fetchRecipeDetails();
-    this.loadRecipe();
-    this.loadIngredients();
     this.fetchRecipeIngredients()
+    this.fetchRecipeDetails();
+    this.getRecipeById();
+    this.getAllIngredients();
   }
   get isNutricionist() {
     return this.userService.isNutricionist();
   }
-  loadRecipe() {
+  getRecipeById() {
     this.recipeService.getRecipeById(this.recipeId).subscribe(recipe => {
       this.recipe = recipe;
 /*      this.selectedIngredients = [...recipe.ingredients];*/
     });
   }
 
-  loadIngredients() {
+  getAllIngredients() {
     this.recipeService.getAllIngredients().subscribe(data => {
       this.filteredIngredients = data;
     });
@@ -118,17 +118,8 @@ export class RecipeDetailComponent implements OnInit {
     this.selectedIngredients.splice(index, 1);
   }
 
-  startEdit() {
-    this.recipeBackup = JSON.parse(JSON.stringify(this.recipe));
-    this.editMode = true;
-  }
-
   cancelEdit() {
-/*    if (this.recipeBackup) {
-      this.RDB = JSON.parse(JSON.stringify(this.recipeBackup));
-      this.selectedIngredients = [...this.recipeBackup.ingredients];
-    }
-    this.editMode = false;*/
+    this.editMode = false;
   }
   fetchRecipeDetails(): void {
     this.recipeService.getRecipeById(this.recipeId).subscribe({
@@ -167,10 +158,10 @@ export class RecipeDetailComponent implements OnInit {
   }
   fetchIngredientsByRecipeId(): void {
     this.ingredientsIdsByRecipesIngredient.forEach(id => {
-      this.recipeService.getIngredientById(id.toString()).subscribe({
+      this.recipeService.getIngredientsByRecipeId(id.toString()).subscribe({
         next: (ingredients) => {
           ingredients.forEach(ingredient => this.ingredientsByRecipeIngredientId.push(ingredient));
-          console.log('Recipe by ID:', this.ingredientsByRecipeIngredientId);
+          console.log('Ingredients by ID:', this.ingredientsByRecipeIngredientId);
         },
         error: (err) => {
           console.error('Error fetching ingredient by ID:', err);

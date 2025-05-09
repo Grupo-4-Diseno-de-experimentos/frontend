@@ -154,13 +154,13 @@
           </mat-form-field>
 
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addIngredient($event.option.value)">
-            <mat-option *ngFor="let ingredient of filteredIngredients" [value]="ingredient">
+            <mat-option *ngFor="let ingredient of ingredientsByRecipeIngredientId" [value]="ingredient">
               {{ ingredient.name }} ({{ ingredient.calories }} kcal)
             </mat-option>
           </mat-autocomplete>
 
           <div class="mt-4 border rounded-lg overflow-hidden">
-            <div *ngFor="let ing of selectedIngredients; let i = index" class="p-4 flex justify-between items-center border-b">
+            <div *ngFor="let ing of ingredientsByRecipeIngredientId; let i = index" class="p-4 flex justify-between items-center border-b">
               <div>
                 <p class="font-medium text-gray-800">{{ ing.name }}</p>
                 <p class="text-sm text-gray-500">Cal: {{ ing.calories }} kcal | C: {{ ing.carbs }}g P: {{ ing.proteins }}g F: {{ ing.fats }}g</p>
@@ -244,7 +244,7 @@
     </mat-card-content>
 
     <mat-card-actions class="p-6 pt-0 flex justify-end gap-3">
-      <ng-container *ngIf="!editMode; else editingButtons">
+      <ng-container *ngIf="isNutricionist && !editMode; else editingButtons">
         <button
           mat-raised-button
           color="primary"

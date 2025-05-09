@@ -76,6 +76,7 @@ export class RecipeIngredientAssembler {
   }
   static toEntityFromResponse(response: RecipeIngredientResponse): RecipeIngredient {
     return {
+      id: response.id,
       ingredient_id: response.ingredient_id,
       recipe_id: response.recipe_id,
     };
