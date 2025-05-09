@@ -1,0 +1,11 @@
+.card-content{
+ background-color: darkgreen;
+  color: black;
+}
+input{
+  background-color: white;
+  color: black;
+}
+mat-label{
+  color: black;
+}

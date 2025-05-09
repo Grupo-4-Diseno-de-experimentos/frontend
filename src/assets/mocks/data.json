@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "María Rodríguez",
       "email": "maria.rodriguez@example.com",
       "password": "encrypted_password_1",
@@ -9,7 +9,7 @@
       "created_timestamp": "2024-12-10T14:30:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Carlos González",
       "email": "carlos.gonzalez@example.com",
       "password": "encrypted_password_2",
@@ -17,7 +17,7 @@
       "created_timestamp": "2024-12-15T09:45:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Laura Martínez",
       "email": "laura.martinez@example.com",
       "password": "encrypted_password_3",
@@ -25,7 +25,7 @@
       "created_timestamp": "2024-12-20T16:15:00Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Javier López",
       "email": "javier.lopez@example.com",
       "password": "encrypted_password_4",
@@ -33,7 +33,7 @@
       "created_timestamp": "2024-11-05T11:20:00Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Ana Sánchez",
       "email": "ana.sanchez@example.com",
       "password": "encrypted_password_5",
@@ -41,7 +41,7 @@
       "created_timestamp": "2024-11-10T13:50:00Z"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "David Fernández",
       "email": "david.fernandez@example.com",
       "password": "encrypted_password_6",
@@ -49,7 +49,7 @@
       "created_timestamp": "2024-10-01T08:30:00Z"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Elena Castro",
       "email": "elena.castro@example.com",
       "password": "encrypted_password_7",
@@ -57,10 +57,9 @@
       "created_timestamp": "2024-12-25T10:10:00Z"
     }
   ],
-
   "customers": [
     {
-      "id": 1,
+      "id": "1",
       "age": 32,
       "height": 168.5,
       "weight": 65.3,
@@ -72,9 +71,9 @@
       "user_id": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "age": 45,
-      "height": 182.0,
+      "height": 182,
       "weight": 78.6,
       "objective": "mantenimiento",
       "activity_level": "alta",
@@ -84,7 +83,7 @@
       "user_id": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "age": 28,
       "height": 165.2,
       "weight": 58.9,
@@ -96,9 +95,9 @@
       "user_id": 3
     },
     {
-      "id": 4,
+      "id": "4",
       "age": 39,
-      "height": 175.0,
+      "height": 175,
       "weight": 82.1,
       "objective": "pérdida de peso",
       "activity_level": "baja",
@@ -108,9 +107,9 @@
       "user_id": 7
     },
     {
-      "id": 5,
+      "id": "5",
       "age": 52,
-      "height": 160.0,
+      "height": 160,
       "weight": 67.8,
       "objective": "salud general",
       "activity_level": "moderada",
@@ -120,7 +119,7 @@
       "user_id": 1
     },
     {
-      "id": 6,
+      "id": "6",
       "age": 35,
       "height": 190.5,
       "weight": 90.2,
@@ -132,7 +131,7 @@
       "user_id": 2
     },
     {
-      "id": 7,
+      "id": "7",
       "age": 41,
       "height": 172.3,
       "weight": 70.5,
@@ -144,62 +143,60 @@
       "user_id": 3
     }
   ],
-
   "nutritionists": [
     {
-      "id": 1,
+      "id": "1",
       "description": "Especialista en nutrición deportiva y pérdida de peso",
       "specialities": "nutrición deportiva, dietas de definición",
       "years_experience": 8,
       "user_id": 4
     },
     {
-      "id": 2,
+      "id": "2",
       "description": "Nutricionista clínica especializada en trastornos alimentarios",
       "specialities": "trastornos alimentarios, nutrición clínica",
       "years_experience": 12,
       "user_id": 5
     },
     {
-      "id": 3,
+      "id": "3",
       "description": "Experto en nutrición vegana y vegetariana",
       "specialities": "dietas vegetarianas, veganas, plant-based",
       "years_experience": 6,
       "user_id": 4
     },
     {
-      "id": 4,
+      "id": "4",
       "description": "Nutricionista especializado en diabetes y enfermedades metabólicas",
       "specialities": "diabetes, síndrome metabólico",
       "years_experience": 15,
       "user_id": 5
     },
     {
-      "id": 5,
+      "id": "5",
       "description": "Especialista en nutrición pediátrica",
       "specialities": "nutrición infantil, alergias alimentarias",
       "years_experience": 10,
       "user_id": 4
     },
     {
-      "id": 6,
+      "id": "6",
       "description": "Nutricionista deportiva para atletas de alto rendimiento",
       "specialities": "rendimiento deportivo, composición corporal",
       "years_experience": 9,
       "user_id": 5
     },
     {
-      "id": 7,
+      "id": "7",
       "description": "Especialista en nutrición geriátrica",
       "specialities": "nutrición para mayores, prevención de sarcopenia",
       "years_experience": 11,
       "user_id": 4
     }
   ],
-
   "ingredients": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Pollo",
       "quantity": 100,
       "calories": 165,
@@ -210,7 +207,7 @@
       "available": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Arroz blanco",
       "quantity": 100,
       "calories": 130,
@@ -221,7 +218,7 @@
       "available": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Aguacate",
       "quantity": 100,
       "calories": 160,
@@ -232,7 +229,7 @@
       "available": true
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Lentejas",
       "quantity": 100,
       "calories": 116,
@@ -243,7 +240,7 @@
       "available": true
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Salmón",
       "quantity": 100,
       "calories": 208,
@@ -254,7 +251,7 @@
       "available": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Espinacas",
       "quantity": 100,
       "calories": 23,
@@ -265,7 +262,7 @@
       "available": true
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Plátano",
       "quantity": 100,
       "calories": 89,
@@ -276,10 +273,9 @@
       "available": true
     }
   ],
-
   "recipes": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Pechuga de pollo con arroz y verduras",
       "description": "Plato equilibrado de proteínas y carbohidratos ideal para después del entrenamiento",
       "instructions": "1. Cocinar el pollo a la plancha. 2. Hervir el arroz. 3. Saltear las verduras. 4. Servir todo junto.",
@@ -287,7 +283,7 @@
       "nutricionist_id": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Ensalada de lentejas",
       "description": "Ensalada rica en proteína vegetal y fibra",
       "instructions": "1. Cocer las lentejas. 2. Picar verduras. 3. Mezclar todo y aliñar con aceite de oliva y limón.",
@@ -295,7 +291,7 @@
       "nutricionist_id": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Bowl de salmón con aguacate",
       "description": "Plato rico en grasas saludables y proteínas de alta calidad",
       "instructions": "1. Cocer el arroz. 2. Cocinar el salmón al horno. 3. Cortar el aguacate en láminas. 4. Montar el bowl.",
@@ -303,7 +299,7 @@
       "nutricionist_id": 3
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Batido verde proteico",
       "description": "Batido nutritivo ideal para después del entrenamiento",
       "instructions": "1. Mezclar espinacas, plátano, proteína en polvo y leche en una batidora. 2. Batir hasta obtener una mezcla homogénea.",
@@ -311,7 +307,7 @@
       "nutricionist_id": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Tofu salteado con verduras",
       "description": "Alternativa vegetariana rica en proteínas",
       "instructions": "1. Cortar el tofu en dados. 2. Saltear con verduras y salsa de soja. 3. Servir con arroz.",
@@ -319,7 +315,7 @@
       "nutricionist_id": 2
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Crema de lentejas",
       "description": "Plato reconfortante rico en fibra y proteínas",
       "instructions": "1. Cocer lentejas con cebolla y zanahoria. 2. Triturar hasta obtener una crema. 3. Añadir especias al gusto.",
@@ -327,7 +323,7 @@
       "nutricionist_id": 3
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Tortilla de espinacas",
       "description": "Desayuno o cena rica en proteínas y nutrientes",
       "instructions": "1. Batir huevos. 2. Añadir espinacas picadas. 3. Cocinar en sartén a fuego medio.",
@@ -335,138 +331,135 @@
       "nutricionist_id": 4
     }
   ],
-
   "recipe_ingredients": [
     {
-      "id": 1,
+      "id": "1",
       "ingredient_id": 1,
       "recipe_id": 1
     },
     {
-      "id": 2,
-      "ingredient_id": 2,
-      "recipe_id": 1
+      "ingredient_id": 3,
+      "recipe_id": 2,
+      "id": "2"
     },
     {
-      "id": 3,
+      "id": "3",
       "ingredient_id": 6,
       "recipe_id": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "ingredient_id": 4,
       "recipe_id": 2
     },
     {
-      "id": 5,
+      "id": "5",
       "ingredient_id": 6,
       "recipe_id": 2
     },
     {
-      "id": 6,
+      "id": "6",
       "ingredient_id": 5,
       "recipe_id": 3
     },
     {
-      "id": 7,
+      "id": "7",
       "ingredient_id": 3,
       "recipe_id": 3
     },
     {
-      "id": 8,
+      "id": "8",
       "ingredient_id": 2,
       "recipe_id": 3
     },
     {
-      "id": 9,
+      "id": "9",
       "ingredient_id": 6,
       "recipe_id": 4
     },
     {
-      "id": 10,
+      "id": "10",
       "ingredient_id": 7,
       "recipe_id": 4
     },
     {
-      "id": 11,
+      "id": "11",
       "ingredient_id": 2,
       "recipe_id": 5
     },
     {
-      "id": 12,
+      "id": "12",
       "ingredient_id": 6,
       "recipe_id": 5
     },
     {
-      "id": 13,
+      "id": "13",
       "ingredient_id": 4,
       "recipe_id": 6
     },
     {
-      "id": 14,
+      "id": "14",
       "ingredient_id": 6,
       "recipe_id": 7
     }
   ],
-
   "macros": [
     {
-      "id": 1,
+      "id": "1",
       "carbs": 45.6,
       "protein": 35.2,
       "fats": 12.8,
       "recipe_id": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "carbs": 40.3,
       "protein": 18.7,
       "fats": 8.2,
       "recipe_id": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "carbs": 28.4,
       "protein": 32.5,
       "fats": 24.6,
       "recipe_id": 3
     },
     {
-      "id": 4,
-      "carbs": 35.0,
-      "protein": 25.0,
-      "fats": 5.0,
+      "id": "4",
+      "carbs": 35,
+      "protein": 25,
+      "fats": 5,
       "recipe_id": 4
     },
     {
-      "id": 5,
+      "id": "5",
       "carbs": 42.1,
       "protein": 24.3,
       "fats": 10.5,
       "recipe_id": 5
     },
     {
-      "id": 6,
+      "id": "6",
       "carbs": 38.2,
       "protein": 16.8,
       "fats": 6.3,
       "recipe_id": 6
     },
     {
-      "id": 7,
+      "id": "7",
       "carbs": 8.5,
       "protein": 22.7,
       "fats": 15.3,
       "recipe_id": 7
     }
   ],
-
   "meal_plans": [
     {
-      "id": 1,
-      "name": "Plan pérdida de peso",
+      "id": "1",
+      "name": "Plan pérdida de peso.",
       "category": "Baja en calorías",
-      "description": "Ideal para perder peso gradualmente.",
+      "description": "Ideal para perder peso gradualmente. ",
       "goal": "perder peso",
       "min_bmi": 25,
       "max_bmi": 40,
@@ -477,7 +470,7 @@
       "created_at": "2025-04-25T09:00:00"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Plan mantenimiento",
       "category": "Balanceado",
       "description": "Mantén tu peso con comidas saludables.",
@@ -491,7 +484,7 @@
       "created_at": "2025-04-20T10:30:00"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Plan aumento de masa",
       "category": "Alto en proteínas",
       "description": "Para quienes desean ganar músculo.",
@@ -505,7 +498,7 @@
       "created_at": "2025-04-18T11:15:00"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Plan vegetariano",
       "category": "Vegetariano",
       "description": "Comidas sin carne para estilos de vida veggies.",
@@ -519,7 +512,7 @@
       "created_at": "2025-03-28T08:45:00"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Plan keto",
       "category": "Cetogénico",
       "description": "Alto en grasas saludables y bajo en carbohidratos.",
@@ -533,58 +526,117 @@
       "created_at": "2025-04-01T12:00:00"
     }
   ],
-
   "meal_plan_recipes": [
-    { "id": 1, "day": "Lunes", "meal_time": "Desayuno", "recipe_id": 1, "meal_plan_id": 1 },
-    { "id": 2, "day": "Lunes", "meal_time": "Almuerzo", "recipe_id": 2, "meal_plan_id": 1 },
-    { "id": 3, "day": "Martes", "meal_time": "Cena", "recipe_id": 3, "meal_plan_id": 1 },
-    { "id": 4, "day": "Lunes", "meal_time": "Desayuno", "recipe_id": 4, "meal_plan_id": 2 },
-    { "id": 5, "day": "Lunes", "meal_time": "Cena", "recipe_id": 5, "meal_plan_id": 3 }
+    {
+      "id": "1",
+      "day": "Sabado",
+      "meal_time": "Cena",
+      "recipe_id": "2",
+      "meal_plan_id": 1
+    },
+    {
+      "id": "2",
+      "day": "Lunes",
+      "meal_time": "Almuerzo",
+      "recipe_id": "7",
+      "meal_plan_id": 1
+    },
+    {
+      "id": "3",
+      "day": "Martes",
+      "meal_time": "Cena",
+      "recipe_id": 3,
+      "meal_plan_id": 1
+    },
+    {
+      "id": "4",
+      "day": "Lunes",
+      "meal_time": "Desayuno",
+      "recipe_id": 4,
+      "meal_plan_id": 2
+    },
+    {
+      "id": "5",
+      "day": "Lunes",
+      "meal_time": "Cena",
+      "recipe_id": 5,
+      "meal_plan_id": 3
+    },
+    {
+      "id": "6",
+      "day": "Domingo",
+      "meal_time": "Almuerzo",
+      "recipe_id": 2,
+      "meal_plan_id": 1
+    }
   ],
-
   "favorite_recipes": [
     {
-      "id": 1,
+      "id": "1",
       "user_id": 1,
       "recipe_id": 2
     },
     {
-      "id": 2,
+      "id": "2",
       "user_id": 1,
       "recipe_id": 5
     },
     {
-      "id": 3,
+      "id": "3",
       "user_id": 2,
       "recipe_id": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "user_id": 2,
       "recipe_id": 3
     },
     {
-      "id": 5,
+      "id": "5",
       "user_id": 3,
       "recipe_id": 4
     },
     {
-      "id": 6,
+      "id": "6",
       "user_id": 7,
       "recipe_id": 6
     },
     {
-      "id": 7,
+      "id": "7",
       "user_id": 7,
       "recipe_id": 7
     }
   ],
-
   "customer_meal_plans": [
-    { "id": 1, "is_current": true, "customer_id": 1, "meal_plan_id": 1 },
-    { "id": 2, "is_current": false, "customer_id": 1, "meal_plan_id": 2 },
-    { "id": 3, "is_current": true, "customer_id": 2, "meal_plan_id": 3 },
-    { "id": 4, "is_current": true, "customer_id": 3, "meal_plan_id": 4 },
-    { "id": 5, "is_current": false, "customer_id": 4, "meal_plan_id": 5 }
+    {
+      "id": "1",
+      "is_current": true,
+      "customer_id": 1,
+      "meal_plan_id": 1
+    },
+    {
+      "id": "2",
+      "is_current": false,
+      "customer_id": 1,
+      "meal_plan_id": 2
+    },
+    {
+      "id": "3",
+      "is_current": true,
+      "customer_id": 2,
+      "meal_plan_id": 3
+    },
+    {
+      "id": "4",
+      "is_current": true,
+      "customer_id": 3,
+      "meal_plan_id": 4
+    },
+    {
+      "id": "5",
+      "is_current": false,
+      "customer_id": 4,
+      "meal_plan_id": 5
+    }
   ]
 }

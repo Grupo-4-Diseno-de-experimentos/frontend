@@ -1,0 +1,110 @@
+<div class="max-w-5xl mx-auto p-6 text-amber-200">
+  <mat-card class="shadow-xl rounded-2xl overflow-hidden bg-white">
+    <mat-card-header class="p-6 pb-0">
+      <mat-card-title class="text-3xl font-extrabold text-amber-100">
+        Crear nuevo plan de comida
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="card-content p-6 space-y-6 text-amber-50">
+      <form [formGroup]="mealPlanForm" (ngSubmit)="onSubmit()">
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nombre del Plan</mat-label>
+            <input matInput formControlName="name" class="bg-white">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Categoría</mat-label>
+            <input matInput formControlName="category">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Meta del Plan</mat-label>
+            <mat-select formControlName="goal">
+              <mat-option value="weight_loss">Pérdida de peso</mat-option>
+              <mat-option value="muscle_gain">Ganar masa muscular</mat-option>
+              <mat-option value="maintenance">Mantenimiento</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>IMC Mínimo</mat-label>
+            <input matInput type="number" formControlName="min_bmi">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>IMC Máximo</mat-label>
+            <input matInput type="number" formControlName="max_bmi">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Edad Mínima</mat-label>
+            <input matInput type="number" formControlName="min_age">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Edad Máxima</mat-label>
+            <input matInput type="number" formControlName="max_age">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Calorías por día</mat-label>
+            <input matInput type="number" formControlName="calories_per_day">
+          </mat-form-field>
+        </div>
+
+        <!-- Comidas por día -->
+        <div class="pt-6">
+          <h2 class="text-xl font-semibold text-amber-200 mb-2">Agregar comidas al plan</h2>
+
+          <div formArrayName="recipesByDay">
+            <div *ngFor="let dayGroup of recipesByDay.controls; let i = index" [formGroupName]="i">
+              <h3>{{ daysOfWeek[i] }}</h3>
+
+              <div formArrayName="meals">
+<!--                <div *ngFor="let meal of getMealsControls(i); let j = index" [formGroupName]="j" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  &lt;!&ndash; Comida &ndash;&gt;
+                  <mat-form-field appearance="fill">
+                    <mat-label>Tipo de comida</mat-label>
+                    <mat-select formControlName="meal_time">
+                      <mat-option value="breakfast">Desayuno</mat-option>
+                      <mat-option value="lunch">Almuerzo</mat-option>
+                      <mat-option value="dinner">Cena</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  &lt;!&ndash; Receta &ndash;&gt;
+                  <mat-form-field appearance="fill">
+                    <mat-label>Receta</mat-label>
+                    <mat-select formControlName="recipe_id">
+                      <mat-option *ngFor="let recipe of recipesMock" [value]="recipe.id">{{ recipe.title }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>-->
+              </div>
+            </div>
+          </div>
+
+
+          <button mat-stroked-button type="button" (click)="addMeal()" color="primary">+ Agregar comida</button>
+        </div>
+
+        <!-- Botones -->
+        <div class="pt-6 flex justify-end space-x-4">
+          <button mat-button type="button" (click)="cancel()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit">Guardar Plan</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -26,6 +26,6 @@ export class MealItemComponent {
   constructor(private router: Router) {}
 
   goToDetail(): void {
-    this.router.navigate(['/meal_plan/plandetail', this.plan.id]);
+    this.router.navigate(['meal_plan/plandetail', this.plan.id]);
   }
 }

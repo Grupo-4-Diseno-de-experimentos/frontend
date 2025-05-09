@@ -37,42 +37,52 @@
         </div>
 
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <mat-card *ngFor="let recipe of mealPlanRecipes" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+          <mat-card *ngFor="let recipe of mealPlanRecipes; let i = index" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
             <mat-card-header class="flex">
               <mat-icon mat-card-avatar class="text-emerald-500 bg-emerald-100 rounded-full p-2">event</mat-icon>
               <div class="flex flex-col justify-center ml-4">
-                <mat-card-title class="text-lg font-medium">{{ recipe.day }}</mat-card-title>
-                <h2>{{ recipe.meal_time }}</h2>
-                <h2 class="text-amber-900">{{ recipes[mealPlanRecipes.indexOf(recipe)].title }}</h2>
+                <mat-card-title class="text-lg font-medium">
+                  <input matInput [(ngModel)]="recipe.day" [readonly]="!isEditing" placeholder="Día" />
+                </mat-card-title>
+                <h2 ><input class="bg-amber-50" matInput [(ngModel)]="  mealPlanRecipes[i].meal_time" [readonly]="!isEditing" placeholder="Hora de comida" /></h2>
+                <mat-form-field *ngIf="isEditing" class="w-full">
+                  <mat-label>Seleccionar Receta</mat-label>
+                  <mat-select [(ngModel)]="mealPlanRecipes[i].recipe_id">
+                    <mat-option *ngFor="let recipe of AllRecipes" [value]="recipe.id">
+                      {{ recipe.title }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <h2 *ngIf="!isEditing" class="text-amber-900">{{ recipesbyPlanId[i]?.title }}</h2>
               </div>
             </mat-card-header>
             <mat-card-actions align="end">
-              <button mat-icon-button color="primary" *ngIf="isEditing">
+              <button mat-icon-button color="primary" (click)="enableEdit()" *ngIf="isNutricionist && !isEditing">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="warn" *ngIf="isEditing">
+              <button (click)="deleteMealPlanRecipe(recipe)" mat-icon-button color="warn" *ngIf="isNutricionist && isEditing">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-card-actions>
           </mat-card>
         </div>
 
-        <div *ngIf="isEditing" class="mt-4 flex justify-center">
-          <button mat-fab color="accent" aria-label="Añadir receta">
+        <div *ngIf="isNutricionist && !isEditing" class="mt-4 flex justify-center">
+          <button mat-fab color="accent" aria-label="Añadir receta" (click)="goToCreateRecipe()">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </section>
 
 
-      <section *ngIf="recipes.length > 0" class="bg-amber-50 !text-black rounded-xl p-5 border-l-4 border-emerald-500">
+      <section *ngIf="AllRecipes.length > 0" class="bg-amber-50 !text-black rounded-xl p-5 border-l-4 border-emerald-500">
         <div class="flex items-center mb-4">
           <mat-icon class=" mr-2">menu_book</mat-icon>
           <h2 class="text-xl font-semibold ">Recetas Disponibles</h2>
         </div>
 
         <mat-accordion class="rounded-md  overflow-hidden">
-          <mat-expansion-panel *ngFor="let recipe of recipes" class="mb-2 shadow-sm">
+          <mat-expansion-panel *ngFor="let recipe of recipesbyPlanId" class="mb-2 shadow-sm">
             <mat-expansion-panel-header class="bg-white text-black hover:bg-amber-50">
               <mat-panel-title class="text-black font-medium">
                 {{ recipe.title }}
@@ -85,11 +95,11 @@
             <div class="py-2">
               <p class="text-gray-700">{{ recipe.description }}</p>
 
-              <div class="mt-4 flex justify-end" *ngIf="isEditing">
-                <button mat-stroked-button color="primary" class="mr-2">
+              <div class="mt-4 flex justify-end" >
+                <!--<button *ngIf="isEditing" mat-stroked-button color="primary" class="mr-2">
                   <mat-icon class="mr-1">add</mat-icon> Añadir al Plan
-                </button>
-                <button mat-stroked-button color="accent">
+                </button>-->
+                <button mat-stroked-button color="accent" (click)="goToRecipeDetail(recipe.id)" class="bg-amber-500 hover:bg-amber-600 text-white">
                   <mat-icon class="mr-1">visibility</mat-icon> Ver Detalles
                 </button>
               </div>
