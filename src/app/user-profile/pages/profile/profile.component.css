@@ -1,0 +1,53 @@
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.user-info, .objectives-info {
+  margin-bottom: 25px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.info-item label {
+  font-weight: bold;
+  width: 150px;
+  color: #555;
+}
+
+.info-item span {
+  color: #777;
+  flex-grow: 1;
+}
+
+.edit-button {
+  background-color: #a0cb64;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.edit-button:hover {
+  background-color: #87b34d;
+}

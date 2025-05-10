@@ -1,0 +1,56 @@
+<div class="profile-container">
+  <h1>Tu Perfil</h1>
+
+  <section class="user-info" *ngIf="userData">
+    <h2>Información Personal</h2>
+    <div class="info-item">
+      <label>Nombre:</label>
+      <span>{{ userData.nombre || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Email:</label>
+      <span>{{ userData.email || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Sexo:</label>
+      <span>{{ userData.sexo || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Edad:</label>
+      <span>{{ userData.edad ? userData.edad + ' años' : 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Altura:</label>
+      <span>{{ userData.altura ? userData.altura + ' cm' : 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Peso:</label>
+      <span>{{ userData.peso ? userData.peso + ' kg' : 'No especificado' }}</span>
+    </div>
+    <button class="edit-button" (click)="editProfile()">Editar Perfil</button>
+  </section>
+  <section class="user-info" *ngIf="!userData">
+    <h2>Información Personal</h2>
+    <p>Cargando información del perfil...</p>
+  </section>
+  <section class="objectives-info">
+    <h2>Tus Objetivos</h2>
+    <div class="info-item">
+      <label>Objetivo Principal:</label>
+      <span>{{ userObjectives?.objetivoPrincipal || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Método Preferido:</label>
+      <span>{{ userObjectives?.metodoPreferido || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Nivel de Actividad Física:</label>
+      <span>{{ userObjectives?.nivelActividad || 'No especificado' }}</span>
+    </div>
+    <div class="info-item">
+      <label>Dieta Preferida:</label>
+      <span>{{ userObjectives?.dietaPreferida || 'No especificado' }}</span>
+    </div>
+    <button class="edit-button" (click)="editObjectives()">Editar Objetivos</button>
+  </section>
+</div>

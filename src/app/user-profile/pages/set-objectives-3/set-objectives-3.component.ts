@@ -1,0 +1,44 @@
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { UserService } from '../../services/user.service'; // Importa el servicio de usuario
+
+@Component({
+  selector: 'app-set-objectives-3',
+  templateUrl: './set-objectives-3.component.html',
+  imports: [
+    FormsModule,
+    RouterLink
+  ],
+  styleUrls: ['./set-objectives-3.component.css']
+})
+export class SetObjectives3Component {
+  sexo: string = '';
+  edad: number | null = null;
+  altura: number | null = null;
+  peso: number | null = null;
+
+  constructor(private router: Router, private userService: UserService) {} // Inyecta el servicio de usuario
+
+  continue() {
+    if (this.edad && this.altura && this.peso && this.sexo) {
+      console.log('Información del perfil:', {
+        sexo: this.sexo,
+        edad: this.edad,
+        altura: this.altura,
+        peso: this.peso
+      });
+      this.userService.updateUserProfile({ sexo: this.sexo, edad: this.edad, altura: this.altura, peso: this.peso }).subscribe( // Llama al método del servicio de usuario
+        () => {
+          this.router.navigate(['/set-objectives-4']);
+        },
+        (error) => {
+          console.error('Error al guardar la información del perfil', error);
+          // Manejar el error
+        }
+      );
+    } else {
+      console.log('Por favor, completa todos los campos correctamente.');
+    }
+  }
+}
