@@ -13,7 +13,7 @@ import {
   MatHeaderCell,
   MatHeaderCellDef,
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable
+  MatTable, MatTableModule
 } from '@angular/material/table';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -21,10 +21,11 @@ import {UserService} from '../../../user/services/user.service';
 import {FormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {RecipeService} from '../../services/recipe.service';
-import {Ingredient, Recipe, RecipeIngredient} from '../../model/recipe.entity';
+import {Ingredient, Macros, Recipe, RecipeIngredient} from '../../model/recipe.entity';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -52,7 +53,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatHeaderRow,
     MatHeaderRowDef,
     MatRow,
-    MatRowDef
+    MatRowDef,
+    MatSelectModule,
+    MatTableModule
   ],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.css'
@@ -61,18 +64,17 @@ export class RecipeDetailComponent implements OnInit {
   recipeId!: string;
   editMode = false;
   recipe!: Recipe;
-  originalRecipe: any;
   recipeIngredients: RecipeIngredient[] = [];
   displayedColumns: string[] = [
     'name', 'quantity', 'calories', 'carbs', 'proteins', 'fats', 'category', 'available'
   ];
   ingredientsByRecipeIngredientId: Ingredient[] = [];
-  recipeBackup: Recipe | null = null;
   ingredientSearch = '';
   allIngredients: Ingredient[] = [];
   filteredIngredients: Ingredient[] = [];
-  selectedIngredients: Ingredient[] = [];
   ingredientsIdsByRecipesIngredient: number[] = [];
+  selectedIngredient: Ingredient | null = null;
+  macros!: Macros;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService) {}
   ngOnInit() {
@@ -82,12 +84,26 @@ export class RecipeDetailComponent implements OnInit {
     this.recipeId = this.route.snapshot.paramMap.get('id')!;
     console.log(this.recipeId);
     this.fetchRecipeIngredients()
+    this.fetchIngredientsByRecipeId()
+    console.log('ingredients:', this.ingredientsByRecipeIngredientId);
     this.fetchRecipeDetails();
+    this.fetchIngredients();
     this.getRecipeById();
     this.getAllIngredients();
+    this.getMacrosByRecipeId();
+    this.filteredIngredients = this.ingredientsByRecipeIngredientId;
   }
   get isNutricionist() {
     return this.userService.isNutricionist();
+  }
+  removeIngredient(index: number): void {
+    this.ingredientsByRecipeIngredientId.splice(index, 1);
+    console.log('Updated ingredients:', this.ingredientsByRecipeIngredientId);
+  }
+  onIngredientSelect(event: any): void {
+    console.log('Selected ingredient:', event.value);
+    this.ingredientsByRecipeIngredientId.push(event.value);
+    console.log('Ingredients by ID:', this.ingredientsByRecipeIngredientId);
   }
   getRecipeById() {
     this.recipeService.getRecipeById(this.recipeId).subscribe(recipe => {
@@ -95,7 +111,13 @@ export class RecipeDetailComponent implements OnInit {
 /*      this.selectedIngredients = [...recipe.ingredients];*/
     });
   }
-
+  getMacrosByRecipeId(){
+    this.recipeService.getAllMacros().subscribe(macros => {
+      macros.filter(macro => macro.recipe_id.toString() === this.recipeId)
+        .forEach(macro => this.macros = macro);
+      console.log('Macros:', this.macros);
+    });
+  }
   getAllIngredients() {
     this.recipeService.getAllIngredients().subscribe(data => {
       this.filteredIngredients = data;
@@ -108,15 +130,8 @@ export class RecipeDetailComponent implements OnInit {
         ingredient.name.toLowerCase().includes(query)
     );
   }
-  addIngredient(ingredient: Ingredient) {
-    if (!this.selectedIngredients.some(i => i.id === ingredient.id)) {
-      this.selectedIngredients.push({ ...ingredient, quantity: 100 }); // default
-    }
-  }
 
-  removeIngredient(index: number) {
-    this.selectedIngredients.splice(index, 1);
-  }
+
 
   cancelEdit() {
     this.editMode = false;
@@ -169,36 +184,23 @@ export class RecipeDetailComponent implements OnInit {
       });
     });
   }
-/*  saveChanges() {
-    const updatedRecipe = {
-      ...this.recipe,
-      ingredients: this.selectedIngredients
-    };
-    this.recipeService.updateRecipe(updatedRecipe).subscribe(() => {
-      this.editMode = false;
-    });
-
-  }*/
   saveChanges() {
- /*   console.log('Meal Plan:', this.mealPlan); // Captura el título y descripción
-    console.log('Meal Plan Recipes:', this.mealPlanRecipes); // Captura las recetas asociadas
+    console.log('recipe:', this.recipe);
+    console.log('Recipes Ingredients:', this.recipeIngredients);
     // Aquí puedes enviar los datos al backend
-    this.recipeService.updateRecipe(this.mealPlan.id.toString(), {
-      mealPlan: this.mealPlan,
-      recipes: this.mealPlanRecipes
+    this.recipeService.updateRecipe(this.recipe.id.toString(), {
+      recipe: this.recipe,
+      recipesIngredient: this.recipeIngredients
     }).subscribe({
       next: (response) => {
         console.log('Recipe actualizado con éxito:', response);
-        /!*          alert('¡Plan actualizado exitosamente!');*!/
+        alert('¡Plan actualizado exitosamente!');
       },
       error: (err) => {
         console.error('Error al actualizar la recipe:', err);
         alert('Error al actualizar la recipe.');
       }
     });
-    this.editMode = false;*/
-  }
-  editRecipe() {
-    console.log('Editar receta');
+    this.editMode = false;
   }
 }

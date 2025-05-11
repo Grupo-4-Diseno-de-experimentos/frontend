@@ -142,59 +142,7 @@ export class MealPlanDetailComponent implements OnInit{
   enableEdit() {
     this.isEditing = true;
   }
-/*  onSubmit(): void {
-    if (this.mealPlanForm.valid) {
-      const planId = this.mealPlanId; // el ID del plan actual
-      const formValue = this.mealPlanForm.value;
 
-      // 1. Armas el objeto MealPlan
-      const mealPlan: MealPlan = {
-        id: planId,
-        name: formValue.name,
-        category: formValue.category,
-        description: formValue.description,
-        goal: formValue.goal,
-        min_bmi: formValue.min_bmi,
-        max_bmi: formValue.max_bmi,
-        min_age: formValue.min_age,
-        max_age: formValue.max_age,
-        calories_per_day: formValue.calories_per_day,
-        nutricionist_id: this.currentUserId,
-        created_at: new Date()  // o lo que necesites
-      };
-
-      // 2. Armas los objetos MealPlanRecipe
-      const mealPlanRecipes: MealPlanRecipe[] = [];
-
-      formValue.recipesByDay.forEach((dayGroup: any) => {
-        const day = dayGroup.day;
-        dayGroup.meals.forEach((meal: any) => {
-          mealPlanRecipes.push({
-            id: 0, // si es autogenerado
-            day: day,
-            meal_time: meal.meal_time,
-            recipe_id: meal.recipe_id,
-            meal_plan_id: planId
-          });
-        });
-      });
-
-      // 3. Llamas al servicio para actualizar todo
-      this.mealPlanService.updateFullMealPlan(planId, mealPlan, mealPlanRecipes).subscribe({
-        next: () => {
-          alert('¡Plan actualizado exitosamente!');
-          this.router.navigate(['/meal_plan']); // o donde quieras redirigir
-        },
-        error: (err) => {
-          console.error('Error al actualizar el plan:', err);
-          alert('Error al actualizar el plan.');
-        }
-      });
-
-    } else {
-      this.mealPlanForm.markAllAsTouched();
-    }
-  }*/
   deleteMealPlanRecipe(mealPlanRecipe: MealPlanRecipe) {
     this.mealPlanService.deleteMealPlanRecipe(mealPlanRecipe.id.toString()).subscribe({
       next: (response) => {
@@ -209,9 +157,10 @@ export class MealPlanDetailComponent implements OnInit{
   }
 
   saveChanges() {
-      console.log('Meal Plan:', this.mealPlan); // Captura el título y descripción
-      console.log('Meal Plan Recipes:', this.mealPlanRecipes); // Captura las recetas asociadas
-      // Aquí puedes enviar los datos al backend
+    //datos capturados de los inputs
+      console.log('Meal Plan:', this.mealPlan);
+      console.log('Meal Plan Recipes:', this.mealPlanRecipes);
+
       this.mealPlanService.updateMealPlan(this.mealPlan.id.toString(), {
         mealPlan: this.mealPlan,
         recipes: this.mealPlanRecipes
@@ -230,8 +179,6 @@ export class MealPlanDetailComponent implements OnInit{
 
   cancelEdit() {
     this.isEditing = false;
-    // opcional: restaurar valores originales si hiciste una copia
-  }
 
-  protected readonly findIndex = findIndex;
+  }
 }

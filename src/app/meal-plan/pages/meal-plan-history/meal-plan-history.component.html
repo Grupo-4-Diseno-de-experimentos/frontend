@@ -1,0 +1,37 @@
+<div class="max-w-6xl mx-auto px-6 py-10">
+  <h1 class="text-3xl font-bold text-gray-800 mb-8">Tus Recetas Favoritas</h1>
+
+  <div *ngIf="favoriteRecipes.length > 0; else noFavorites" class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <mat-card *ngFor="let recipe of favoriteRecipes" class="rounded-xl shadow-md hover:shadow-xl transition duration-300">
+      <mat-card-header>
+        <mat-card-title class="text-xl font-semibold text-gray-800">{{ recipe.title }}</mat-card-title>
+        <mat-card-subtitle class="text-sm text-gray-500">{{ recipe.calories }} kcal</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="text-sm text-gray-600 mb-3">{{ recipe.description }}</p>
+        <div class="text-sm text-gray-700 space-y-1">
+          <p><strong>Carbs:</strong> 12 g</p>
+          <p><strong>Proteínas:</strong> 12 g</p>
+          <p><strong>Grasas:</strong> 12 g</p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="flex justify-between px-4 pb-4">
+        <button mat-raised-button color="primary" (click)="goToDetail(recipe.id)">
+          Ver Detalle
+        </button>
+        <button mat-icon-button color="warn" (click)="removeFromFavorites(recipe.id)" matTooltip="Eliminar de favoritos">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noFavorites>
+    <div class="text-center py-20 text-gray-500">
+      <mat-icon class="text-5xl mb-4">favorite_border</mat-icon>
+      <p class="text-lg">Aún no tienes recetas favoritas guardadas.</p>
+    </div>
+  </ng-template>
+</div>

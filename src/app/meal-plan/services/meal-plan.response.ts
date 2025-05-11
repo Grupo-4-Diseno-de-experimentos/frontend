@@ -36,9 +36,9 @@ export interface IngredientResponse {
   id: number;
   name: string;
   quantity: number;
-  calorie: number;
+  calories: number;
   carbs: number;
-  protein: number;
+  proteins: number;
   fats: number;
   category: string;
   available: boolean;
@@ -54,16 +54,11 @@ export interface RecipeResponse {
   nutricionist_id: number;
 }
 
-// recipe-ingredient.model.ts
-export interface RecipeIngredientResponse {
-  ingredient_id: number;
-  recipe_id: number;
-}
 
 // macros.model.ts
 export interface MacrosResponse {
   carbs: number;
-  protein: number;
+  proteins: number;
   fats: number;
   recipe_id: number;
 }
@@ -92,7 +87,7 @@ export interface MealPlanResponse {
 }
 
 // customer-meal-plan.model.ts
-export interface CustomerMealPlan {
+export interface CustomerMealPlanResponse {
   id: number;
   is_current: boolean;
   customer_id: number;

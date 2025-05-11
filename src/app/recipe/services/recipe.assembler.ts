@@ -9,7 +9,6 @@ export class RecipeAssembler {
       this.toEntityFromResponse(response));
   }
   static toEntityFromResponse(response: RecipeResponse): Recipe {
-      console.log(response)
     return {
       id: response.id,
       title: response.title,
@@ -28,7 +27,7 @@ export class MacrosAssembler {
   static toEntityFromResponse(response: MacrosResponse): Macros {
     return {
       carbs: response.carbs,
-      protein: response.protein,
+      proteins: response.proteins,
       fats: response.fats,
       recipe_id: response.recipe_id,
     };
@@ -79,6 +78,7 @@ export class RecipeIngredientAssembler {
       id: response.id,
       ingredient_id: response.ingredient_id,
       recipe_id: response.recipe_id,
+      quantity: response.quantity,
     };
   }
 }

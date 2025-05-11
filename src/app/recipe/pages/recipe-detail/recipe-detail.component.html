@@ -83,16 +83,16 @@
             <li class="flex justify-between items-center">
               <span class="text-gray-600">Carbohidratos:</span>
               <ng-container *ngIf="!editMode; else editCarbs">
-                <strong class="text-blue-700 font-bold">3030 g</strong>
+                <strong class="text-blue-700 font-bold">{{macros.carbs}}</strong>
               </ng-container>
               <ng-template #editCarbs>
                 <div class="relative w-20">
-                  <!--                  <input
+                                    <input
                                       type="number"
                                       matInput
-                                      [(ngModel)]="30"
+                                      [(ngModel)]="macros.carbs"
                                       class="w-full bg-white px-3 py-1 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-8"
-                                    />-->
+                                    />
                   <span class="absolute right-2 top-1 text-gray-400 text-sm">g</span>
                 </div>
               </ng-template>
@@ -100,16 +100,16 @@
             <li class="flex justify-between items-center">
               <span class="text-gray-600">Proteínas:</span>
               <ng-container *ngIf="!editMode; else editProteins">
-                <strong class="text-blue-700 font-bold">35g</strong>
+                <strong class="text-blue-700 font-bold">{{ macros.proteins }}</strong>
               </ng-container>
               <ng-template #editProteins>
                 <div class="relative w-20">
-                  <!--                  <input
+                                    <input
                                       type="number"
                                       matInput
-                                      [(ngModel)]="35"
+                                      [(ngModel)]="macros.proteins"
                                       class="w-full bg-white px-3 py-1 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-8"
-                                    />-->
+                                    />
                   <span class="absolute right-2 top-1 text-gray-400 text-sm">g</span>
                 </div>
               </ng-template>
@@ -117,16 +117,16 @@
             <li class="flex justify-between items-center">
               <span class="text-gray-600">Grasas:</span>
               <ng-container *ngIf="!editMode; else editFats">
-                <strong class="text-blue-700 font-bold">15 g</strong>
+                <strong class="text-blue-700 font-bold">{{ macros.fats }}</strong>
               </ng-container>
               <ng-template #editFats>
                 <div class="relative w-20">
-                  <!--                  <input
+                                    <input
                                       type="number"
                                       matInput
-                                      [(ngModel)]="15"
+                                      [(ngModel)]="macros.fats"
                                       class="w-full bg-white px-3 py-1 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-8"
-                                    />-->
+                                    />
                   <span class="absolute right-2 top-1 text-gray-400 text-sm">g</span>
                 </div>
               </ng-template>
@@ -143,21 +143,13 @@
 
         <div *ngIf="editMode">
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Buscar ingrediente</mat-label>
-            <input
-              type="text"
-              matInput
-              [(ngModel)]="ingredientSearch"
-              [matAutocomplete]="auto"
-              (input)="filterIngredients()"
-            >
+            <mat-label>Seleccionar ingrediente</mat-label>
+            <mat-select [(value)]="selectedIngredient" (selectionChange)="onIngredientSelect($event)">
+              <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient">
+                {{ ingredient.name }} ({{ ingredient.calories }} kcal)
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addIngredient($event.option.value)">
-            <mat-option *ngFor="let ingredient of ingredientsByRecipeIngredientId" [value]="ingredient">
-              {{ ingredient.name }} ({{ ingredient.calories }} kcal)
-            </mat-option>
-          </mat-autocomplete>
 
           <div class="mt-4 border rounded-lg overflow-hidden">
             <div *ngFor="let ing of ingredientsByRecipeIngredientId; let i = index" class="p-4 flex justify-between items-center border-b">
@@ -167,7 +159,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <input type="number" [(ngModel)]="ing.quantity" [ngModelOptions]="{ standalone: true }" class="w-20 border px-2 py-1 rounded text-sm" />
-                <button mat-icon-button (click)="removeIngredient(i)" color="warn">
+                <button mat-icon-button color="warn" (click)="removeIngredient(ing.id)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -175,8 +167,7 @@
           </div>
         </div>
 
-
-        <table *ngIf="!editMode" mat-table [dataSource]="ingredientsByRecipeIngredientId" class="min-w-full border mt-4">
+        <table *ngIf="!editMode && ingredientsByRecipeIngredientId.length > 0;" mat-table [dataSource]="ingredientsByRecipeIngredientId" class="min-w-full border mt-4">
           <!-- Nombre -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef class="font-bold text-gray-700 bg-gray-50 px-4 py-3"> Nombre </th>
@@ -232,7 +223,9 @@
                 </span>
             </td>
           </ng-container>
-
+          <ng-template #loading>
+            <p>Cargando ingredientes...</p>
+          </ng-template>
           <tr mat-header-row *matHeaderRowDef="displayedColumns" class="h-12"></tr>
           <tr
             mat-row

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, map, Observable} from 'rxjs';
 import {environment as env} from '../../../environments/environment';
-import {MealPlan, MealPlanRecipe, Recipe} from '../../meal-plan/model/meal-plan.entity';
+import {MealPlan, MealPlanRecipe} from '../../meal-plan/model/meal-plan.entity';
+import {Recipe} from '../model/recipe.entity';
 import {MealPlanRecipeResponse, RecipeResponse} from '../../meal-plan/services/meal-plan.response';
 import {MealPlanRecipeAssembler} from '../../meal-plan/services/meal-plan.assembler';
 import {FavoriteRecipe, Ingredient, Macros, RecipeIngredient} from '../model/recipe.entity';
@@ -84,7 +85,7 @@ export class RecipeService {
     );
   }
 
-  getMacrosByRecipeId(id: string): Observable<Macros[]> {
+  getAllMacros(): Observable<Macros[]> {
     return this.http.get<MacrosResponse[]>(`${env.apiUrl}macros`).pipe(
       map(data => MacrosAssembler.toEntityFromResponseArray(data))
     )
@@ -96,8 +97,27 @@ export class RecipeService {
       )
     );
   }
+  saveRecipe(recipe: Recipe): Observable<any> {
+    return this.http.post<RecipeResponse>(`${env.apiUrl}recipes`, recipe).pipe(
+      map(data => RecipeAssembler.toEntityFromResponse(data))
+    );
+  }
+  saveRecipeIngredients(recipeIngredient: any[]) {
+    recipeIngredient.forEach(item => {
+      this.http.post<RecipeIngredientResponse>(`${env.apiUrl}recipe_ingredients`, item).pipe(
+        map(data => RecipeIngredientAssembler.toEntityFromResponse(data))
+      ).subscribe({
+        next: (response) => {
+          console.log('Recipe ingredient saved:', response);
+        },
+        error: (error) => {
+          console.error('Error saving recipe ingredient:', error);
+        }
+      });
+    })
+  }
   updateRecipe(recipeId: string, data: {recipe: Recipe; recipesIngredient: RecipeIngredient[]}): Observable<any> {
-    const updateRecipe$ = this.http.put(`${env.apiUrl}recipe/${recipeId}`, data.recipe);
+    const updateRecipe$ = this.http.put(`${env.apiUrl}recipes/${recipeId}`, data.recipe);
     const updateRecipeIngredients$ = data.recipesIngredient.map(item =>
       this.http.put(`${env.apiUrl}recipe_ingredients/${item.id}`, item)
     );
@@ -109,4 +129,18 @@ export class RecipeService {
         .filter(recipeIngredient => recipeIngredient.recipe_id.toString() === id))
     )
   }
+  removeFavorite(recipe_id: string, user_id:string): void {
+    this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}favorite_recipes?user_id=${user_id}`).subscribe({
+      next: (favorites) => {
+        const favoriteToDelete = favorites.find(fav => fav.recipe_id.toString() === recipe_id);
+
+        if (favoriteToDelete) {
+          this.http.delete(`${env.apiUrl}favorite_recipes/${favoriteToDelete.id}`).subscribe({
+            next: () => console.log('Favorito eliminado correctamente'),
+            error: (err) => console.error('Error al eliminar favorito:', err)
+          });
+        }
+      }
+    }
+  );}
 }

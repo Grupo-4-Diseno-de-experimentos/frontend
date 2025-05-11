@@ -2,10 +2,15 @@
   MealPlanResponse,
   MealPlanRecipeResponse,
   FavoriteRecipeResponse,
-  RecipeIngredientResponse,
-  RecipeResponse
+  RecipeResponse, CustomerMealPlanResponse
 } from './meal-plan.response';
-import {MealPlan, MealPlanRecipe, FavoriteRecipe, RecipeIngredient, Recipe} from '../model/meal-plan.entity';
+import {
+  MealPlan,
+  MealPlanRecipe,
+  FavoriteRecipe,
+  Recipe,
+  CustomerMealPlan
+} from '../model/meal-plan.entity';
 
 export class MealPlanAssembler {
   static toEntityFromResponseArray(responseArray: MealPlanResponse[]): MealPlan[] {
@@ -34,28 +39,6 @@ export class MealPlanAssembler {
   }
 }
 
-export class MealPlanDayAssembler {
-  static toEntityFromResponseArray(responseArray: MealPlanRecipeResponse[]): MealPlanRecipe[] {
-    return responseArray.map((response) =>
-      this.toEntityFromResponse(response));
-  }
-  static toEntityFromResponse(response: MealPlanRecipeResponse): MealPlanRecipe {
-    return {
-      isBreakfast(): boolean {
-        return false;
-      }, isDinner(): boolean {
-        return false;
-      }, isLunch(): boolean {
-        return false;
-      },
-      id: response.id,
-      meal_plan_id: response.meal_plan_id,
-      recipe_id: response.recipe_id,
-      day: response.day,
-      meal_time: response.meal_time
-    };
-  }
-}
 export class FavoriteRecipeAssembler {
   static toEntityFromResponseArray(responseArray: FavoriteRecipeResponse[]): FavoriteRecipe[] {
     return responseArray.map((response) =>
@@ -98,6 +81,21 @@ export class MealPlanRecipeAssembler {
       response.meal_time,
       response.recipe_id,
       response.meal_plan_id
+    );
+  }
+}
+
+export class CustomerMealPlanAssembler {
+  static toEntityFromResponseArray(responseArray: CustomerMealPlanResponse[]): CustomerMealPlan[] {
+    return responseArray.map((response) =>
+      this.toEntityFromResponse(response));
+  }
+  static toEntityFromResponse(response: CustomerMealPlanResponse): CustomerMealPlan {
+    return new CustomerMealPlan (
+      response.id,
+      response.is_current,
+      response.customer_id,
+      response.meal_plan_id,
     );
   }
 }

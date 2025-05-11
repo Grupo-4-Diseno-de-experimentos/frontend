@@ -41,9 +41,9 @@ export class Ingredient {
     public id: number,
     public name: string,
     public quantity: number,
-    public calorie: number,
+    public calories: number,
     public carbs: number,
-    public protein: number,
+    public proteins: number,
     public fats: number,
     public category: string,
     public available: boolean
@@ -60,18 +60,12 @@ export class Recipe {
     public nutricionist_id: number
   ) {}
 }
-// recipe-ingredient.entity.ts
-export class RecipeIngredient {
-  constructor(
-    public ingredient_id: number,
-    public recipe_id: number
-  ) {}
-}
+
 // macros.entity.ts
 export class Macros {
   constructor(
     public carbs: number,
-    public protein: number,
+    public proteins: number,
     public fats: number,
     public recipe_id: number
   ) {}

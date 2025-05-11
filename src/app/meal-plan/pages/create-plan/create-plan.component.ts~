@@ -99,15 +99,10 @@ export class CreatePlanComponent implements OnInit {
       })
     );
   }*/
-  addMeal(dayIndex: number) {
+/*  addMeal(dayIndex: number) {
     const meals = this.getMealsControls(dayIndex);
-    meals.push(
-      this.fb.group({
-        meal_time: [''],
-        recipe_id: [null],
-      })
-    );
-  }
+    meals.push(this.mealPlanForm());
+  }*/
 
   removeMeal(dayIndex: number, mealIndex: number) {
     const meals = this.getMealsControls(dayIndex);

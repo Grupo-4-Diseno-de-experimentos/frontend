@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, map, Observable, switchMap} from 'rxjs';
-import {MealPlan, MealPlanRecipe, Recipe} from '../model/meal-plan.entity';
-import {MealPlanRecipeResponse, MealPlanResponse, RecipeResponse} from './meal-plan.response';
-import {MealPlanAssembler, MealPlanRecipeAssembler, RecipeAssembler} from './meal-plan.assembler';
+import {CustomerMealPlan, MealPlan, MealPlanRecipe, Recipe} from '../model/meal-plan.entity';
+import {CustomerMealPlanResponse, MealPlanRecipeResponse, MealPlanResponse, RecipeResponse} from './meal-plan.response';
+import {
+  CustomerMealPlanAssembler,
+  MealPlanAssembler,
+  MealPlanRecipeAssembler,
+  RecipeAssembler
+} from './meal-plan.assembler';
 import {environment as env} from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -26,6 +31,29 @@ export class MealPlanService {
         map(data => MealPlanAssembler.toEntityFromResponseArray(data)),
       );
     }
+    saveMealPlan(mealPlan: MealPlan): Observable<any> {
+      return this.http.post<MealPlanResponse>(`${env.apiUrl}meal_plans`, mealPlan).pipe(
+         map(data => MealPlanAssembler.toEntityFromResponse(data))
+      )
+    }
+  saveRecipesByDay(mealPlanRecipes: any[])  {
+    mealPlanRecipes.forEach(
+      mealPlanRecipe => {
+        this.http.post<MealPlanRecipeResponse>(`${env.apiUrl}meal_plan_recipes`, mealPlanRecipe).pipe(
+          map(data => MealPlanRecipeAssembler.toEntityFromResponse(data))
+        ).subscribe({
+            next: (mealPlanRecipe) => {
+              console.log('mealPlanRecipe', mealPlanRecipe);
+            },
+            error: (error) => {
+              console.error('Error saving meal plan recipe:', error);
+            }
+          }
+        )
+        console.log('mealPlanRecipe', mealPlanRecipe);
+      }
+    );
+  }
   updateMealPlan(mealPlanid: string, data: {mealPlan: MealPlan; recipes: MealPlanRecipe[]}): Observable<any> {
     const updateMealPlan$ = this.http.put(`${env.apiUrl}meal_plans/${mealPlanid}`, data.mealPlan);
     const updateRecipes$ = data.recipes.map(recipe =>
@@ -80,6 +108,12 @@ export class MealPlanService {
   getRecipeById(id: string): Observable<Recipe> {
     return this.http.get<RecipeResponse>(`${env.apiUrl}recipes/${id}`).pipe(
       map(data => RecipeAssembler.toEntityFromResponse(data))
+    );
+  }
+  getCustomerMealPlans(userId: string): Observable<CustomerMealPlan[]> {
+    return this.http.get<CustomerMealPlanResponse[]>(`${env.apiUrl}customer_meal_plan`).pipe(
+      map(data => CustomerMealPlanAssembler.toEntityFromResponseArray(data)
+        .filter(customerMealPlan => customerMealPlan.customer_id.toString() === userId))
     );
   }
   getAllRecipes(): Observable<Recipe[]> {

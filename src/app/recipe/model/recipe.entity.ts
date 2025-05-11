@@ -15,27 +15,28 @@ export class Ingredient {
 // recipe.entity.ts
 export class Recipe {
   constructor(
-    public id: number,
     public title: string,
     public description: string,
     public instructions: string,
     public calories: number,
-    public nutricionist_id: number
+    public nutricionist_id: number,
+    public id: number
   ) {}
 }
 // recipe-ingredient.entity.ts
 export class RecipeIngredient {
   constructor(
-    public id: number,
+    public id: number ,
     public ingredient_id: number,
-    public recipe_id: number
+    public recipe_id: number,
+    public quantity: number,
   ) {}
 }
 // macros.entity.ts
 export class Macros {
   constructor(
     public carbs: number,
-    public protein: number,
+    public proteins: number,
     public fats: number,
     public recipe_id: number
   ) {}

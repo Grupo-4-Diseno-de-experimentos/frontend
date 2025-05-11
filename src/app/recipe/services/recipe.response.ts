@@ -3,12 +3,13 @@ export interface RecipeIngredientResponse {
   id: number;
   ingredient_id: number;
   recipe_id: number;
+  quantity: number;
 }
 
 // macros.model.ts
 export interface MacrosResponse {
   carbs: number;
-  protein: number;
+  proteins: number;
   fats: number;
   recipe_id: number;
 }

@@ -11,8 +11,10 @@ import {MatError, MatFormField, MatInput} from '@angular/material/input';
 import {NgForOf, NgIf} from '@angular/common';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
-import {Ingredient} from '../../model/recipe.entity';
+import {Ingredient, Recipe} from '../../model/recipe.entity';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {RecipeService} from '../../services/recipe.service';
+import {UserService} from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-recipe-create',
@@ -45,7 +47,7 @@ export class RecipeCreateComponent implements OnInit{
   allIngredients: Ingredient[] = [];
   filteredIngredients: Ingredient[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private recipeService: RecipeService, private userService: UserService) {
     this.recipeForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -58,7 +60,7 @@ export class RecipeCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.fetchIngredients();
   }
 
   searchIngredients(): void {
@@ -67,6 +69,17 @@ export class RecipeCreateComponent implements OnInit{
       ing.name.toLowerCase().includes(searchTerm) &&
       !this.selectedIngredients.some(selected => selected.id === ing.id)
     );
+  }
+  fetchIngredients(): void {
+    this.recipeService.getAllIngredients().subscribe({
+      next: (ingredients) => {
+        console.log('ingredients:', ingredients);
+        this.allIngredients = ingredients;
+      },
+      error: (err) => {
+        console.error('Error fetching ingredients:', err);
+      }
+    });
   }
 
   addIngredient(ingredient: Ingredient): void {
@@ -93,7 +106,7 @@ export class RecipeCreateComponent implements OnInit{
       };
     }, { calories: 0, carbs: 0, proteins: 0, fats: 0 });
 
-    // actualizaciion el formulario (puedes hacerlo manual o automático)
+    // actualizaciion el formulario
     this.recipeForm.patchValue({
       calories: Math.round(totals.calories),
       carbs: Math.round(totals.carbs),
@@ -102,7 +115,7 @@ export class RecipeCreateComponent implements OnInit{
     });
   }
 
-  onSubmit(): void {
+/*  onSubmit(): void {
     if (this.recipeForm.valid) {
       const recipeData = {
         ...this.recipeForm.value,
@@ -112,7 +125,45 @@ export class RecipeCreateComponent implements OnInit{
         }))
       };
       console.log('Receta a guardar:', recipeData);
-      //guardar recetas en backend
+
+    }
+  }*/
+
+  onSubmit(): void {
+    if (this.recipeForm.valid) {
+      const recipe: any = {
+        title: this.recipeForm.value.title,
+        description: this.recipeForm.value.description,
+        instructions: this.recipeForm.value.instructions,
+        calories: this.recipeForm.value.calories,
+        nutricionist_id: this.userService.getUserId(),
+      };
+
+      const macros:any = {
+        carbs: this.recipeForm.value.carbs,
+        proteins: this.recipeForm.value.proteins,
+        fats: this.recipeForm.value.fats
+      };
+
+      // se guarda la receta para obtener el id primero
+      this.recipeService.saveRecipe(recipe).subscribe({
+        next: (savedRecipe) => {
+          const recipeId = savedRecipe.id;
+
+          // asociamos el id de la receta a los ingredientes
+          const recipeIngredients = this.selectedIngredients.map(ingredient => ({
+            recipe_id: recipeId,
+            ingredient_id: ingredient.id,
+            quantity: ingredient.quantity
+          }));
+
+          // se guardan los ingredientes en RecipeIngredient
+          this.recipeService.saveRecipeIngredients(recipeIngredients)
+        },
+        error: (err) => {
+          console.error('Error al guardar la receta:', err);
+        }
+      });
     }
   }
 
