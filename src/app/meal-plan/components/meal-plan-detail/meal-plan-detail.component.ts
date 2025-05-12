@@ -7,52 +7,17 @@ import {MealPlan, MealPlanRecipe, Recipe} from '../../model/meal-plan.entity';
 import {MealPlanService} from '../../services/meal-plan.service';
 import {UserService} from '../../../user/services/user.service';
 
-import {
-  MatCard,
-  MatCardActions, MatCardAvatar,
-  MatCardContent,
-  MatCardHeader,
-  MatCardSubtitle,
-  MatCardTitle
-} from '@angular/material/card';
+import {  MatCard,  MatCardActions,  MatCardContent,  MatCardHeader,  MatCardSubtitle,  MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatInput, MatLabel, MatInputModule} from '@angular/material/input';
-import {
-  MatAccordion,
-  MatExpansionPanel,
-  MatExpansionPanelDescription,
-  MatExpansionPanelTitle,
-  MatExpansionModule
-} from '@angular/material/expansion';
+import {  MatAccordion,  MatExpansionPanel,  MatExpansionPanelDescription,  MatExpansionPanelTitle,  MatExpansionModule} from '@angular/material/expansion';
 import {MatIcon} from '@angular/material/icon';
-import {findIndex} from 'rxjs';
 import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-meal-plan-detail',
   imports: [
-    NgForOf,
-    FormsModule,
-    MatButton,
-    NgIf,
-    MatInputModule,
-    MatCardTitle,
-    MatCard,
-    MatCardContent,
-    MatCardSubtitle,
-    MatFormField,
-    MatIcon,
-    MatInput,
-    MatLabel,
-    MatAccordion,
-    MatExpansionPanel,
-    MatExpansionPanelDescription,
-    MatCardActions,
-    MatExpansionPanelTitle,
-    MatCardHeader,
-    MatIconButton,
-    MatCardAvatar,
-    MatFabButton,
-    MatExpansionModule,
-    MatSelectModule
+    NgForOf,  FormsModule,   MatButton,   NgIf,   MatInputModule,   MatCardTitle,   MatCard,   MatCardContent,   MatCardSubtitle,
+    MatFormField,    MatIcon,  MatInput,  MatLabel,  MatAccordion,  MatExpansionPanel,  MatExpansionPanelDescription,  MatCardActions,
+    MatExpansionPanelTitle,  MatCardHeader,  MatIconButton,  MatFabButton,  MatExpansionModule,  MatSelectModule
   ],
   templateUrl: './meal-plan-detail.component.html',
   styleUrl: './meal-plan-detail.component.css',

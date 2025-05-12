@@ -1,20 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardModule
-} from '@angular/material/card';
+import {MatCard, MatCardActions, MatCardContent, MatCardModule} from '@angular/material/card';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable, MatTableModule
-} from '@angular/material/table';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatTableModule} from '@angular/material/table';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../user/services/user.service';
@@ -26,37 +13,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-detail',
   imports: [
-    MatCard,
-    MatCardModule,
-    MatButton,
-    MatTable,
-    FormsModule,
-    MatInput,
-    NgIf,
-    MatCardActions,
-    MatCardContent,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    MatIconModule,
-    MatIconButton,
-    NgForOf,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatCellDef,
-    MatHeaderCellDef,
-    NgClass,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    MatSelectModule,
-    MatTableModule
-  ],
+    MatCard, MatCardModule, MatButton, MatTable,  FormsModule,  MatInput,  NgIf,  MatCardActions,  MatCardContent,  MatFormFieldModule,  MatAutocompleteModule,
+    MatIconModule,  MatIconButton,  NgForOf,  MatColumnDef,  MatHeaderCell,  MatCell,  MatCellDef,  MatHeaderCellDef,  NgClass,  MatHeaderRow,  MatHeaderRowDef,
+    MatRow,  MatRowDef,  MatSelectModule,  MatTableModule ],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.css'
 })
@@ -72,27 +36,57 @@ export class RecipeDetailComponent implements OnInit {
   ingredientSearch = '';
   allIngredients: Ingredient[] = [];
   filteredIngredients: Ingredient[] = [];
-  ingredientsIdsByRecipesIngredient: number[] = [];
+  ingredientsIdsByRecipesIngredient: string[] = [];
   selectedIngredient: Ingredient | null = null;
   macros!: Macros;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService) {}
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      console.log('Recibido id:', params['id']);
-    });
     this.recipeId = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.recipeId);
-    this.fetchRecipeIngredients()
-    this.fetchIngredientsByRecipeId()
-    console.log('ingredients:', this.ingredientsByRecipeIngredientId);
-    this.fetchRecipeDetails();
-    this.fetchIngredients();
-    this.getRecipeById();
-    this.getAllIngredients();
-    this.getMacrosByRecipeId();
-    this.filteredIngredients = this.ingredientsByRecipeIngredientId;
+    this.loadData();
   }
+
+  loadData(): void {
+    forkJoin({
+      recipe: this.recipeService.getRecipeById(this.recipeId),
+      recipeIngredients: this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId),
+      allIngredients: this.recipeService.getAllIngredients(),
+      allMacros: this.recipeService.getAllMacros()
+    }).subscribe({
+      next: ({ recipe, recipeIngredients, allIngredients, allMacros }) => {
+        this.recipe = recipe;
+        this.recipeIngredients = recipeIngredients;
+        this.allIngredients = allIngredients;
+
+        // id de ingredientes asociados a esta receta
+        this.ingredientsIdsByRecipesIngredient = recipeIngredients.map(ri => ri.ingredient_id.toString());
+
+        // solo los ingredientes usados en esta receta se guardan
+        this.ingredientsByRecipeIngredientId = this.allIngredients.filter(ingredient =>
+          this.ingredientsIdsByRecipesIngredient.includes(ingredient.id.toString())
+
+        );
+        console.log('Filtered ingredients:', this.ingredientsIdsByRecipesIngredient);
+
+        // filtro de macros
+        const macro = allMacros.find(m => m.recipe_id.toString() === this.recipeId);
+        if (macro) this.macros = macro;
+
+        // Filtrado inicial
+        this.filteredIngredients = [...this.ingredientsByRecipeIngredientId];
+        console.log('Todos los datos cargados:', {
+          recipe,
+          recipeIngredients,
+          ingredientsByRecipe: this.ingredientsByRecipeIngredientId,
+          macros: this.macros
+        });
+      },
+      error: (err) => {
+        console.error('Error cargando datos iniciales:', err);
+      }
+    });
+  }
+
   get isNutricionist() {
     return this.userService.isNutricionist();
   }
@@ -105,24 +99,6 @@ export class RecipeDetailComponent implements OnInit {
     this.ingredientsByRecipeIngredientId.push(event.value);
     console.log('Ingredients by ID:', this.ingredientsByRecipeIngredientId);
   }
-  getRecipeById() {
-    this.recipeService.getRecipeById(this.recipeId).subscribe(recipe => {
-      this.recipe = recipe;
-/*      this.selectedIngredients = [...recipe.ingredients];*/
-    });
-  }
-  getMacrosByRecipeId(){
-    this.recipeService.getAllMacros().subscribe(macros => {
-      macros.filter(macro => macro.recipe_id.toString() === this.recipeId)
-        .forEach(macro => this.macros = macro);
-      console.log('Macros:', this.macros);
-    });
-  }
-  getAllIngredients() {
-    this.recipeService.getAllIngredients().subscribe(data => {
-      this.filteredIngredients = data;
-    });
-  }
   filterIngredients() {
     const query = this.ingredientSearch.toLowerCase();
     this.filteredIngredients = this.allIngredients.filter(
@@ -131,76 +107,69 @@ export class RecipeDetailComponent implements OnInit {
     );
   }
 
-
-
   cancelEdit() {
     this.editMode = false;
   }
-  fetchRecipeDetails(): void {
-    this.recipeService.getRecipeById(this.recipeId).subscribe({
-      next: (recipe) => {
-        console.log('recipe details:', recipe);
-        this.recipe = recipe;
-      },
-      error: (err) => {
-        console.error('Error fetching recipe details:', err);
+  saveChanges() {
+    const currentIngredientIds = this.ingredientsByRecipeIngredientId.map(i => i.id);
+
+    // ingrediente eliminado
+    const ingredientsToDelete = this.recipeIngredients.filter(ri => !currentIngredientIds.includes(ri.ingredient_id));
+    ingredientsToDelete.forEach(ri => {
+      if (ri.id) {
+        this.recipeService.removeRecipeIngredient(ri.id.toString()).subscribe({
+          next: () => console.log('Eliminado:', ri),
+          error: (err) => console.error('Error eliminando:', err)
+        });
       }
     });
-  }
-  fetchIngredients(): void {
-    this.recipeService.getAllIngredients().subscribe({
-      next: (ingredients) => {
-        console.log('ingredients:', ingredients);
-        this.allIngredients = ingredients;
-      },
-      error: (err) => {
-        console.error('Error fetching ingredients:', err);
-      }
-    });
-  }
-  fetchRecipeIngredients(): void {
-    this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId).subscribe({
-      next: (recipeIngredients) => {
-        console.log('recipe ingredients:', recipeIngredients);
-        this.recipeIngredients = recipeIngredients;
-        recipeIngredients.forEach(recipeIngredient => this.ingredientsIdsByRecipesIngredient.push(recipeIngredient.ingredient_id))
-        this.fetchIngredientsByRecipeId();
-      },
-      error: (err) => {
-        console.error('Error fetching recipe ingredients:', err);
-      }
-    });
-  }
-  fetchIngredientsByRecipeId(): void {
-    this.ingredientsIdsByRecipesIngredient.forEach(id => {
-      this.recipeService.getIngredientsByRecipeId(id.toString()).subscribe({
-        next: (ingredients) => {
-          ingredients.forEach(ingredient => this.ingredientsByRecipeIngredientId.push(ingredient));
-          console.log('Ingredients by ID:', this.ingredientsByRecipeIngredientId);
-        },
-        error: (err) => {
-          console.error('Error fetching ingredient by ID:', err);
+
+    // crear o actualizar recipe-ingredientes
+    const updatedIngredients: RecipeIngredient[] = this.ingredientsByRecipeIngredientId.map(ingredient => {
+      const existing = this.recipeIngredients.find(ri => ri.ingredient_id === ingredient.id);
+      return existing
+        ? {
+          ...existing,
+          quantity: ingredient.quantity
         }
+        : {
+          recipe_id: Number(this.recipeId),
+          ingredient_id: ingredient.id,
+          quantity: ingredient.quantity
+        } as RecipeIngredient;
+    });
+
+    // actualizar
+    updatedIngredients.filter(ri => ri.id).forEach(ri => {
+      this.recipeService.updateRecipeIngredient(ri.id!.toString(), { recipeIngredient: ri }).subscribe({
+        next: () => console.log('Actualizado:', ri),
+        error: (err) => console.error('Error actualizando:', err)
       });
     });
-  }
-  saveChanges() {
-    console.log('recipe:', this.recipe);
-    console.log('Recipes Ingredients:', this.recipeIngredients);
-    // Aquí puedes enviar los datos al backend
+
+    // crear nuevos
+    updatedIngredients.filter(ri => !ri.id).forEach(ri => {
+      this.recipeService.createRecipeIngredient(ri).subscribe({
+        next: () => console.log('Creado:', ri),
+        error: (err) => console.error('Error creando:', err)
+      });
+    });
+
+    // actualizar la receta principal
     this.recipeService.updateRecipe(this.recipe.id.toString(), {
-      recipe: this.recipe,
-      recipesIngredient: this.recipeIngredients
+      recipe: this.recipe
     }).subscribe({
-      next: (response) => {
-        console.log('Recipe actualizado con éxito:', response);
-        alert('¡Plan actualizado exitosamente!');
+      next: () => {
+        console.log('Recipe actualizada con éxito');
+        alert('¡Recipe actualizada exitosamente!');
       },
       error: (err) => {
-        console.error('Error al actualizar la recipe:', err);
-        alert('Error al actualizar la recipe.');
+        console.error('Error al actualizar la receta:', err);
+        alert('Error al actualizar la receta.');
       }
     });
+
     this.editMode = false;
   }
+
 }

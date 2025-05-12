@@ -1,42 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteTrigger,
-  MatOption
-} from '@angular/material/autocomplete';
+import {  MatAutocomplete,  MatAutocompleteTrigger,  MatOption} from '@angular/material/autocomplete';
 import {MatCardModule, MatCardContent, MatCardHeader} from '@angular/material/card';
-import {MatError, MatFormField, MatInput} from '@angular/material/input';
+import {MatFormField, MatInput} from '@angular/material/input';
 import {NgForOf, NgIf} from '@angular/common';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
-import {Ingredient, Recipe} from '../../model/recipe.entity';
+import {Ingredient} from '../../model/recipe.entity';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {RecipeService} from '../../services/recipe.service';
 import {UserService} from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-recipe-create',
-  imports: [
-    FormsModule,
-    MatAutocomplete,
-    MatOption,
-    MatCardContent,
-    MatCardModule,
-    MatCardHeader,
-    ReactiveFormsModule,
-    MatError,
-    MatInput,
-    NgIf,
-    MatIconButton,
-    MatIcon,
-    MatButton,
-    MatAutocompleteTrigger,
-    MatFormField,
-    MatFormFieldModule,
-    NgForOf
-  ],
+  imports: [ FormsModule,  MatAutocomplete,  MatOption,  MatCardContent,  MatCardModule,  MatCardHeader,  ReactiveFormsModule,  MatInput,  NgIf,  MatIconButton,
+    MatIcon,  MatButton,  MatAutocompleteTrigger,  MatFormField,  MatFormFieldModule,  NgForOf ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
 })

@@ -302,8 +302,8 @@
       "id": "4",
       "title": "Batido verde proteico",
       "description": "Batido nutritivo ideal para después del entrenamiento",
-      "instructions": "1. Mezclar espinacas, plátano, proteína en polvo y leche en una batidora. 2. Batir hasta obtener una mezcla homogénea.",
-      "calories": 280,
+      "instructions": "1. Mezclar espinacas, plátano, proteína en polvo y leche en una batidora. 2. Batir hasta obtener una mezcla homogenea.",
+      "calories": 281,
       "nutricionist_id": 1
     },
     {
@@ -339,28 +339,10 @@
       "quantity": 150
     },
     {
-      "id": "2",
-      "ingredient_id": 3,
-      "recipe_id": 2,
-      "quantity": 100
-    },
-    {
       "id": "3",
       "ingredient_id": 6,
       "recipe_id": 1,
       "quantity": 50
-    },
-    {
-      "id": "4",
-      "ingredient_id": 4,
-      "recipe_id": 2,
-      "quantity": 200
-    },
-    {
-      "id": "5",
-      "ingredient_id": 6,
-      "recipe_id": 2,
-      "quantity": 100
     },
     {
       "id": "6",
@@ -415,6 +397,12 @@
       "ingredient_id": 6,
       "recipe_id": 7,
       "quantity": 50
+    },
+    {
+      "id": "7546",
+      "ingredient_id": "1",
+      "recipe_id": 2,
+      "quantity": 40
     }
   ],
   "macros": [

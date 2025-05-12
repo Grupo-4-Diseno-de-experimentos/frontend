@@ -26,18 +26,6 @@ export class RecipeService {
       map(data => IngredientAssembler.toEntityFromResponseArray(data))
     );
   }
-/*  updateRecipe(): Observable<Recipe> {
-    return this.http.put<RecipeResponse>(`${env.apiUrl}recipes`, {
-      name: 'name',
-      description: 'description',
-      category: 'category',
-      goal: 'goal',
-      image: 'image',
-      ingredients: [],
-      macros: [],
-      favorite: false
-    })
-  }*/
   getRecipeById(id: string): Observable<Recipe> {
     return this.http.get<RecipeResponse>(`${env.apiUrl}recipes/${id}`).pipe(
 
@@ -55,18 +43,6 @@ export class RecipeService {
     );
   }
 
-/*  getFavoriteRecipesByUserId(user_id: string): Observable<RecipeResponse[]> {
-    let recipes = this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
-      map(data => RecipeAssembler.toEntityFromResponseArray(data))
-    )
-    return this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}favorite_recipes/${user_id}`).pipe(
-      map(data => {
-        recipes.map(recipe => {
-        FavoriteRecipeAssembler.toEntityFromResponseArray(data).filter(recipe => recipe.user_id.toString() === recipe.id)
-        })
-      })
-    )
-  }*/
   getFavoriteRecipesByUserId(user_id: string): Observable<Recipe[]> {
     return forkJoin({
       allRecipes: this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`),
@@ -116,12 +92,21 @@ export class RecipeService {
       });
     })
   }
-  updateRecipe(recipeId: string, data: {recipe: Recipe; recipesIngredient: RecipeIngredient[]}): Observable<any> {
-    const updateRecipe$ = this.http.put(`${env.apiUrl}recipes/${recipeId}`, data.recipe);
-    const updateRecipeIngredients$ = data.recipesIngredient.map(item =>
-      this.http.put(`${env.apiUrl}recipe_ingredients/${item.id}`, item)
+  updateRecipe(recipeId: string, data: {recipe: Recipe;}): Observable<any> {
+    return this.http.put(`${env.apiUrl}recipes/${recipeId}`, data.recipe);
+
+  }
+  updateRecipeIngredient(recipeId: string, data: {recipeIngredient: RecipeIngredient;}): Observable<any> {
+    return this.http.put(`${env.apiUrl}recipe_ingredients/${recipeId}`, data.recipeIngredient);
+  }
+
+  createRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
+    return this.http.post<RecipeIngredientResponse>(`${env.apiUrl}recipe_ingredients`, recipeIngredient).pipe(
+      map(data => RecipeIngredientAssembler.toEntityFromResponse(data))
     );
-    return forkJoin([updateRecipe$, ...updateRecipeIngredients$]);
+  }
+  removeRecipeIngredient(id: string): Observable<any> {
+    return this.http.delete(`${env.apiUrl}recipe_ingredients/${id}`);
   }
   getRecipeIngredientsByRecipeId(id:string): Observable<RecipeIngredient[]> {
     return this.http.get<RecipeIngredientResponse[]>(`${env.apiUrl}recipe_ingredients`).pipe(

@@ -11,7 +11,7 @@
       <form [formGroup]="mealPlanForm" (ngSubmit)="onSubmit()" class="space-y-8">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Columna izquierda -->
+
           <div class="space-y-6">
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Nombre del Plan</mat-label>
@@ -41,7 +41,7 @@
             </mat-form-field>
           </div>
 
-          <!-- Columna derecha -->
+
           <div class="space-y-6">
             <div class="grid grid-cols-2 gap-4">
               <mat-form-field appearance="outline">
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <!-- Sección de comidas -->
+
         <div class="pt-6 border-t border-green-200">
           <h2 class="text-xl font-semibold text-green-700 mb-4 flex items-center">
             <mat-icon class="mr-2 text-green-600">restaurant</mat-icon>
@@ -141,7 +141,6 @@
           </div>
         </div>
 
-        <!-- Botones -->
         <div class="pt-6 flex justify-end space-x-4 border-t border-green-200">
           <button mat-stroked-button type="button" (click)="cancel()"
                   class="text-green-700 border-green-500 hover:bg-green-50">
