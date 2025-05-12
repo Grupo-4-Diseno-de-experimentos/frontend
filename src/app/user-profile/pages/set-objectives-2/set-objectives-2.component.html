@@ -1,0 +1,40 @@
+<div class="set-goal-container">
+  <div class="header">
+    <button class="back-button" routerLink="/set-objectives-1">
+      <img src="https://i.postimg.cc/bvgMQ9T1/back.png" alt="Flecha de Retroceso">
+    </button>
+    <div class="progress-bar">
+      <div class="progress-indicator" style="width: 40%;"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="icon-container">
+      <img src="https://i.postimg.cc/J0YLvYp3/image.png" alt="Icono de Pregunta">
+    </div>
+    <h2>¿Cómo deseas conseguirlo?</h2>
+    <p class="subtitle">No te preocupes, luego lo puedes cambiar</p>
+
+    <div class="goal-options">
+      <button class="goal-button" (click)="selectMethod('plan-nutricional')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/HnqyHnNL/image.png" alt="Icono Plan Nutricional">
+        </div>
+        <div class="goal-text">
+          <h3>Necesito un plan nutricional</h3>
+          <p>No sé qué comer. Necesito sugerencias de comidas</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectMethod('contar-calorias')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/gkY9HpkC/image.png" alt="Icono Contar Calorías">
+        </div>
+        <div class="goal-text">
+          <h3>Necesito contar mis calorías</h3>
+          <p>Sé qué comer. Necesito monitorear mis calorías y macronutrientes</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

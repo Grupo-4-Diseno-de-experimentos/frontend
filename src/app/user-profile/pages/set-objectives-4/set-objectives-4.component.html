@@ -1,0 +1,70 @@
+<div class="set-goal-container">
+  <div class="header">
+    <button class="back-button" routerLink="/set-objectives-3">
+      <img src="https://i.postimg.cc/bvgMQ9T1/back.png" alt="Flecha de Retroceso">
+    </button>
+    <div class="progress-bar">
+      <div class="progress-indicator" style="width: 80%;"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="icon-container">
+      <img src="https://i.postimg.cc/fLTRJrgX/image.png" alt="Icono Nivel de Actividad">
+    </div>
+    <h2>¿Cuál es tu nivel de actividad física?</h2>
+    <p class="subtitle">No te preocupes, luego lo puedes cambiar</p>
+
+    <div class="activity-level-options">
+      <button class="activity-button" (click)="selectActivityLevel('sedentario')">
+        <div class="activity-icon">
+          <img src="https://i.postimg.cc/6qcSTMg7/image.png" alt="Icono Sedentario">
+        </div>
+        <div class="activity-text">
+          <h3>Sedentario</h3>
+          <p>Poco o nada de ejercicio</p>
+        </div>
+      </button>
+
+      <button class="activity-button" (click)="selectActivityLevel('ligeramente-activo')">
+        <div class="activity-icon">
+          <img src="https://i.postimg.cc/C5cPwznk/image.png" alt="Icono Ligeramente Activo">
+        </div>
+        <div class="activity-text">
+          <h3>Ligeramente Activo</h3>
+          <p>Ejercicio 2 a 3 días por semana</p>
+        </div>
+      </button>
+
+      <button class="activity-button" (click)="selectActivityLevel('moderadamente-activo')">
+        <div class="activity-icon">
+          <img src="https://i.postimg.cc/gjjyq4rL/image.png" alt="Icono Moderadamente Activo">
+        </div>
+        <div class="activity-text">
+          <h3>Moderadamente Activo</h3>
+          <p>Ejercicio 4 a 5 días por semana</p>
+        </div>
+      </button>
+
+      <button class="activity-button" (click)="selectActivityLevel('muy-activo')">
+        <div class="activity-icon">
+          <img src="https://i.postimg.cc/9MMwv02v/image.png" alt="Icono Muy Activo">
+        </div>
+        <div class="activity-text">
+          <h3>Muy Activo</h3>
+          <p>Ejercicio 6 a 7 días por semana</p>
+        </div>
+      </button>
+
+      <button class="activity-button" (click)="selectActivityLevel('atleta-profesional')">
+        <div class="activity-icon">
+          <img src="https://i.postimg.cc/Kjhk4NBy/image.png" alt="Icono Atleta Profesional">
+        </div>
+        <div class="activity-text">
+          <h3>Atleta Profesional</h3>
+          <p>Ejercicio intenso 6 a 7 días por semana</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

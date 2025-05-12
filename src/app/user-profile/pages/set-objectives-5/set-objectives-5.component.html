@@ -1,0 +1,70 @@
+<div class="set-goal-container">
+  <div class="header">
+    <button class="back-button" routerLink="/set-objectives-4">
+      <img src="https://i.postimg.cc/bvgMQ9T1/back.png" alt="Flecha de Retroceso">
+    </button>
+    <div class="progress-bar">
+      <div class="progress-indicator" style="width: 100%;"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="icon-container">
+      <img src="https://i.postimg.cc/nLvMgmNR/image.png" alt="Icono Tipo de Dieta">
+    </div>
+    <h2>¿Qué tipo de dieta prefieres?</h2>
+    <p class="subtitle">No te preocupes, luego lo puedes cambiar</p>
+
+    <div class="goal-options">
+      <button class="goal-button" (click)="selectDiet('recomendada')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/k58tCzRy/image.png" alt="Icono Recomendada">
+        </div>
+        <div class="goal-text">
+          <h3>Recomendada</h3>
+          <p>La mejor para ti. Mezcla óptima de proteínas, carbohidratos y grasas</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectDiet('alta-proteinas')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/1zPygjYB/image.png" alt="Icono Alta en Proteínas">
+        </div>
+        <div class="goal-text">
+          <h3>Alta en Proteínas</h3>
+          <p>Más proteínas, menos carbohidratos y grasas</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectDiet('baja-carbohidratos')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/Fs5F5zgw/image.png" alt="Icono Baja en Carbohidratos">
+        </div>
+        <div class="goal-text">
+          <h3>Baja en Carbohidratos</h3>
+          <p>Menos carbohidratos, más grasas y proteínas moderadas</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectDiet('keto')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/ZY3ZcZtH/image.png" alt="Icono Keto">
+        </div>
+        <div class="goal-text">
+          <h3>Keto</h3>
+          <p>Muy baja en carbohidratos, alta en grasas y proteínas moderadas</p>
+        </div>
+      </button>
+
+      <button class="goal-button" (click)="selectDiet('baja-grasas')">
+        <div class="goal-icon">
+          <img src="https://i.postimg.cc/bwrBmHSP/image.png" alt="Icono Baja en Grasas">
+        </div>
+        <div class="goal-text">
+          <h3>Baja en Grasas</h3>
+          <p>Menos grasas, más carbohidratos y proteínas moderadas</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
