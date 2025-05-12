@@ -3,6 +3,7 @@
 
   <section class="user-info" *ngIf="userData">
     <h2>Información Personal</h2>
+    <br>
     <div class="info-item">
       <label>Nombre:</label>
       <span>{{ userData.nombre || 'No especificado' }}</span>
@@ -13,7 +14,7 @@
     </div>
     <div class="info-item">
       <label>Sexo:</label>
-      <span>{{ userData.sexo || 'No especificado' }}</span>
+      <span>{{ getDisplayValue('sexo', userData?.sexo) }}</span>
     </div>
     <div class="info-item">
       <label>Edad:</label>
@@ -27,30 +28,164 @@
       <label>Peso:</label>
       <span>{{ userData.peso ? userData.peso + ' kg' : 'No especificado' }}</span>
     </div>
-    <button class="edit-button" (click)="editProfile()">Editar Perfil</button>
+    <button class="edit-button" (click)="openEditProfileModal()">Editar Perfil</button>
   </section>
   <section class="user-info" *ngIf="!userData">
     <h2>Información Personal</h2>
     <p>Cargando información del perfil...</p>
   </section>
-  <section class="objectives-info">
-    <h2>Tus Objetivos</h2>
-    <div class="info-item">
-      <label>Objetivo Principal:</label>
-      <span>{{ userObjectives?.objetivoPrincipal || 'No especificado' }}</span>
+
+  <section class="detailed-objectives-info">
+    <h2>Meta Personal</h2>
+    <br>
+
+    <div class="objective-detail-card">
+      <div class="objective-icon">
+        <img src="https://i.postimg.cc/hvXTCKqK/image.png" alt="Icono Perder Grasa" *ngIf="userObjectives?.objetivoPrincipal === 'perder-grasa'">
+
+        <img src="https://i.postimg.cc/FsKB4ShK/image.png " alt= "Icono Ganar Músculo" *ngIf="userObjectives?.objetivoPrincipal === 'ganar-musculo'">
+        <svg viewBox="0 0 24 24" fill="currentColor" *ngIf="userObjectives?.objetivoPrincipal === 'mantener-peso'">
+          <path fill-rule="evenodd" d="M3 12a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="objective-text">
+        <h3>Objetivo Principal</h3>
+        <p>{{ getDisplayValue('objetivoPrincipal', userObjectives?.objetivoPrincipal) }}</p>
+      </div>
     </div>
-    <div class="info-item">
-      <label>Método Preferido:</label>
-      <span>{{ userObjectives?.metodoPreferido || 'No especificado' }}</span>
+
+    <div class="objective-detail-card">
+      <div class="objective-icon">
+        <img src="https://i.postimg.cc/gkY9HpkC/image.png" alt="Icono Plan Nutricional" *ngIf="userObjectives?.metodoPreferido === 'plan-nutricional'">
+        <img src="https://i.postimg.cc/HnqyHnNL/image.png" alt="Icono Contar Calorías" *ngIf="userObjectives?.metodoPreferido === 'contar-calorias'">
+      </div>
+      <div class="objective-text">
+        <h3>Método Preferido</h3>
+        <p>{{ getDisplayValue('metodoPreferido', userObjectives?.metodoPreferido) }}</p>
+      </div>
     </div>
-    <div class="info-item">
-      <label>Nivel de Actividad Física:</label>
-      <span>{{ userObjectives?.nivelActividad || 'No especificado' }}</span>
+
+    <div class="objective-detail-card">
+      <div class="objective-icon">
+        <img src="https://i.postimg.cc/6qcSTMg7/image.png" alt="Icono Sedentario" *ngIf="userObjectives?.nivelActividad === 'sedentario'">
+        <img src="https://i.postimg.cc/C5cPwznk/image.png" alt="Icono Ligeramente Activo" *ngIf="userObjectives?.nivelActividad === 'ligeramente-activo'">
+        <img src="https://i.postimg.cc/gjjyq4rL/image.png" alt="Icono Moderadamente Activo" *ngIf="userObjectives?.nivelActividad === 'moderadamente-activo'">
+        <img src="https://i.postimg.cc/9MMwv02v/image.png" alt="Icono Muy Activo" *ngIf="userObjectives?.nivelActividad === 'muy-activo'">
+        <img src="https://i.postimg.cc/Kjhk4NBy/image.png" alt="Icono Atleta Profesional" *ngIf="userObjectives?.nivelActividad === 'atleta-profesional'">
+      </div>
+      <div class="objective-text">
+        <h3>Nivel de Actividad Física</h3>
+        <p>{{ getDisplayValue('nivelActividad', userObjectives?.nivelActividad) }}</p>
+      </div>
     </div>
-    <div class="info-item">
-      <label>Dieta Preferida:</label>
-      <span>{{ userObjectives?.dietaPreferida || 'No especificado' }}</span>
+
+    <div class="objective-detail-card">
+      <div class="objective-icon">
+        <img src="https://i.postimg.cc/k58tCzRy/image.png" alt="Icono Recomendada" *ngIf="userObjectives?.dietaPreferida === 'recomendada'">
+        <img src="https://i.postimg.cc/1zPygjYB/image.png" alt="Icono Alta en Proteínas" *ngIf="userObjectives?.dietaPreferida === 'alta-proteinas'">
+        <img src="https://i.postimg.cc/Fs5F5zgw/image.png" alt="Icono Baja en Carbohidratos" *ngIf="userObjectives?.dietaPreferida === 'baja-carbohidratos'">
+        <img src="https://i.postimg.cc/ZY3ZcZtH/image.png" alt="Icono Keto" *ngIf="userObjectives?.dietaPreferida === 'keto'">
+        <img src="https://i.postimg.cc/bwrBmHSP/image.png" alt="Icono Baja en Grasas" *ngIf="userObjectives?.dietaPreferida === 'baja-grasas'">
+      </div>
+      <div class="objective-text">
+        <h3>Dieta Preferida</h3>
+        <p>{{ getDisplayValue('dietaPreferida', userObjectives?.dietaPreferida) }}</p>
+      </div>
     </div>
-    <button class="edit-button" (click)="editObjectives()">Editar Objetivos</button>
+
+    <button class="edit-button" (click)="openEditObjectivesModal()">Editar Meta</button>
   </section>
+
+  <div class="edit-objectives-modal" *ngIf="isEditingObjectives">
+    <h3>Editar Meta</h3>
+    <form (ngSubmit)="saveObjectiveChanges()" #editObjectivesForm="ngForm">
+      <div class="form-group">
+        <label for="objetivoPrincipal">Objetivo Principal:</label>
+        <select id="objetivoPrincipal" name="objetivoPrincipal" [(ngModel)]="editedObjectives.objetivoPrincipal" required>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="perder-grasa">Perder Grasa</option>
+          <option value="ganar-musculo">Ganar Músculo</option>
+          <option value="mantener-peso">Mantener Peso</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="metodoPreferido">Método Preferido:</label>
+        <select id="metodoPreferido" name="metodoPreferido" [(ngModel)]="editedObjectives.metodoPreferido" required>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="plan-nutricional">Necesito un plan nutricional</option>
+          <option value="contar-calorias">Necesito contar mis calorías</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="nivelActividad">Nivel de Actividad Física:</label>
+        <select id="nivelActividad" name="nivelActividad" [(ngModel)]="editedObjectives.nivelActividad" required>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="sedentario">Sedentario</option>
+          <option value="ligeramente-activo">Ligeramente Activo</option>
+          <option value="moderadamente-activo">Moderadamente Activo</option>
+          <option value="muy-activo">Muy Activo</option>
+          <option value="atleta-profesional">Atleta Profesional</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dietaPreferida">Dieta Preferida:</label>
+        <select id="dietaPreferida" name="dietaPreferida" [(ngModel)]="editedObjectives.dietaPreferida" required>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="recomendada">Recomendada</option>
+          <option value="alta-proteinas">Alta en Proteínas</option>
+          <option value="baja-carbohidratos">Baja en Carbohidratos</option>
+          <option value="keto">Keto</option>
+          <option value="baja-grasas">Baja en Grasas</option>
+        </select>
+      </div>
+
+      <div class="modal-buttons">
+        <button type="submit" class="save-button" [disabled]="editObjectivesForm.invalid">Guardar cambios</button>
+        <button type="button" class="cancel-button" (click)="closeEditObjectivesModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="edit-modal" *ngIf="isEditingProfile">
+    <h3>Editar Información Personal</h3>
+    <form (ngSubmit)="saveProfileChanges()" #editProfileForm="ngForm">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="editedUserData.nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="editedUserData.email" required>
+      </div>
+      <div class="form-group">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" [(ngModel)]="editedUserData.sexo" required>
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" [(ngModel)]="editedUserData.edad" min="10" max="100">
+      </div>
+      <div class="form-group">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" name="altura" [(ngModel)]="editedUserData.altura" min="100" max="250">
+      </div>
+      <div class="form-group">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" [(ngModel)]="editedUserData.peso" min="30" max="300">
+      </div>
+      <div class="modal-buttons">
+        <button type="submit" class="save-button" [disabled]="editProfileForm.invalid">Guardar</button>
+        <button type="button" class="cancel-button" (click)="closeEditProfileModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
 </div>

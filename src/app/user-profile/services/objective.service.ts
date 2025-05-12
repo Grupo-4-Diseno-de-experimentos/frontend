@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http'; // Importa HttpClient
 
 interface UserObjectives {
   objetivoPrincipal?: string;
@@ -14,6 +15,8 @@ interface UserObjectives {
 })
 export class ObjectiveService {
 
+  private apiUrl = 'TU_URL_DEL_BACKEND/api/objectives'; // Reemplaza con la URL de tu backend
+
   userObjectives: UserObjectives = {
     objetivoPrincipal: '',
     metodoPreferido: '',
@@ -21,7 +24,7 @@ export class ObjectiveService {
     dietaPreferida: ''
   };
 
-  constructor() { }
+  constructor(private http: HttpClient) { } // Inyecta HttpClient
 
   setMainGoal(goal: string): Observable<void> {
     this.userObjectives.objetivoPrincipal = goal;
@@ -49,5 +52,12 @@ export class ObjectiveService {
 
   getUserObjectives(): Observable<UserObjectives> {
     return of(this.userObjectives);
+  }
+
+  // Simulación de la actualización en memoria
+  updateUserObjectives(updatedObjectives: UserObjectives): Observable<any> {
+    this.userObjectives = { ...this.userObjectives, ...updatedObjectives };
+    console.log('Objetivos actualizados localmente:', this.userObjectives);
+    return of({ message: 'Objetivos actualizados con éxito localmente' }); // Simula una respuesta exitosa
   }
 }

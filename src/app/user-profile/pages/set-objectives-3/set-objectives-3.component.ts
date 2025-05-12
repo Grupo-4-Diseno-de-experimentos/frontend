@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
-import { UserService } from '../../services/user.service'; // Importa el servicio de usuario
+import { UserService } from '../../services/user.service';
+import {NgIf} from '@angular/common'; // Importa el servicio de usuario
 
 @Component({
   selector: 'app-set-objectives-3',
   templateUrl: './set-objectives-3.component.html',
   imports: [
     FormsModule,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   styleUrls: ['./set-objectives-3.component.css']
 })
