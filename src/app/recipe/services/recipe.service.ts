@@ -54,13 +54,18 @@ export class RecipeService {
         const favoriteIds = favorites.map(fav => fav.recipe_id);
         console.log(favoriteIds);
         return recipeEntities.filter(recipe =>
-          favoriteIds.includes(Number(recipe.id))
+          favoriteIds.includes((recipe.id))
         );
 
       })
     );
   }
 
+  saveFavoriteRecipe(favoriteRecipe:any): Observable<FavoriteRecipe> {
+    return this.http.post<FavoriteRecipeResponse>(`${env.apiUrl}favorite_recipes`, favoriteRecipe).pipe(
+      map(data => FavoriteRecipeAssembler.toEntityFromResponse(data))
+    );
+  }
   getAllMacros(): Observable<Macros[]> {
     return this.http.get<MacrosResponse[]>(`${env.apiUrl}macros`).pipe(
       map(data => MacrosAssembler.toEntityFromResponseArray(data))

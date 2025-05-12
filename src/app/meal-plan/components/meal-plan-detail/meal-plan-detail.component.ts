@@ -5,7 +5,7 @@ import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MealPlan, MealPlanRecipe, Recipe} from '../../model/meal-plan.entity';
 import {MealPlanService} from '../../services/meal-plan.service';
-import {UserService} from '../../../user/services/user.service';
+import {UserService} from '../../../user-profile/services/user.service'
 
 import {  MatCard,  MatCardActions,  MatCardContent,  MatCardHeader,  MatCardSubtitle,  MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatInput, MatLabel, MatInputModule} from '@angular/material/input';

@@ -4,7 +4,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatTableModule} from '@angular/material/table';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../user/services/user.service';
+import {UserService} from '../../../user-profile/services/user.service';
 import {FormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {RecipeService} from '../../services/recipe.service';

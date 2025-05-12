@@ -6,7 +6,8 @@ import {NgForOf, NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {MealItemComponent} from '../../components/meal-item/meal-item.component';
-import {UserService} from '../../../user/services/user.service';
+import {UserService} from "../../../user-profile/services/user.service";
+
 @Component({
   selector: 'app-meal-plan-list',
   imports: [MatCardModule, NgForOf, FormsModule
@@ -61,7 +62,7 @@ export class MealPlanListComponent implements OnInit {
   }
   filterByNutritionist(): void {
     const userId = this.userService.getUserId();
-    this.filteredMealPlans = this.mealPlans.filter(plan => plan.nutricionist_id === userId);
+    this.filteredMealPlans = this.mealPlans.filter(plan => plan.nutricionist_id.toString() === userId);
   }
   resetFilters(): void {
     this.filteredMealPlans = [...this.mealPlans];

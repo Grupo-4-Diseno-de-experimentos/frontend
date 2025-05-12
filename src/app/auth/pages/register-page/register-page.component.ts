@@ -22,19 +22,21 @@ export class RegisterPageComponent {
   onSubmit(formData: any) {
     console.log('Datos de registro:', formData);
 
-    const user: User = {
-      id: 0,
-      name: formData.firstName, // Asegúrate de que el nombre del campo coincida con tu formulario
-      lastName: formData.lastName, // Asegúrate de que el nombre del campo coincida con tu formulario
+    const user: any = {
+      name: formData.firstName + ' ' + formData.lastName, // Asegúrate de que el nombre del campo coincida con tu formulario
       email: formData.email,
       password: formData.password,
-      role: 'USER',
+      role: formData.role,
       created_at: new Date().toISOString()
     };
     this.authService.create(user).subscribe({
       next: () => {
         console.log('Usuario registrado');
-        this.router.navigate(['/set-objectives']); // Redirige a la pantalla de objetivos
+        if (user.role.toLowerCase() === 'nutricionist'){
+          this.router.navigate(['/profile']); // Redirige a la pantalla de perfil
+        }else {
+          this.router.navigate(['/start-objectives']); // Redirige a la pantalla de objetivos
+        }
       },
       error: (err) => {
         console.error('Error al registrar un usuario', err);

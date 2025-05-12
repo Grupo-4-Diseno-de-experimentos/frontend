@@ -12,7 +12,7 @@ import {Recipe} from '../../model/recipe.entity';
 import {RecipeService} from '../../services/recipe.service';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
-import {UserService} from '../../../user/services/user.service';
+import {UserService} from '../../../user-profile/services/user.service';
 @Component({
   selector: 'app-favorite-recipe',
   imports: [

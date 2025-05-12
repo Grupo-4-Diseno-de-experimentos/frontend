@@ -244,8 +244,8 @@
       </div>
     </mat-card-content>
 
-    <mat-card-actions class="p-6 pt-0 flex justify-end gap-3">
-      <ng-container *ngIf="isNutricionist && !editMode; else editingButtons">
+    <mat-card-actions *ngIf="isNutricionist" class="p-6 pt-0 flex justify-end gap-3">
+      <ng-container *ngIf="!editMode; else editingButtons">
         <button
           mat-raised-button
           color="primary"

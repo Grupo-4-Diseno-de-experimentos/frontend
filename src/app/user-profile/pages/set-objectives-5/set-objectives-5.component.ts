@@ -17,7 +17,7 @@ export class SetObjectives5Component {
     console.log('Dieta seleccionada:', diet);
     this.objectiveService.setPreferredDiet(diet).subscribe( // Llama al método del servicio
       () => {
-        this.router.navigate(['/user-profile/profile']); // Redirige al perfil al finalizar
+        this.router.navigate(['/profile']); // Redirige al perfil al finalizar
       },
       (error) => {
         console.error('Error al guardar la dieta preferida', error);

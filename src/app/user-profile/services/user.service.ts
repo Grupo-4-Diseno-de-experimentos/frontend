@@ -8,6 +8,7 @@ interface UserData {
   edad?: number;
   altura?: number;
   peso?: number;
+  role?: string;
   // ... otros datos del usuario
 }
 
@@ -22,6 +23,7 @@ export class UserService {
     sexo: 'Hombre',
     edad: 30,
     altura: 175,
+    role: 'client',
     peso: 70
   };
 
@@ -29,6 +31,13 @@ export class UserService {
 
   getCurrentUser(): Observable<UserData> {
     return of(this.currentUser);
+  }
+
+  getUserId(): string {
+    return '12345'; // simulacion
+  }
+  isNutricionist(): boolean {
+    return this.currentUser.role === 'nutritionist';
   }
 
   updateUserProfile(userData: Partial<UserData>): Observable<void> {
