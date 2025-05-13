@@ -23,7 +23,7 @@ export class RegisterPageComponent {
     console.log('Datos de registro:', formData);
 
     const user: any = {
-      name: formData.firstName + ' ' + formData.lastName, // Asegúrate de que el nombre del campo coincida con tu formulario
+      name: formData.firstName + ' ' + formData.lastName,
       email: formData.email,
       password: formData.password,
       role: formData.role,

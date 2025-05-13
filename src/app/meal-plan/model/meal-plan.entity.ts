@@ -91,9 +91,8 @@ export class MealPlan {
     public max_bmi: number,
     public min_age: number,
     public max_age: number,
-    public calories_per_day: number,
-    public nutricionist_id: number,
-    public created_at: string
+    public calories_per_d: number,
+    public nutricionist_id: number
   ) {}
 
 /*  isValidForUser(bmi: number, age: number): boolean {

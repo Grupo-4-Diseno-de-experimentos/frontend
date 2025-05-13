@@ -15,13 +15,14 @@ import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-meal-plan-detail',
   imports: [
-    NgForOf,  FormsModule,   MatButton,   NgIf,   MatInputModule,   MatCardTitle,   MatCard,   MatCardContent,   MatCardSubtitle,
-    MatFormField,    MatIcon,  MatInput,  MatLabel,  MatAccordion,  MatExpansionPanel,  MatExpansionPanelDescription,  MatCardActions,
-    MatExpansionPanelTitle,  MatCardHeader,  MatIconButton,  MatFabButton,  MatExpansionModule,  MatSelectModule
+    NgForOf, FormsModule, MatButton, NgIf, MatInputModule, MatCardTitle, MatCard, MatCardContent, MatCardSubtitle,
+    MatFormField, MatIcon, MatInput, MatLabel, MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatCardActions,
+    MatExpansionPanelTitle, MatCardHeader, MatIconButton, MatFabButton, MatExpansionModule, MatSelectModule
   ],
   templateUrl: './meal-plan-detail.component.html',
   styleUrl: './meal-plan-detail.component.css',
   encapsulation: ViewEncapsulation.None,
+  standalone: true
 })
 export class MealPlanDetailComponent implements OnInit{
   planId!: string;
@@ -48,6 +49,8 @@ export class MealPlanDetailComponent implements OnInit{
   }
   ngOnInit(): void {
     this.planId = this.route.snapshot.paramMap.get('id')!;
+    console.log('Plan ID obtenido de la ruta:', this.planId);
+
     this.fetchMealPlanDetails();
     this.fetchMealPlanRecipes();
     this.fetchRecipes()
@@ -92,6 +95,7 @@ export class MealPlanDetailComponent implements OnInit{
     this.mealPlanService.getMealPlanRecipesByplanId(this.planId).subscribe({
       next: (plans) => {
         console.log('Meal plan recipes:', plans);
+        console.log('mealPlanRecipes:', this.mealPlanRecipes);
         this.mealPlanRecipes = plans;
         //adquiero todos los ids de las recetas que solo estan en los planes
         plans.forEach(plan => this.recipesIdsByMealPlanRecipes.push(plan.recipe_id))
@@ -122,23 +126,18 @@ export class MealPlanDetailComponent implements OnInit{
   }
 
   saveChanges() {
-    //datos capturados de los inputs
-      console.log('Meal Plan:', this.mealPlan);
-      console.log('Meal Plan Recipes:', this.mealPlanRecipes);
+    console.log('Meal Plan:', this.mealPlan);
+    console.log('Meal Plan Recipes:', this.mealPlanRecipes);
 
-      this.mealPlanService.updateMealPlan(this.mealPlan.id.toString(), {
-        mealPlan: this.mealPlan,
-        recipes: this.mealPlanRecipes
-      }).subscribe({
-        next: (response) => {
-          console.log('Plan actualizado con éxito:', response);
-/*          alert('¡Plan actualizado exitosamente!');*/
-        },
-        error: (err) => {
-          console.error('Error al actualizar el plan:', err);
-          alert('Error al actualizar el plan.');
-        }
-      });
+    this.mealPlanService.updateMealPlan(this.mealPlan.id, this.mealPlan).subscribe({
+      next: (response) => {
+        console.log('Plan actualizado con éxito:', response);
+      },
+      error: (err) => {
+        console.error('Error al actualizar el plan:', err);
+        alert('Error al actualizar el plan.');
+      }
+    });
     this.isEditing = false;
   }
 

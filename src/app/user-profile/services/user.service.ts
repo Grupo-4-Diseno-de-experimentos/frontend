@@ -23,7 +23,7 @@ export class UserService {
     sexo: 'Hombre',
     edad: 30,
     altura: 175,
-    role: 'client',
+    role: 'nutritionist',
     peso: 70
   };
 

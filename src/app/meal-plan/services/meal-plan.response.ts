@@ -52,6 +52,7 @@ export interface RecipeResponse {
   instructions: string;
   calories: number;
   nutricionist_id: number;
+  macros:MacrosResponse;
 }
 
 
@@ -81,7 +82,7 @@ export interface MealPlanResponse {
   max_bmi: number;
   min_age: number;
   max_age: number;
-  calories_per_day: number;
+  calories_per_d: number;
   nutricionist_id: number;
   created_at: string;
 }
@@ -101,4 +102,27 @@ export interface MealPlanRecipeResponse {
   meal_time: string;
   recipe_id: number;
   meal_plan_id: number;
+}
+// create-meal-plan-request.model.ts
+export interface CreateMealPlanRequest {
+  name: string;
+  category: string;
+  description: string;
+  goal: string;
+  min_bmi: number;
+  max_bmi: number;
+  min_age: number;
+  max_age: number;
+  calories_per_day: number;
+  recipesByDay: RecipeDayDTO[];
+}
+
+export interface RecipeDayDTO {
+  day: string;
+  meals: MealDTO[];
+}
+
+export interface MealDTO {
+  recipe_id: number;
+  meal_time: string;
 }

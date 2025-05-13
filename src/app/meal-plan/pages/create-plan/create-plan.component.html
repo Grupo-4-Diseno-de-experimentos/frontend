@@ -69,7 +69,7 @@
 
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Calorías por día</mat-label>
-              <input matInput type="number" formControlName="calories_per_day" class="bg-green-50 rounded-lg">
+              <input matInput type="number" formControlName="calories_per_d" class="bg-green-50 rounded-lg">
               <mat-icon matSuffix class="text-green-500">local_fire_department</mat-icon>
             </mat-form-field>
           </div>
@@ -90,7 +90,7 @@
                 <mat-expansion-panel-header class="hover:bg-green-50">
                   <mat-panel-title class="text-green-700 font-medium">
                     <mat-icon class="mr-2 text-green-500">event</mat-icon>
-                    {{ daysOfWeek[i] }}
+                    {{ day[i] }}
                   </mat-panel-title>
                   <mat-panel-description class="text-green-600">
                     {{ getMealsControls(i).controls.length }} comidas agregadas

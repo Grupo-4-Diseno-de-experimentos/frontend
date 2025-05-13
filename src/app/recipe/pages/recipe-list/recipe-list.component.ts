@@ -13,18 +13,19 @@ import {RecipeItemComponent} from '../../components/recipe-item/recipe-item.comp
   imports: [MatCardModule, NgForOf, FormsModule
     , RecipeItemComponent],
   templateUrl: './recipe-list.component.html',
+  standalone: true,
   styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   userId!: string;
-  constructor(private dataService: RecipeService, private userService: UserService, private router: Router) {
+  constructor(private recipeService: RecipeService, private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
 
-    this.dataService.getAllRecipes().subscribe({
+    this.recipeService.getAllRecipes().subscribe({
       next: (data) => {
         console.log('Data fetched:', data);
         this.recipes = data;
@@ -43,7 +44,7 @@ export class RecipeListComponent implements OnInit {
       recipe_id: recipeId,
       user_id: this.userId
     }
-    this.dataService.saveFavoriteRecipe(favoriteRecipe).subscribe({
+    this.recipeService.saveFavoriteRecipe(favoriteRecipe).subscribe({
         next: (response) => {
           console.log('Recipe saved as favorite:', response);
         },

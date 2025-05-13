@@ -17,7 +17,7 @@ export class AuthService extends  BaseService<User>{
   }
 
   login(credentials: { email: string; password: string}){
-    const login = `${environment.apiUrl}/users`;
+    const login = `${environment.apiUrl}/users/login`;
     return this.http.post(login,credentials);
   }
 

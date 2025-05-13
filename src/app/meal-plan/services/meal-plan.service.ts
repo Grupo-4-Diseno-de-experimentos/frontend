@@ -1,45 +1,42 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {forkJoin, map, Observable, switchMap} from 'rxjs';
+import {BehaviorSubject, forkJoin, map, Observable, switchMap, tap} from 'rxjs';
 import {CustomerMealPlan, MealPlan, MealPlanRecipe, Recipe} from '../model/meal-plan.entity';
-import {CustomerMealPlanResponse, MealPlanRecipeResponse, MealPlanResponse, RecipeResponse} from './meal-plan.response';
+import {
+  CreateMealPlanRequest,
+  CustomerMealPlanResponse,
+  MealPlanRecipeResponse,
+  MealPlanResponse,
+  RecipeResponse
+} from './meal-plan.response';
 import {
   CustomerMealPlanAssembler,
   MealPlanAssembler,
   MealPlanRecipeAssembler,
   RecipeAssembler
 } from './meal-plan.assembler';
-import {environment as env} from '../../../environments/environment';
+import {environment, environment as env} from '../../../environments/environment';
+import {BaseService} from '../../public/components/base-service/base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MealPlanService {
-  constructor(private http: HttpClient) {
+export class MealPlanService extends BaseService<MealPlan>{
+  private mealSubject = new BehaviorSubject<any>(null);
+  constructor(http: HttpClient) {
+    super(http,`${environment.apiUrl}/mealPlaner`)
   }
-
-  /*getMealPlans(userId: string): Observable<MealPlan[]> {
-    return this.http.get<MealPlanResponse[]>(env.apiUrl + '/meal-plans?userId=' + userId);
-    /!*return this.http.get<MealPlan>(`${this.apiUrl}/current?userId=${userId}`);*!/
-  }*/
-/*  getAllMealPlans(key: string): Observable<MealPlan[]> {
-    return this.http.get<{ [key: string]: MealPlanResponse[] }>(env.apiUrl).pipe(
-      map(data => MealPlanAssembler.toEntityFromResponseArray(data[key])),
-    );
-  }*/
-    getAllMealPlans(): Observable<MealPlan[]> {
-      return this.http.get<MealPlanResponse[]>(`${env.apiUrl}meal_plans`).pipe(
-        map(data => MealPlanAssembler.toEntityFromResponseArray(data)),
-      );
-    }
+   getAllMealPlans(): Observable<MealPlan[]> {
+    return this.http.get<MealPlan[]>(`${environment.apiUrl}/mealPlaner`);
+   }
     saveMealPlan(mealPlan: MealPlan): Observable<any> {
-      return this.http.post<MealPlanResponse>(`${env.apiUrl}meal_plans`, mealPlan).pipe(
+      return this.http.post<MealPlanResponse>(`${env.apiUrl}/meal_plans`, mealPlan).pipe(
          map(data => MealPlanAssembler.toEntityFromResponse(data))
       )
     }
   saveRecipesByDay(mealPlanRecipes: any[])  {
     mealPlanRecipes.forEach(
       mealPlanRecipe => {
-        this.http.post<MealPlanRecipeResponse>(`${env.apiUrl}meal_plan_recipes`, mealPlanRecipe).pipe(
+        this.http.post<MealPlanRecipeResponse>(`${env.apiUrl}/mealPlanRecipes`, mealPlanRecipe).pipe(
           map(data => MealPlanRecipeAssembler.toEntityFromResponse(data))
         ).subscribe({
             next: (mealPlanRecipe) => {
@@ -54,7 +51,7 @@ export class MealPlanService {
       }
     );
   }
-  updateMealPlan(mealPlanid: string, data: {mealPlan: MealPlan; recipes: MealPlanRecipe[]}): Observable<any> {
+  /*updateMealPlan(mealPlanid: string, data: {mealPlan: MealPlan; recipes: MealPlanRecipe[]}): Observable<any> {
     const updateMealPlan$ = this.http.put(`${env.apiUrl}meal_plans/${mealPlanid}`, data.mealPlan);
     const updateRecipes$ = data.recipes.map(recipe =>
       this.http.put(`${env.apiUrl}meal_plan_recipes/${recipe.id}`, recipe)
@@ -62,13 +59,18 @@ export class MealPlanService {
 
     // Combine all Observables (meal plan and recipes) into a single Observable
     return forkJoin([updateMealPlan$, ...updateRecipes$]);
-  }
+  }*/
 
   deleteMealPlanRecipesByPlanId(planId: string): Observable<any> {
-    return this.http.delete(`${env.apiUrl}meal_plan_recipes?meal_plan_id=${planId}`);
+    return this.http.delete(`${env.apiUrl}/meal_plan_recipes?meal_plan_id=${planId}`);
   }
-  createMealPlanRecipe(data: MealPlanRecipe): Observable<any> {
-    return this.http.post(`${env.apiUrl}meal_plan_recipes`, data);
+
+  createMealPlan(mealPlan: CreateMealPlanRequest): Observable<MealPlanResponse>{
+    return this.http.post<MealPlanResponse>(`${environment.apiUrl}/mealPlanRecipes`, mealPlan);
+  }
+
+  updateMealPlan(id:number, mealPlan: MealPlan): Observable<MealPlan>{
+    return this.http.put<MealPlan>(`${environment.apiUrl}/mealPlaner/${id}`, mealPlan);
   }
 
 /*  updateFullMealPlan(planId: string, updatedPlan: MealPlan, updatedMeals: MealPlanRecipe[]) {
@@ -84,51 +86,56 @@ export class MealPlanService {
       return this.http.put(`${env.apiUrl}meal_plans/${id}`, data);
     }*/
     updateRecipe(id: string, data: { recipe: Recipe }): Observable<any> {
-      return this.http.put(`${env.apiUrl}recipes/${id}`, data);
+      return this.http.put(`${environment.apiUrl}/recipe/${id}`, data);
     }
     updateMealPlanRecipe(id: string, data: { mealPlanRecipe: MealPlanRecipe }): Observable<any> {
-      return this.http.put(`${env.apiUrl}meal_plan_recipes/${id}`, data);
+      return this.http.put(`${env.apiUrl}/meal_plan_recipes/${id}`, data);
 
     }
   deleteMealPlan(id: string): Observable<any> {
-    return this.http.delete(`${env.apiUrl}meal_plans/${id}`);
+    return this.http.delete(`${env.apiUrl}/meal_plans/${id}`);
   }
   deleteRecipe(id: string): Observable<any> {
-    return this.http.delete(`${env.apiUrl}recipes/${id}`);
+    return this.http.delete(`${environment.apiUrl}/recipe/${id}`);
   }
   deleteMealPlanRecipe(id: string): Observable<any> {
-    return this.http.delete(`${env.apiUrl}meal_plan_recipes/${id}`);
+    return this.http.delete(`${env.apiUrl}/mealPlanRecipes/${id}`);
   }
-
+  getMealPlanById(id: number): Observable<MealPlan> {
+    return this.http.get<MealPlan>(`${environment.apiUrl}/mealPlaner/${id}`);
+  }
   getDetailsMealPlanbyId(id: string): Observable<MealPlan> {
-    return this.http.get<MealPlanResponse>(`${env.apiUrl}meal_plans/${id}`).pipe(
+    return this.http.get<MealPlanResponse>(`${environment.apiUrl}/mealPlaner/${id}`).pipe(
       map(data => MealPlanAssembler.toEntityFromResponse(data))
     );
   }
   getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get<RecipeResponse>(`${env.apiUrl}recipes/${id}`).pipe(
+    return this.http.get<RecipeResponse>(`${environment.apiUrl}/recipe/${id}`).pipe(
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
   }
   getCustomerMealPlans(userId: string): Observable<CustomerMealPlan[]> {
-    return this.http.get<CustomerMealPlanResponse[]>(`${env.apiUrl}customer_meal_plan`).pipe(
+    return this.http.get<CustomerMealPlanResponse[]>(`${env.apiUrl}/customer_meal_plan`).pipe(
       map(data => CustomerMealPlanAssembler.toEntityFromResponseArray(data)
         .filter(customerMealPlan => customerMealPlan.customer_id.toString() === userId))
     );
   }
   getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
+    return this.http.get<RecipeResponse[]>(`${environment.apiUrl}/recipe`).pipe(
       map(data => RecipeAssembler.toEntityFromResponseArray(data))
     );
   }
 
-  getMealPlanRecipesByplanId(id: string): Observable<MealPlanRecipe[]> {
-    return this.http.get<MealPlanRecipeResponse[]>(`${env.apiUrl}meal_plan_recipes`).pipe(
-      map(data => MealPlanRecipeAssembler.toEntityFromResponseArray(data).filter(recipe => recipe.meal_plan_id.toString() === id))
+  getMealPlanRecipesByplanId(planId: string): Observable<MealPlanRecipe[]> {
+    const numericPlanId = Number(planId);
+    return this.http.get<MealPlanRecipeResponse[]>(`${environment.apiUrl}/mealPlanRecipes/${planId}`).pipe(
+      tap(data => console.log('Respuesta cruda del backend:', data)), // <-- agrega esto
+      map(data =>
+        MealPlanRecipeAssembler.toEntityFromResponseArray(data))
     );
   }
   getRecipeByPlanId(id: string): Observable<Recipe[]> {
-    return this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
+    return this.http.get<RecipeResponse[]>(`${environment.apiUrl}/recipe`).pipe(
       map(data => RecipeAssembler.toEntityFromResponseArray(data)
         .filter(recipe => recipe.id.toString() === id))
     );

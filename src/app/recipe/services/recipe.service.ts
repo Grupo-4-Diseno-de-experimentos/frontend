@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, map, Observable} from 'rxjs';
-import {environment as env} from '../../../environments/environment';
+import {environment, environment as env} from '../../../environments/environment';
 import {MealPlan, MealPlanRecipe} from '../../meal-plan/model/meal-plan.entity';
 import {Recipe} from '../model/recipe.entity';
 import {MealPlanRecipeResponse, RecipeResponse} from '../../meal-plan/services/meal-plan.response';
@@ -17,17 +17,17 @@ export class RecipeService {
   constructor(private http: HttpClient) { }
 
   getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
+    return this.http.get<RecipeResponse[]>(`${environment.apiUrl}/recipe`).pipe(
       map(data => RecipeAssembler.toEntityFromResponseArray(data))
     );
   }
   getAllIngredients(): Observable<Ingredient[]> {
-    return this.http.get<IngredientResponse[]>(`${env.apiUrl}ingredients`).pipe(
+    return this.http.get<IngredientResponse[]>(`${env.apiUrl}/ingredients`).pipe(
       map(data => IngredientAssembler.toEntityFromResponseArray(data))
     );
   }
   getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get<RecipeResponse>(`${env.apiUrl}recipes/${id}`).pipe(
+    return this.http.get<RecipeResponse>(`${environment.apiUrl}/recipes/${id}`).pipe(
 
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
@@ -79,26 +79,15 @@ export class RecipeService {
     );
   }
   saveRecipe(recipe: Recipe): Observable<any> {
-    return this.http.post<RecipeResponse>(`${env.apiUrl}recipes`, recipe).pipe(
-      map(data => RecipeAssembler.toEntityFromResponse(data))
+    return this.http.post<RecipeResponse>(`${env.apiUrl}/recipe`, recipe).pipe(
+      map((data: RecipeResponse) => RecipeAssembler.toEntityFromResponse(data))
     );
   }
-  saveRecipeIngredients(recipeIngredient: any[]) {
-    recipeIngredient.forEach(item => {
-      this.http.post<RecipeIngredientResponse>(`${env.apiUrl}recipe_ingredients`, item).pipe(
-        map(data => RecipeIngredientAssembler.toEntityFromResponse(data))
-      ).subscribe({
-        next: (response) => {
-          console.log('Recipe ingredient saved:', response);
-        },
-        error: (error) => {
-          console.error('Error saving recipe ingredient:', error);
-        }
-      });
-    })
+  saveRecipeIngredients(recipeIngredients: any[]): Observable<any> {
+    return this.http.post<any>('/api/recipe/ingredients', recipeIngredients);
   }
   updateRecipe(recipeId: string, data: {recipe: Recipe;}): Observable<any> {
-    return this.http.put(`${env.apiUrl}recipes/${recipeId}`, data.recipe);
+    return this.http.put(`${env.apiUrl}recipe/${recipeId}`, data.recipe);
 
   }
   updateRecipeIngredient(recipeId: string, data: {recipeIngredient: RecipeIngredient;}): Observable<any> {

@@ -15,7 +15,7 @@ export class RecipeAssembler {
       description: response.description,
       instructions: response.instructions,
       calories: response.calories,
-      nutricionist_id: response.nutricionist_id
+      nutricionist_id: response.nutricionist_id,
     };
   }
 }

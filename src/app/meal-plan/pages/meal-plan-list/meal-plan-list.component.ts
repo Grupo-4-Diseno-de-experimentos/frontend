@@ -13,6 +13,7 @@ import {UserService} from "../../../user-profile/services/user.service";
   imports: [MatCardModule, NgForOf, FormsModule
     , MealItemComponent, NgIf],
   templateUrl: './meal-plan-list.component.html',
+  standalone: true,
   styleUrl: './meal-plan-list.component.css'
 })
 export class MealPlanListComponent implements OnInit {

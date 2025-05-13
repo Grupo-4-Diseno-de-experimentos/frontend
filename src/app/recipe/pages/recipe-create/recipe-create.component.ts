@@ -13,9 +13,10 @@ import {UserService} from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-recipe-create',
-  imports: [ FormsModule,  MatAutocomplete,  MatOption,  MatCardContent,  MatCardModule,  MatCardHeader,  ReactiveFormsModule,  MatInput,  NgIf,  MatIconButton,
-    MatIcon,  MatButton,  MatAutocompleteTrigger,  MatFormField,  MatFormFieldModule,  NgForOf ],
+  imports: [FormsModule, MatAutocomplete, MatOption, MatCardContent, MatCardModule, MatCardHeader, ReactiveFormsModule, MatInput, NgIf, MatIconButton,
+    MatIcon, MatButton, MatAutocompleteTrigger, MatFormField, MatFormFieldModule, NgForOf],
   templateUrl: './recipe-create.component.html',
+  standalone: true,
   styleUrl: './recipe-create.component.css'
 })
 export class RecipeCreateComponent implements OnInit{
@@ -115,28 +116,28 @@ export class RecipeCreateComponent implements OnInit{
         instructions: this.recipeForm.value.instructions,
         calories: this.recipeForm.value.calories,
         nutricionist_id: this.userService.getUserId(),
+
+        macros: {
+          carbs: this.recipeForm.value.carbs,
+          protein: this.recipeForm.value.proteins,
+          fats: this.recipeForm.value.fats
+        }
       };
 
-      const macros:any = {
-        carbs: this.recipeForm.value.carbs,
-        proteins: this.recipeForm.value.proteins,
-        fats: this.recipeForm.value.fats
-      };
-
-      // se guarda la receta para obtener el id primero
       this.recipeService.saveRecipe(recipe).subscribe({
         next: (savedRecipe) => {
           const recipeId = savedRecipe.id;
 
-          // asociamos el id de la receta a los ingredientes
           const recipeIngredients = this.selectedIngredients.map(ingredient => ({
             recipe_id: recipeId,
             ingredient_id: ingredient.id,
             quantity: ingredient.quantity
           }));
 
-          // se guardan los ingredientes en RecipeIngredient
-          this.recipeService.saveRecipeIngredients(recipeIngredients)
+          this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
+            next: () => console.log('Ingredientes guardados correctamente'),
+            error: err => console.error('Error al guardar ingredientes:', err)
+          });
         },
         error: (err) => {
           console.error('Error al guardar la receta:', err);
