@@ -20,7 +20,8 @@ export class Recipe {
     public instructions: string,
     public calories: number,
     public nutricionist_id: number,
-    public id: number
+    public id: number,
+    public macros: Macros
   ) {}
 }
 // recipe-ingredient.entity.ts
@@ -36,7 +37,7 @@ export class RecipeIngredient {
 export class Macros {
   constructor(
     public carbs: number,
-    public proteins: number,
+    public protein: number,
     public fats: number,
     public recipe_id: number
   ) {}

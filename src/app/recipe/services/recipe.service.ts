@@ -66,11 +66,7 @@ export class RecipeService {
       map(data => FavoriteRecipeAssembler.toEntityFromResponse(data))
     );
   }
-  getAllMacros(): Observable<Macros[]> {
-    return this.http.get<MacrosResponse[]>(`${env.apiUrl}/recipe`).pipe(
-      map(data => MacrosAssembler.toEntityFromResponseArray(data))
-    )
-  }
+
   getIngredientsByRecipeId(id: string): Observable<Ingredient[]> {
     return this.http.get<IngredientResponse[]>(`${env.apiUrl}ingredients`).pipe(
       map(data => IngredientAssembler.toEntityFromResponseArray(data)

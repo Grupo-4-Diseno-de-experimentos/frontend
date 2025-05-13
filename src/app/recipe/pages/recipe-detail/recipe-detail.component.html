@@ -99,14 +99,14 @@
             <li class="flex justify-between items-center">
               <span class="text-teal-700">Proteínas:</span>
               <ng-container *ngIf="!editMode; else editProteins">
-                <strong class="text-teal-700 font-bold">{{ macros.proteins }} g</strong>
+                <strong class="text-teal-700 font-bold">{{ macros.protein }} g</strong>
               </ng-container>
               <ng-template #editProteins>
                 <div class="relative w-20">
                   <input
                     type="number"
                     matInput
-                    [(ngModel)]="macros.proteins"
+                    [(ngModel)]="macros.protein"
                     class="w-full bg-white px-3 py-1 rounded-lg border border-teal-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent pr-8"
                   />
                   <span class="absolute right-2 top-1 text-teal-400 text-sm">g</span>
@@ -155,7 +155,7 @@
                  class="p-4 flex justify-between items-center border-b border-green-100 hover:bg-green-50">
               <div>
                 <p class="font-medium text-green-800">{{ ing.name }}</p>
-                <p class="text-sm text-green-600">Cal: {{ ing.calories }} kcal | C: {{ ing.carbs }}g P: {{ ing.proteins }}g F: {{ ing.fats }}g</p>
+                <p class="text-sm text-green-600">Cal: {{ ing.calories }} kcal | C: {{ ing.carbs }}g P: {{ ing.protein }}g F: {{ ing.fats }}g</p>
               </div>
               <div class="flex items-center gap-2">
                 <input type="number" [(ngModel)]="ing.quantity" [ngModelOptions]="{ standalone: true }"

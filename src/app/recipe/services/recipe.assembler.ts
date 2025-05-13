@@ -9,14 +9,20 @@ export class RecipeAssembler {
       this.toEntityFromResponse(response));
   }
   static toEntityFromResponse(response: RecipeResponse): Recipe {
-    return {
-      id: response.id,
-      title: response.title,
-      description: response.description,
-      instructions: response.instructions,
-      calories: response.calories,
-      nutricionist_id: response.nutricionist_id,
-    };
+    return new Recipe(
+      response.title,
+      response.description,
+      response.instructions,
+      response.calories,
+      response.nutricionist_id,
+      response.id,
+      new Macros(
+        response.macros.carbs,
+        response.macros.protein,
+        response.macros.fats,
+        response.macros.recipe_id
+      )
+    );
   }
 }
 export class MacrosAssembler {
@@ -27,7 +33,7 @@ export class MacrosAssembler {
   static toEntityFromResponse(response: MacrosResponse): Macros {
     return {
       carbs: response.carbs,
-      proteins: response.protein,
+      protein: response.protein,
       fats: response.fats,
       recipe_id: response.recipe_id,
     };

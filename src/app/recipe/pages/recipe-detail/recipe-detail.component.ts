@@ -50,10 +50,9 @@ export class RecipeDetailComponent implements OnInit {
     forkJoin({
       recipe: this.recipeService.getRecipeById(this.recipeId),
       recipeIngredients: this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId),
-      allIngredients: this.recipeService.getAllIngredients(),
-      allMacros: this.recipeService.getAllMacros()
+      allIngredients: this.recipeService.getAllIngredients()
     }).subscribe({
-      next: ({ recipe, recipeIngredients, allIngredients, allMacros }) => {
+      next: ({ recipe, recipeIngredients, allIngredients }) => {
         this.recipe = recipe;
         this.recipeIngredients = recipeIngredients;
         this.allIngredients = allIngredients;
@@ -69,8 +68,7 @@ export class RecipeDetailComponent implements OnInit {
         console.log('Filtered ingredients:', this.ingredientsIdsByRecipesIngredient);
 
         // filtro de macros
-        const macro = allMacros.find(m => m.recipe_id.toString() === this.recipeId);
-        if (macro) this.macros = macro;
+        this.macros = recipe.macros;
 
         // Filtrado inicial
         this.filteredIngredients = [...this.ingredientsByRecipeIngredientId];

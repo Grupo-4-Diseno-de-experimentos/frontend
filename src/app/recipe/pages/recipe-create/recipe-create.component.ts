@@ -115,10 +115,12 @@ export class RecipeCreateComponent implements OnInit{
         description: this.recipeForm.value.description,
         instructions: this.recipeForm.value.instructions,
         calories: this.recipeForm.value.calories,
-        carbs: this.recipeForm.value.carbs,
-        protein: this.recipeForm.value.protein,
-        fats: this.recipeForm.value.fats,
-        ingredientIds: this.selectedIngredients.map(i => i.id)
+        macros: {
+          carbs: this.recipeForm.value.carbs,
+          protein: this.recipeForm.value.protein,
+          fats: this.recipeForm.value.fats,
+          recipe_id: 0
+        }
       };
 
       console.log('Recipe sent to backend:', recipe);
@@ -131,7 +133,7 @@ export class RecipeCreateComponent implements OnInit{
             ingredient_id: ingredient.id,
             quantity: ingredient.quantity
           }));
-          console.log('Recipe sent to backend:', recipe);
+
           this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
             next: () => console.log('Ingredientes guardados correctamente'),
             error: err => console.error('Error al guardar ingredientes:', err)
