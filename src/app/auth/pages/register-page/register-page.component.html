@@ -64,20 +64,45 @@
       </div>
       <div class="form-group">
         <label>
-          <input type="checkbox" name="terms" ngModel required>
-          Acepto los <a href="/terms" target="_blank">Términos y Condiciones</a> y la <a href="/privacy" target="_blank">Política de Privacidad</a>.
+          <input type="checkbox" name="termsCheckbox" [ngModel]="termsAccepted" (ngModelChange)="termsAccepted = $event">
+          Acepto los <a href="javascript:void(0)" (click)="openTermsModal()">Términos y Condiciones</a>
         </label>
-        <div *ngIf="registerForm.controls['terms']?.invalid && registerForm.controls['terms']?.touched" class="error-message">
-          Debes aceptar los términos y condiciones.
-        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="privacyCheckbox" [ngModel]="privacyAccepted" (ngModelChange)="privacyAccepted = $event">
+          Acepto la <a href="javascript:void(0)" (click)="openPrivacyModal()">Política de Privacidad</a>
+        </label>
       </div>
 
 
-      <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
+      <button type="submit" [disabled]="!canRegister()">Registrarse</button>
 
       <p>
         ¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión aquí</a>.
       </p>
     </form>
+
+    <div class="modal" *ngIf="showTermsModal">
+      <div class="modal-content">
+        <h3>Términos y Condiciones</h3>
+        <div class="modal-text" [innerHTML]="termsText"></div>
+        <div class="modal-actions">
+          <button (click)="acceptTerms()">Aceptar</button>
+          <button (click)="closeTermsModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" *ngIf="showPrivacyModal">
+      <div class="modal-content">
+        <h3>Política de Privacidad</h3>
+        <div class="modal-text" [innerHTML]="privacyText"></div>
+        <div class="modal-actions">
+          <button (click)="acceptPrivacy()">Aceptar</button>
+          <button (click)="closePrivacyModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
