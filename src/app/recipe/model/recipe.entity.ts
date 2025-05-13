@@ -6,7 +6,7 @@ export class Ingredient {
     public quantity: number,
     public calories: number,
     public carbs: number,
-    public proteins: number,
+    public protein: number,
     public fats: number,
     public category: string,
     public available: boolean
@@ -45,7 +45,7 @@ export class Macros {
 export class FavoriteRecipe {
   constructor(
     public id: number,
-    public user_id: number,
-    public recipe_id: number
+    public userId: number,
+    public recipeId: number
   ) {}
 }

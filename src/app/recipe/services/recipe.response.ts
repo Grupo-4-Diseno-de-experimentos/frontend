@@ -9,7 +9,7 @@ export interface RecipeIngredientResponse {
 // macros.model.ts
 export interface MacrosResponse {
   carbs: number;
-  proteins: number;
+  protein: number;
   fats: number;
   recipe_id: number;
 }
@@ -17,8 +17,8 @@ export interface MacrosResponse {
 // favorite-recipe.model.ts
 export interface FavoriteRecipeResponse {
   id: number;
-  user_id: number;
-  recipe_id: number;
+  userId: number;
+  recipeId: number;
 }
 
 
@@ -29,7 +29,7 @@ export interface IngredientResponse {
   quantity: number;
   calories: number;
   carbs: number;
-  proteins: number;
+  protein: number;
   fats: number;
   category: string;
   available: boolean;

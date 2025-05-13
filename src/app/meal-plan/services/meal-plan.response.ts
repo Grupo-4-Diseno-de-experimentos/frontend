@@ -59,7 +59,7 @@ export interface RecipeResponse {
 // macros.model.ts
 export interface MacrosResponse {
   carbs: number;
-  proteins: number;
+  protein: number;
   fats: number;
   recipe_id: number;
 }

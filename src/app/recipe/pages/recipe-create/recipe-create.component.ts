@@ -33,7 +33,7 @@ export class RecipeCreateComponent implements OnInit{
       instructions: ['', Validators.required],
       calories: ['', [Validators.required, Validators.min(0)]],
       carbs: ['', [Validators.required, Validators.min(0)]],
-      proteins: ['', [Validators.required, Validators.min(0)]],
+      protein: ['', [Validators.required, Validators.min(0)]],
       fats: ['', [Validators.required, Validators.min(0)]]
     });
   }
@@ -80,7 +80,7 @@ export class RecipeCreateComponent implements OnInit{
       return {
         calories: acc.calories + (ing.calories * factor),
         carbs: acc.carbs + (ing.carbs * factor),
-        proteins: acc.proteins + (ing.proteins * factor),
+        proteins: acc.proteins + (ing.protein * factor),
         fats: acc.fats + (ing.fats * factor)
       };
     }, { calories: 0, carbs: 0, proteins: 0, fats: 0 });
@@ -89,7 +89,7 @@ export class RecipeCreateComponent implements OnInit{
     this.recipeForm.patchValue({
       calories: Math.round(totals.calories),
       carbs: Math.round(totals.carbs),
-      proteins: Math.round(totals.proteins),
+      protein: Math.round(totals.proteins),
       fats: Math.round(totals.fats)
     });
   }
@@ -115,15 +115,13 @@ export class RecipeCreateComponent implements OnInit{
         description: this.recipeForm.value.description,
         instructions: this.recipeForm.value.instructions,
         calories: this.recipeForm.value.calories,
-        nutricionist_id: this.userService.getUserId(),
-
-        macros: {
-          carbs: this.recipeForm.value.carbs,
-          protein: this.recipeForm.value.proteins,
-          fats: this.recipeForm.value.fats
-        }
+        carbs: this.recipeForm.value.carbs,
+        protein: this.recipeForm.value.protein,
+        fats: this.recipeForm.value.fats,
+        ingredientIds: this.selectedIngredients.map(i => i.id)
       };
 
+      console.log('Recipe sent to backend:', recipe);
       this.recipeService.saveRecipe(recipe).subscribe({
         next: (savedRecipe) => {
           const recipeId = savedRecipe.id;
@@ -133,7 +131,7 @@ export class RecipeCreateComponent implements OnInit{
             ingredient_id: ingredient.id,
             quantity: ingredient.quantity
           }));
-
+          console.log('Recipe sent to backend:', recipe);
           this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
             next: () => console.log('Ingredientes guardados correctamente'),
             error: err => console.error('Error al guardar ingredientes:', err)

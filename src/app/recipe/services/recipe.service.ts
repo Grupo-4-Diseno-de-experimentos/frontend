@@ -27,7 +27,7 @@ export class RecipeService {
     );
   }
   getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get<RecipeResponse>(`${environment.apiUrl}/recipes/${id}`).pipe(
+    return this.http.get<RecipeResponse>(`${environment.apiUrl}/recipe/${id}`).pipe(
 
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
@@ -45,13 +45,13 @@ export class RecipeService {
 
   getFavoriteRecipesByUserId(user_id: string): Observable<Recipe[]> {
     return forkJoin({
-      allRecipes: this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`),
-      favorites: this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}favorite_recipes/?user_id=${user_id}`)
+      allRecipes: this.http.get<RecipeResponse[]>(`${env.apiUrl}/recipe`),
+      favorites: this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}/favorite/${user_id}`)
     }).pipe(
       map(({ allRecipes, favorites }) => {
         const recipeEntities = RecipeAssembler.toEntityFromResponseArray(allRecipes);
         console.log(recipeEntities);
-        const favoriteIds = favorites.map(fav => fav.recipe_id);
+        const favoriteIds = favorites.map(fav => fav.recipeId);
         console.log(favoriteIds);
         return recipeEntities.filter(recipe =>
           favoriteIds.includes((recipe.id))
@@ -62,12 +62,12 @@ export class RecipeService {
   }
 
   saveFavoriteRecipe(favoriteRecipe:any): Observable<FavoriteRecipe> {
-    return this.http.post<FavoriteRecipeResponse>(`${env.apiUrl}favorite_recipes`, favoriteRecipe).pipe(
+    return this.http.post<FavoriteRecipeResponse>(`${env.apiUrl}/favorite`, favoriteRecipe).pipe(
       map(data => FavoriteRecipeAssembler.toEntityFromResponse(data))
     );
   }
   getAllMacros(): Observable<Macros[]> {
-    return this.http.get<MacrosResponse[]>(`${env.apiUrl}macros`).pipe(
+    return this.http.get<MacrosResponse[]>(`${env.apiUrl}/recipe`).pipe(
       map(data => MacrosAssembler.toEntityFromResponseArray(data))
     )
   }
@@ -84,14 +84,14 @@ export class RecipeService {
     );
   }
   saveRecipeIngredients(recipeIngredients: any[]): Observable<any> {
-    return this.http.post<any>('/api/recipe/ingredients', recipeIngredients);
+    return this.http.post<any>(`${environment.apiUrl}/recipe`, recipeIngredients);
   }
   updateRecipe(recipeId: string, data: {recipe: Recipe;}): Observable<any> {
     return this.http.put(`${env.apiUrl}recipe/${recipeId}`, data.recipe);
 
   }
   updateRecipeIngredient(recipeId: string, data: {recipeIngredient: RecipeIngredient;}): Observable<any> {
-    return this.http.put(`${env.apiUrl}recipe_ingredients/${recipeId}`, data.recipeIngredient);
+    return this.http.put(`${env.apiUrl}/recipe_ingredients/${recipeId}`, data.recipeIngredient);
   }
 
   createRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
@@ -102,16 +102,15 @@ export class RecipeService {
   removeRecipeIngredient(id: string): Observable<any> {
     return this.http.delete(`${env.apiUrl}recipe_ingredients/${id}`);
   }
-  getRecipeIngredientsByRecipeId(id:string): Observable<RecipeIngredient[]> {
-    return this.http.get<RecipeIngredientResponse[]>(`${env.apiUrl}recipe_ingredients`).pipe(
-      map(data => RecipeIngredientAssembler.toEntityFromResponseArray(data)
-        .filter(recipeIngredient => recipeIngredient.recipe_id.toString() === id))
-    )
+  getRecipeIngredientsByRecipeId(id: string): Observable<RecipeIngredient[]> {
+    return this.http.get<RecipeIngredientResponse[]>(`${env.apiUrl}/recipe_ingredients?recipe_id=${id}`).pipe(
+      map(data => RecipeIngredientAssembler.toEntityFromResponseArray(data))
+    );
   }
   removeFavorite(recipe_id: string, user_id:string): void {
     this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}favorite_recipes?user_id=${user_id}`).subscribe({
       next: (favorites) => {
-        const favoriteToDelete = favorites.find(fav => fav.recipe_id.toString() === recipe_id);
+        const favoriteToDelete = favorites.find(fav => fav.recipeId.toString() === recipe_id);
 
         if (favoriteToDelete) {
           this.http.delete(`${env.apiUrl}favorite_recipes/${favoriteToDelete.id}`).subscribe({

@@ -63,7 +63,7 @@ export class MealPlanListComponent implements OnInit {
   }
   filterByNutritionist(): void {
     const userId = this.userService.getUserId();
-    this.filteredMealPlans = this.mealPlans.filter(plan => plan.nutricionist_id.toString() === userId);
+    this.filteredMealPlans = this.mealPlans.filter(plan => plan.nutricionist_id === userId);
   }
   resetFilters(): void {
     this.filteredMealPlans = [...this.mealPlans];

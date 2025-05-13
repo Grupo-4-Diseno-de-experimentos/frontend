@@ -27,7 +27,7 @@ export class MacrosAssembler {
   static toEntityFromResponse(response: MacrosResponse): Macros {
     return {
       carbs: response.carbs,
-      proteins: response.proteins,
+      proteins: response.protein,
       fats: response.fats,
       recipe_id: response.recipe_id,
     };
@@ -42,8 +42,8 @@ export class FavoriteRecipeAssembler {
   static toEntityFromResponse(response: FavoriteRecipeResponse): FavoriteRecipe {
     return {
       id: response.id,
-      user_id: response.user_id,
-      recipe_id: response.recipe_id,
+      userId: response.userId,
+      recipeId: response.recipeId,
     };
   }
 }
@@ -60,7 +60,7 @@ export class IngredientAssembler {
       quantity: response.quantity,
       calories: response.calories,
       carbs: response.carbs,
-      proteins: response.proteins,
+      protein: response.protein,
       fats: response.fats,
       category: response.category,
       available: response.available,

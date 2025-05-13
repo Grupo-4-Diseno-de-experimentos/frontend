@@ -23,8 +23,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId = this.userService.getUserId();
-
     this.recipeService.getAllRecipes().subscribe({
       next: (data) => {
         console.log('Data fetched:', data);
@@ -40,10 +38,13 @@ export class RecipeListComponent implements OnInit {
 
   onRecipeSelected(recipeId: number): void {
     console.log('Recipe selected:', recipeId);
+    const userId = this.userService.getUserId();
+
     const favoriteRecipe = {
-      recipe_id: recipeId,
-      user_id: this.userId
+      recipeId: recipeId,
+      userId: userId
     }
+    console.log('Request enviado al backend:', favoriteRecipe);
     this.recipeService.saveFavoriteRecipe(favoriteRecipe).subscribe({
         next: (response) => {
           console.log('Recipe saved as favorite:', response);
