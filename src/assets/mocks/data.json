@@ -319,15 +319,15 @@
       "title": "Ensalada de lentejas",
       "description": "Ensalada rica en proteína vegetal y fibra",
       "instructions": "1. Cocer las lentejas. 2. Picar verduras. 3. Mezclar todo y aliñar con aceite de oliva y limón.",
-      "calories": 310,
+      "calories": 300,
       "nutricionist_id": 2
     },
     {
       "id": "3",
       "title": "Bowl de salmón con aguacate",
-      "description": "Plato rico en grasas saludables y proteínas de alta calidad",
+      "description": "Plato rico en grasas saludables y proteínas",
       "instructions": "1. Cocer el arroz. 2. Cocinar el salmón al horno. 3. Cortar el aguacate en láminas. 4. Montar el bowl.",
-      "calories": 520,
+      "calories": 530,
       "nutricionist_id": 3
     },
     {
@@ -377,24 +377,6 @@
       "quantity": 50
     },
     {
-      "id": "6",
-      "ingredient_id": 5,
-      "recipe_id": 3,
-      "quantity": 200
-    },
-    {
-      "id": "7",
-      "ingredient_id": 3,
-      "recipe_id": 3,
-      "quantity": 100
-    },
-    {
-      "id": "8",
-      "ingredient_id": 2,
-      "recipe_id": 3,
-      "quantity": 150
-    },
-    {
       "id": "9",
       "ingredient_id": 6,
       "recipe_id": 4,
@@ -434,7 +416,43 @@
       "id": "7546",
       "ingredient_id": "1",
       "recipe_id": 2,
-      "quantity": 40
+      "quantity": 100
+    },
+    {
+      "id": "fdfb",
+      "recipe_id": 2,
+      "ingredient_id": "2",
+      "quantity": 100
+    },
+    {
+      "id": "1ded",
+      "recipe_id": 2,
+      "ingredient_id": "4",
+      "quantity": 100
+    },
+    {
+      "id": "1226",
+      "ingredient_id": "2",
+      "recipe_id": 3,
+      "quantity": 100
+    },
+    {
+      "id": "72ce",
+      "ingredient_id": "6",
+      "recipe_id": 3,
+      "quantity": 100
+    },
+    {
+      "id": "399b",
+      "ingredient_id": "5",
+      "recipe_id": 3,
+      "quantity": 100
+    },
+    {
+      "id": "265a",
+      "ingredient_id": "3",
+      "recipe_id": 3,
+      "quantity": 100
     }
   ],
   "macros": [
@@ -491,7 +509,7 @@
   "meal_plans": [
     {
       "id": "1",
-      "name": "Plan pérdida de peso.",
+      "name": "Plan pérdida de peso y grasa.",
       "category": "Baja en calorías",
       "description": "Ideal para perder peso gradualmente. ",
       "goal": "perder peso",
@@ -558,21 +576,53 @@
       "calories_per_day": 1700,
       "nutricionist_id": 5,
       "created_at": "2025-04-01T12:00:00"
+    },
+    {
+      "id": "a70a",
+      "name": "Plan para bajar de peso",
+      "category": "bajar de peso",
+      "description": "Esta receta es para bajar de peso",
+      "goal": "muscle_gain",
+      "min_bmi": 24,
+      "max_bmi": 35,
+      "min_age": 20,
+      "max_age": 40,
+      "calories_per_day": 1500,
+      "nutricionist_id": 1
+    },
+    {
+      "id": "1281",
+      "name": "nuevo plan",
+      "category": "ganar masa",
+      "description": "plan para ganar masa",
+      "goal": "muscle_gain",
+      "min_bmi": 24,
+      "max_bmi": 34,
+      "min_age": 24,
+      "max_age": 34,
+      "calories_per_day": 1500,
+      "nutricionist_id": 1
+    },
+    {
+      "id": "00bc",
+      "name": "1",
+      "category": "1",
+      "description": "descripcion del plan",
+      "goal": "muscle_gain",
+      "min_bmi": 12,
+      "max_bmi": 12,
+      "min_age": 13,
+      "max_age": 45,
+      "calories_per_day": 2000,
+      "nutricionist_id": 1
     }
   ],
   "meal_plan_recipes": [
     {
       "id": "1",
-      "day": "Sabado",
-      "meal_time": "Cena",
-      "recipe_id": "2",
-      "meal_plan_id": 1
-    },
-    {
-      "id": "2",
       "day": "Lunes",
       "meal_time": "Almuerzo",
-      "recipe_id": "7",
+      "recipe_id": "3",
       "meal_plan_id": 1
     },
     {
@@ -602,6 +652,405 @@
       "meal_time": "Almuerzo",
       "recipe_id": "397a",
       "meal_plan_id": 1
+    },
+    {
+      "id": "2b22",
+      "day": "Viernes",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "49fb",
+      "day": "Viernes",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "d2a6",
+      "day": "Miércoles",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "6a9e",
+      "day": "Viernes",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "a0af",
+      "day": "Sábado",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "1519",
+      "day": "Martes",
+      "meal_time": "lunch",
+      "recipe_id": "1",
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "f57b",
+      "day": "Martes",
+      "meal_time": "dinner",
+      "recipe_id": "3",
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "11af",
+      "day": "Miércoles",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "1a55",
+      "day": "Sábado",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "837a",
+      "day": "Sábado",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "12e4",
+      "day": "Domingo",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "283e",
+      "day": "Martes",
+      "meal_time": "breakfast",
+      "recipe_id": "2",
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "9b82",
+      "day": "Domingo",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "bd02",
+      "day": "Miércoles",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "5146",
+      "day": "Domingo",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "cf7b",
+      "day": "Jueves",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "2de3",
+      "day": "Jueves",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "a70a"
+    },
+    {
+      "id": "4d35",
+      "day": "Lunes",
+      "meal_time": "lunch",
+      "recipe_id": "2",
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "1a87",
+      "day": "Miércoles",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "0ad9",
+      "day": "Miércoles",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "e120",
+      "day": "Lunes",
+      "meal_time": "breakfast",
+      "recipe_id": "1",
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "d92b",
+      "day": "Miércoles",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "99f2",
+      "day": "Jueves",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "dea8",
+      "day": "Jueves",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "4e5d",
+      "day": "Jueves",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "2cc5",
+      "day": "Viernes",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "66ff",
+      "day": "Viernes",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "882b",
+      "day": "Viernes",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "8b35",
+      "day": "Sábado",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "72a4",
+      "day": "Sábado",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "5d35",
+      "day": "Sábado",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "ffdf",
+      "day": "Domingo",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "0d05",
+      "day": "Domingo",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "a899",
+      "day": "Domingo",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "3e59",
+      "day": "Lunes",
+      "meal_time": "dinner",
+      "recipe_id": "5",
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "c508",
+      "day": "Martes",
+      "meal_time": "lunch",
+      "recipe_id": "2",
+      "meal_plan_id": "1281"
+    },
+    {
+      "id": "afaf",
+      "day": "Lunes",
+      "meal_time": "dinner",
+      "recipe_id": "2",
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "9726",
+      "day": "Martes",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "01b2",
+      "day": "Lunes",
+      "meal_time": "lunch",
+      "recipe_id": "1",
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "8fd4",
+      "day": "Lunes",
+      "meal_time": "breakfast",
+      "recipe_id": "5",
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "14fa",
+      "day": "Martes",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "1491",
+      "day": "Martes",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "d79d",
+      "day": "Miércoles",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "daac",
+      "day": "Miércoles",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "c808",
+      "day": "Miércoles",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "99da",
+      "day": "Jueves",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "22f6",
+      "day": "Jueves",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "986e",
+      "day": "Jueves",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "922a",
+      "day": "Viernes",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "6767",
+      "day": "Viernes",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "31b0",
+      "day": "Sábado",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "792a",
+      "day": "Sábado",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "530b",
+      "day": "Viernes",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "c7a4",
+      "day": "Sábado",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "19a7",
+      "day": "Domingo",
+      "meal_time": "Desayuno",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "88c5",
+      "day": "Domingo",
+      "meal_time": "Almuerzo",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
+    },
+    {
+      "id": "df11",
+      "day": "Domingo",
+      "meal_time": "Cena",
+      "recipe_id": null,
+      "meal_plan_id": "00bc"
     }
   ],
   "favorite_recipes": [
@@ -631,11 +1080,6 @@
       "recipe_id": 7
     },
     {
-      "id": "c19d",
-      "recipe_id": "2",
-      "user_id": "12345"
-    },
-    {
       "id": "66f0",
       "recipe_id": "1",
       "user_id": "12345"
@@ -646,8 +1090,13 @@
       "user_id": "12345"
     },
     {
-      "id": "9159",
-      "recipe_id": "3",
+      "id": "d191",
+      "recipe_id": "1",
+      "user_id": "12345"
+    },
+    {
+      "id": "2a94",
+      "recipe_id": "1",
       "user_id": "12345"
     }
   ],
