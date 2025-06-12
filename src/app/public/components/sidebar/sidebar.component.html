@@ -1,19 +1,24 @@
-<aside class="bg-gray-100 h-full w-60 py-6 px-4 shadow-md">
-  <nav class="flex flex-col gap-4 text-gray-700">
-    <a routerLink="/dashboard" class="hover:text-indigo-600 flex items-center gap-2">
-      <mat-icon>dashboard</mat-icon> Dashboard
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <a routerLink="/dashboard" class="nav-item">
+      <mat-icon class="nav-icon">dashboard</mat-icon>
+      <span class="nav-text">Dashboard</span>
     </a>
-    <a routerLink="/meal_plan" class="hover:text-indigo-600 flex items-center gap-2">
-      <mat-icon>restaurant_menu</mat-icon> Plan de Comidas
+    <a routerLink="/meal_plan" class="nav-item">
+      <mat-icon class="nav-icon">restaurant_menu</mat-icon>
+      <span class="nav-text">Plan de Comidas</span>
     </a>
-    <a routerLink="/recipe/recipe-list" class="hover:text-indigo-600 flex items-center gap-2">
-      <mat-icon>book</mat-icon> Recetas
+    <a routerLink="/recipe/recipe-list" class="nav-item">
+      <mat-icon class="nav-icon">book</mat-icon>
+      <span class="nav-text">Recetas</span>
     </a>
-    <a routerLink="/recipe/favorite-recipe" class="hover:text-indigo-600 flex items-center gap-2">
-      <mat-icon>favorite</mat-icon> Favoritos
+    <a routerLink="/recipe/favorite-recipe" class="nav-item">
+      <mat-icon class="nav-icon">favorite</mat-icon>
+      <span class="nav-text">Favoritos</span>
     </a>
-    <a routerLink="/profile" class="hover:text-indigo-600 flex items-center gap-2">
-      <mat-icon>person</mat-icon> Perfil
+    <a routerLink="/profile" class="nav-item">
+      <mat-icon class="nav-icon">person</mat-icon>
+      <span class="nav-text">Perfil</span>
     </a>
   </nav>
 </aside>

@@ -1,20 +1,25 @@
-<mat-card class="shadow-md rounded-xl">
+<mat-card class="recipe-card">
   <mat-card-header>
-    <mat-card-title class="text-xl font-semibold text-gray-300">
-      {{ recipe.title }}
-    </mat-card-title>
-    <mat-card-subtitle class="text-sm text-gray-500">
-      Descripcion: {{ recipe.description }}
-    </mat-card-subtitle>
+    <div class="recipe-header">
+      <mat-card-title class="recipe-title">
+        {{ recipe.title }}
+      </mat-card-title>
+      <mat-card-subtitle class="recipe-subtitle">
+        {{ recipe.description }}
+      </mat-card-subtitle>
+    </div>
   </mat-card-header>
 
-  <mat-card-content>
-    <p class="text-emerald-700 text-base mb-2">{{ recipe.instructions }}</p>
-    <p class="text-sm text-gray-300">Calorías: {{ recipe.calories }}Kcal</p>
-    <!--      <p class="text-sm text-gray-300">Rango de edad: {{ plan.min_age }} - {{ plan.max_age }} años</p>-->
+  <mat-card-content class="recipe-content">
+    <p class="recipe-instructions">{{ recipe.instructions }}</p>
+    <div class="recipe-meta">
+      <span class="calories">Calorías: {{ recipe.calories }}Kcal</span>
+    </div>
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-button color="primary" class="hover:underline" (click)="addFavorite()">Añadir a Favoritos</button>
+  <mat-card-actions class="recipe-actions">
+    <button mat-button class="favorite-btn" (click)="addFavorite()">
+      <span class="btn-icon">♥</span> Añadir a Favoritos
+    </button>
   </mat-card-actions>
 </mat-card>

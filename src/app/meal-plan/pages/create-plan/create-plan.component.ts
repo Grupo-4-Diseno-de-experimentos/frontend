@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -16,7 +16,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-create-plan',
   imports: [MatCardModule, ReactiveFormsModule, MatSelectModule, MatInputModule, NgForOf,
-    MatButton, MatFormFieldModule, MatIcon, MatExpansionModule, MatIconButton],
+    MatButton, MatFormFieldModule, MatIcon, MatExpansionModule, MatIconButton, NgIf, NgClass],
   templateUrl: './create-plan.component.html',
   standalone: true,
   styleUrl: './create-plan.component.css'
@@ -51,6 +51,16 @@ export class CreatePlanComponent implements OnInit {
   ngOnInit(): void {
   this.fetchAllRecipes();
   }
+  expandedDayIndex: number | null = null;
+
+  toggleDaySection(index: number): void {
+    if (this.expandedDayIndex === index) {
+      this.expandedDayIndex = null;
+    } else {
+      this.expandedDayIndex = index;
+    }
+  }
+
 
   fetchAllRecipes() {
     this.mealPlanService.getAllRecipes().subscribe({
@@ -80,14 +90,7 @@ export class CreatePlanComponent implements OnInit {
       this.recipesByDay.push(
         this.fb.group({
           day: [day],
-          meals: this.fb.array(
-            this.mealTimes.map(meal =>
-              this.fb.group({
-                meal_time: [meal],
-                recipe_id: [null]
-              })
-            )
-          )
+          meals: this.fb.array([])
         })
       );
     });
