@@ -11,7 +11,7 @@ import {RecipeItemComponent} from '../../components/recipe-item/recipe-item.comp
 @Component({
   selector: 'app-recipe-list',
   imports: [MatCardModule, NgForOf, FormsModule
-    , RecipeItemComponent],
+    , RecipeItemComponent, NgIf],
   templateUrl: './recipe-list.component.html',
   standalone: true,
   styleUrl: './recipe-list.component.css'
@@ -35,7 +35,12 @@ export class RecipeListComponent implements OnInit {
     goToDetail(id: number): void {
     this.router.navigate(['/recipe/recipedetail', id]);
     }
-
+  get isNutricionist() {
+    return this.userService.isNutricionist();
+  }
+  goToCreateRecipe(){
+    this.router.navigate(['/recipe/create-recipe']);
+  }
   onRecipeSelected(recipeId: number): void {
     console.log('Recipe selected:', recipeId);
     const userId = this.userService.getUserId();

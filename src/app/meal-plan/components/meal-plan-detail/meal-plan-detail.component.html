@@ -60,17 +60,17 @@
                 </div>
               </div>
 
-              <div class="flex flex-col gap-2">
+<!--              <div class="flex flex-col gap-2">
                 <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="text-green-600 hover:text-green-800">✏️</button>
                 <button *ngIf="isNutricionist && isEditing" (click)="deleteMealPlanRecipe(recipe)" class="text-red-600 hover:text-red-800">🗑️</button>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
 
-        <div *ngIf="isNutricionist && !isEditing" class="mt-4">
+<!--        <div *ngIf="isNutricionist && !isEditing" class="mt-4">
           <button (click)="goToCreateRecipe()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">➕ Añadir Receta</button>
-        </div>
+        </div>-->
       </section>
 
       <!-- Recetas disponibles -->
@@ -101,10 +101,10 @@
     </div>
 
     <!-- Botones del plan -->
-    <div class="flex justify-end gap-4 mt-6">
+<!--    <div class="flex justify-end gap-4 mt-6">
       <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">✏️ Editar Plan</button>
       <button *ngIf="isNutricionist && isEditing" (click)="saveChanges()" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">💾 Guardar Cambios</button>
       <button *ngIf="isNutricionist && isEditing" (click)="cancelEdit()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">❌ Cancelar</button>
-    </div>
+    </div>-->
   </div>
 </div>
