@@ -21,7 +21,8 @@ export class RecipeAssembler {
         response.macros.protein,
         response.macros.fats,
         response.macros.recipe_id
-      )
+      ),
+      response.ingredientIds
     );
   }
 }

@@ -49,32 +49,29 @@ export class RecipeDetailComponent implements OnInit {
   loadData(): void {
     forkJoin({
       recipe: this.recipeService.getRecipeById(this.recipeId),
-      recipeIngredients: this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId),
       allIngredients: this.recipeService.getAllIngredients()
     }).subscribe({
-      next: ({ recipe, recipeIngredients, allIngredients }) => {
+      next: ({ recipe, allIngredients }) => {
+        console.log("Debug Recipe: ", recipe,allIngredients);
         this.recipe = recipe;
-        this.recipeIngredients = recipeIngredients;
         this.allIngredients = allIngredients;
-
-        // id de ingredientes asociados a esta receta
-        this.ingredientsIdsByRecipesIngredient = recipeIngredients.map(ri => ri.ingredient_id.toString());
 
         // solo los ingredientes usados en esta receta se guardan
         this.ingredientsByRecipeIngredientId = this.allIngredients.filter(ingredient =>
-          this.ingredientsIdsByRecipesIngredient.includes(ingredient.id.toString())
-
+            recipe.ingredientsIds.includes(ingredient.id)
+          //this.ingredientsIdsByRecipesIngredient.includes(ingredient.id)
         );
         console.log('Filtered ingredients:', this.ingredientsIdsByRecipesIngredient);
 
         // filtro de macros
         this.macros = recipe.macros;
 
+        console.log('Debug Macros: ', {domainMacros: this.macros, backendMacros: recipe.macros});
+
         // Filtrado inicial
         this.filteredIngredients = [...this.ingredientsByRecipeIngredientId];
         console.log('Todos los datos cargados:', {
           recipe,
-          recipeIngredients,
           ingredientsByRecipe: this.ingredientsByRecipeIngredientId,
           macros: this.macros
         });

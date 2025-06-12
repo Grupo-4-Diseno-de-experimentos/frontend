@@ -107,7 +107,7 @@ export class MealPlan {
 // meal-plan-recipe.entity.ts
 export class MealPlanRecipe {
   constructor(
-    public id: number,
+    public id: number | undefined,
     public day: string,
     public meal_time: string,
     public recipe_id: number,

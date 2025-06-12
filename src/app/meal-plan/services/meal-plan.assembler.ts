@@ -76,11 +76,11 @@ export class MealPlanRecipeAssembler {
   }
   static toEntityFromResponse(response: MealPlanRecipeResponse): MealPlanRecipe {
     return new MealPlanRecipe(
-      response.id,
+      undefined,
       response.day,
-      response.meal_time,
-      response.recipe_id,
-      response.meal_plan_id
+      response.mealTime,
+      response.recipe.id,
+      response.mealPlan.id
     );
   }
 }

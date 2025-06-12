@@ -57,7 +57,7 @@
       "created_timestamp": "2024-12-25T10:10:00Z"
     },
     {
-      "id": "0",
+      "id": 0,
       "lastName": "1",
       "email": "1@wqe",
       "password": "123456",
@@ -65,7 +65,7 @@
       "created_at": "2025-05-12T03:13:53.023Z"
     },
     {
-      "id": "0",
+      "id": 0,
       "lastName": "1",
       "email": "1@wqe",
       "password": "123456",
@@ -87,36 +87,6 @@
       "password": "123456",
       "role": "NUTRICIONIST",
       "created_at": "2025-05-12T03:49:06.165Z"
-    },
-    {
-      "id": "d3d2",
-      "email": "daniel-741@hotmail.com",
-      "password": "12345678910a",
-      "affiliateCode": "",
-      "rememberMe": ""
-    },
-    {
-      "id": "0cf7",
-      "email": "daniel-741@hotmail.com",
-      "password": "12345678910a",
-      "affiliateCode": "",
-      "rememberMe": ""
-    },
-    {
-      "id": "cd9c",
-      "name": "undefined Chirinos",
-      "email": "daniel-741@hotmail.com",
-      "password": "12345678910a",
-      "role": "CUSTOMER",
-      "created_at": "2025-05-12T17:13:45.638Z"
-    },
-    {
-      "id": "dbfa",
-      "name": "undefined Chirinos",
-      "email": "daniel-741@hotmail.com",
-      "password": "12345678910a",
-      "role": "CUSTOMER",
-      "created_at": "2025-05-12T17:19:53.545Z"
     }
   ],
   "customers": [
@@ -663,27 +633,22 @@
     {
       "id": "c19d",
       "recipe_id": "2",
-      "user_id": 1
+      "user_id": "12345"
     },
     {
       "id": "66f0",
       "recipe_id": "1",
-      "user_id": 1
+      "user_id": "12345"
     },
     {
       "id": "6c0b",
       "recipe_id": "1",
-      "user_id": 1
+      "user_id": "12345"
     },
     {
       "id": "9159",
       "recipe_id": "3",
-      "user_id": 1
-    },
-    {
-      "id": "0f02",
-      "recipe_id": "1",
-      "user_id": "1"
+      "user_id": "12345"
     }
   ],
   "customer_meal_plans": [

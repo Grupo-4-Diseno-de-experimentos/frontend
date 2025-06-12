@@ -44,4 +44,5 @@ export interface RecipeResponse {
   calories: number;
   nutricionist_id: number;
   macros:MacrosResponse;
+  ingredientIds: number[];
 }

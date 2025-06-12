@@ -21,7 +21,8 @@ export class Recipe {
     public calories: number,
     public nutricionist_id: number,
     public id: number,
-    public macros: Macros
+    public macros: Macros,
+    public ingredientsIds: Array<number>
   ) {}
 }
 // recipe-ingredient.entity.ts

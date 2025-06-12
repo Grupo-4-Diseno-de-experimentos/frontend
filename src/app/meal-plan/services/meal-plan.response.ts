@@ -53,6 +53,7 @@ export interface RecipeResponse {
   calories: number;
   nutricionist_id: number;
   macros:MacrosResponse;
+  ingredientIds: number[];
 }
 
 
@@ -97,11 +98,14 @@ export interface CustomerMealPlanResponse {
 
 // meal-plan-day.model.ts
 export interface MealPlanRecipeResponse {
-  id: number;
   day: string;
-  meal_time: string;
-  recipe_id: number;
-  meal_plan_id: number;
+  mealTime: string;
+  recipe: {
+    id: number
+  };
+  mealPlan: {
+    id: number;
+  };
 }
 // create-meal-plan-request.model.ts
 export interface CreateMealPlanRequest {

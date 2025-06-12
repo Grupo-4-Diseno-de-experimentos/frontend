@@ -82,8 +82,8 @@ export class RecipeService {
   saveRecipeIngredients(recipeIngredients: any[]): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/recipe`, recipeIngredients);
   }
-  updateRecipe(recipeId: string, data: {recipe: Recipe;}): Observable<any> {
-    return this.http.put(`${env.apiUrl}recipe/${recipeId}`, data.recipe);
+  updateRecipe(id: string, data: {recipe: Recipe;}): Observable<any> {
+    return this.http.put(`${env.apiUrl}/recipe/${id}`, data.recipe);
 
   }
   updateRecipeIngredient(recipeId: string, data: {recipeIngredient: RecipeIngredient;}): Observable<any> {

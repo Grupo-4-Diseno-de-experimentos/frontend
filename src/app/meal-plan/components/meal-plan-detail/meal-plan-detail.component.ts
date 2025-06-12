@@ -113,7 +113,7 @@ export class MealPlanDetailComponent implements OnInit{
   }
 
   deleteMealPlanRecipe(mealPlanRecipe: MealPlanRecipe) {
-    this.mealPlanService.deleteMealPlanRecipe(mealPlanRecipe.id.toString()).subscribe({
+    this.mealPlanService.deleteMealPlanRecipe(mealPlanRecipe.id?.toString()!).subscribe({
       next: (response) => {
         console.log('Receta eliminada con éxito:', response);
         this.fetchMealPlanRecipes();
