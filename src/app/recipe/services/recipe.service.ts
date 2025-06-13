@@ -28,7 +28,6 @@ export class RecipeService {
   }
   getRecipeById(id: string): Observable<Recipe> {
     return this.http.get<RecipeResponse>(`${environment.apiUrl}/recipe/${id}`).pipe(
-
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
   }
@@ -80,41 +79,42 @@ export class RecipeService {
     );
   }
   saveRecipeIngredients(recipeIngredients: any[]): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/recipe`, recipeIngredients);
+    console.log('Enviando al backend:', recipeIngredients);
+    return this.http.post<any>(`${environment.apiUrl}/recipe_ingredients`, recipeIngredients);
   }
   updateRecipe(id: string, data: {recipe: Recipe;}): Observable<any> {
     return this.http.put(`${env.apiUrl}/recipe/${id}`, data.recipe);
 
   }
-  updateRecipeIngredient(recipeId: string, data: {recipeIngredient: RecipeIngredient;}): Observable<any> {
-    return this.http.put(`${env.apiUrl}/recipe_ingredients/${recipeId}`, data.recipeIngredient);
+  updateRecipeIngredient(id: string, recipeIngredient: RecipeIngredient): Observable<any> {
+    return this.http.put(`${env.apiUrl}/recipe_ingredients/${id}`, recipeIngredient);
   }
 
   createRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
-    return this.http.post<RecipeIngredientResponse>(`${env.apiUrl}recipe_ingredients`, recipeIngredient).pipe(
+    return this.http.post<RecipeIngredientResponse>(`${env.apiUrl}/recipe_ingredients`, recipeIngredient).pipe(
       map(data => RecipeIngredientAssembler.toEntityFromResponse(data))
     );
   }
   removeRecipeIngredient(id: string): Observable<any> {
-    return this.http.delete(`${env.apiUrl}recipe_ingredients/${id}`);
+    return this.http.delete(`${env.apiUrl}/recipe_ingredients/${id}`);
   }
   getRecipeIngredientsByRecipeId(id: string): Observable<RecipeIngredient[]> {
-    return this.http.get<RecipeIngredientResponse[]>(`${env.apiUrl}/recipe_ingredients?recipe_id=${id}`).pipe(
+    return this.http.get<RecipeIngredientResponse[]>(`${env.apiUrl}/recipe_ingredients/${id}`).pipe(
       map(data => RecipeIngredientAssembler.toEntityFromResponseArray(data))
     );
   }
   removeFavorite(recipe_id: string, user_id:string): void {
     this.http.get<FavoriteRecipeResponse[]>(`${env.apiUrl}favorite_recipes?user_id=${user_id}`).subscribe({
-      next: (favorites) => {
-        const favoriteToDelete = favorites.find(fav => fav.recipeId.toString() === recipe_id);
+        next: (favorites) => {
+          const favoriteToDelete = favorites.find(fav => fav.recipeId.toString() === recipe_id);
 
-        if (favoriteToDelete) {
-          this.http.delete(`${env.apiUrl}favorite_recipes/${favoriteToDelete.id}`).subscribe({
-            next: () => console.log('Favorito eliminado correctamente'),
-            error: (err) => console.error('Error al eliminar favorito:', err)
-          });
+          if (favoriteToDelete) {
+            this.http.delete(`${env.apiUrl}favorite_recipes/${favoriteToDelete.id}`).subscribe({
+              next: () => console.log('Favorito eliminado correctamente'),
+              error: (err) => console.error('Error al eliminar favorito:', err)
+            });
+          }
         }
       }
-    }
-  );}
+    );}
 }

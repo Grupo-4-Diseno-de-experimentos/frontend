@@ -74,9 +74,8 @@ export class RecipeCreateComponent implements OnInit{
   }
 
   updateNutritionalValues(): void {
-    // se calcula valores nutricionales sumando los ingredientes
     const totals = this.selectedIngredients.reduce((acc, ing) => {
-      const factor = ing.quantity / 100; // se asumie valores nutricionales por 100g
+      const factor = ing.quantity / 100;
       return {
         calories: acc.calories + (ing.calories * factor),
         carbs: acc.carbs + (ing.carbs * factor),
@@ -85,7 +84,6 @@ export class RecipeCreateComponent implements OnInit{
       };
     }, { calories: 0, carbs: 0, proteins: 0, fats: 0 });
 
-    // actualizaciion el formulario
     this.recipeForm.patchValue({
       calories: Math.round(totals.calories),
       carbs: Math.round(totals.carbs),
@@ -94,19 +92,19 @@ export class RecipeCreateComponent implements OnInit{
     });
   }
 
-/*  onSubmit(): void {
-    if (this.recipeForm.valid) {
-      const recipeData = {
-        ...this.recipeForm.value,
-        ingredients: this.selectedIngredients.map(ing => ({
-          id: ing.id,
-          quantity: ing.quantity
-        }))
-      };
-      console.log('Receta a guardar:', recipeData);
+  /*  onSubmit(): void {
+      if (this.recipeForm.valid) {
+        const recipeData = {
+          ...this.recipeForm.value,
+          ingredients: this.selectedIngredients.map(ing => ({
+            id: ing.id,
+            quantity: ing.quantity
+          }))
+        };
+        console.log('Receta a guardar:', recipeData);
 
-    }
-  }*/
+      }
+    }*/
 
   onSubmit(): void {
     if (this.recipeForm.valid) {
@@ -120,20 +118,21 @@ export class RecipeCreateComponent implements OnInit{
           protein: this.recipeForm.value.protein,
           fats: this.recipeForm.value.fats,
           recipe_id: 0
-        }
+        },
+        ingredientIds: this.selectedIngredients.map(ingredient => ingredient.id)
       };
 
-      console.log('Recipe sent to backend:', recipe);
+
       this.recipeService.saveRecipe(recipe).subscribe({
         next: (savedRecipe) => {
           const recipeId = savedRecipe.id;
-
+          console.log('Recipe sent to backend:', recipe);
           const recipeIngredients = this.selectedIngredients.map(ingredient => ({
             recipe_id: recipeId,
             ingredient_id: ingredient.id,
             quantity: ingredient.quantity
           }));
-
+          console.log('RecipeIngredients sent to backend:', recipeIngredients);
           this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
             next: () => console.log('Ingredientes guardados correctamente'),
             error: err => console.error('Error al guardar ingredientes:', err)
