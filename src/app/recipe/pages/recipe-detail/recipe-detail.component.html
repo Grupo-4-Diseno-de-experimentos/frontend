@@ -1,281 +1,303 @@
-<div class="p-6 max-w-5xl mx-auto">
-  <mat-card class="shadow-xl rounded-2xl overflow-hidden bg-gradient-to-br from-green-50 to-white border border-green-100">
-    <mat-card-header class="p-6 pb-0">
-      <mat-card-title class="text-3xl font-extrabold text-green-800 mb-2">
-        <ng-container *ngIf="!editMode; else editTitle">
-          {{ recipe.title }}
-        </ng-container>
-        <ng-template #editTitle>
-          <input
-            matInput
-            [(ngModel)]="recipe.title"
-            class="w-full text-3xl text-green-900 font-extrabold bg-white px-4 py-2 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            placeholder="Título de la receta"
-          />
-        </ng-template>
-      </mat-card-title>
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white/80 backdrop-blur-sm shadow-2xl rounded-3xl overflow-hidden border border-white/20">
 
-      <mat-card-subtitle class="text-green-600 text-lg mb-4">
-        <ng-container *ngIf="!editMode; else editDesc">
-          {{ recipe.description }}
-        </ng-container>
-        <ng-template #editDesc>
-          <textarea
-            matInput
-            [(ngModel)]="recipe.description"
-            class="w-full bg-white px-4 py-2 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            rows="2"
-            placeholder="Descripción breve de la receta"
-          ></textarea>
-        </ng-template>
-      </mat-card-subtitle>
-    </mat-card-header>
+      <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-8">
+        <div class="mb-6">
+          <ng-container *ngIf="!editMode; else editTitle">
+            <h1 class="text-4xl font-black text-white mb-3 drop-shadow-lg">{{ recipe.title }}</h1>
+          </ng-container>
+          <ng-template #editTitle>
+            <input
+              [(ngModel)]="recipe.title"
+              class="w-full text-4xl text-slate-800 font-black bg-white/95 backdrop-blur-sm px-6 py-4 rounded-2xl border-0 shadow-lg focus:ring-4 focus:ring-blue-200 focus:outline-none transition-all duration-300"
+              placeholder="Título de la receta"
+            />
+          </ng-template>
 
-    <mat-card-content class="p-6 pt-0">
-      <div class="mb-8">
-        <h2 class="text-xl font-bold text-green-700 mb-3 pb-2 border-b border-green-200 flex items-center">
-          <mat-icon class="mr-2 text-green-500">list_alt</mat-icon>
-          Instrucciones
-        </h2>
-        <ng-container *ngIf="!editMode; else editInstr">
-          <p class="text-gray-700 whitespace-pre-line bg-green-50 p-4 rounded-lg border border-green-100">{{ recipe.instructions }}</p>
-        </ng-container>
-        <ng-template #editInstr>
-          <textarea
-            matInput
-            [(ngModel)]="recipe.instructions"
-            class="w-full bg-white px-4 py-3 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            rows="6"
-            placeholder="Escribe las instrucciones paso a paso..."
-          ></textarea>
-        </ng-template>
+          <ng-container *ngIf="!editMode; else editDesc">
+            <p class="text-blue-100 text-xl font-medium">{{ recipe.description }}</p>
+          </ng-container>
+          <ng-template #editDesc>
+            <textarea
+              [(ngModel)]="recipe.description"
+              class="w-full mt-3 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-2xl border-0 shadow-lg focus:ring-4 focus:ring-blue-200 focus:outline-none transition-all duration-300 text-slate-700"
+              rows="3"
+              placeholder="Descripción breve de la receta"
+            ></textarea>
+          </ng-template>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 shadow-sm border border-green-200">
-          <h3 class="font-bold text-green-800 mb-3 flex items-center">
-            <mat-icon class="text-green-600 mr-2">local_fire_department</mat-icon>
-            Calorías Totales
-          </h3>
-          <ng-container *ngIf="!editMode; else editCals">
-            <p class="text-2xl font-extrabold text-green-600">{{ recipe.calories }} <span class="text-lg font-medium text-green-500">kcal</span></p>
-          </ng-container>
-          <ng-template #editCals>
-            <div class="relative">
-              <input
-                type="number"
-                matInput
-                [(ngModel)]="recipe.calories"
-                class="w-full bg-white px-4 py-2 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent pr-12"
-              />
-              <span class="absolute right-3 top-2.5 text-green-400">kcal</span>
+
+      <div class="p-8">
+
+        <div class="mb-10">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 pb-3 border-b-2 border-gradient-to-r from-blue-200 to-purple-200 flex items-center">
+            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+              </svg>
             </div>
+            Instrucciones
+          </h2>
+          <ng-container *ngIf="!editMode; else editInstr">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+              <p class="text-slate-700 whitespace-pre-line leading-relaxed font-medium">{{ recipe.instructions }}</p>
+            </div>
+          </ng-container>
+          <ng-template #editInstr>
+            <textarea
+              [(ngModel)]="recipe.instructions"
+              class="w-full bg-white/90 backdrop-blur-sm px-6 py-4 rounded-2xl border border-blue-200 shadow-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-300 focus:outline-none transition-all duration-300 text-slate-700"
+              rows="8"
+              placeholder="Escribe las instrucciones paso a paso..."
+            ></textarea>
           </ng-template>
         </div>
 
-        <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-5 shadow-sm border border-teal-200">
-          <h3 class="font-bold text-teal-800 mb-3 flex items-center">
-            <mat-icon class="text-teal-600 mr-2">pie_chart</mat-icon>
-            Macronutrientes
-          </h3>
-          <ul class="space-y-2">
-            <li class="flex justify-between items-center">
-              <span class="text-teal-700">Carbohidratos:</span>
-              <ng-container *ngIf="!editMode; else editCarbs">
-                <strong class="text-teal-700 font-bold">{{macros.carbs}} g</strong>
-              </ng-container>
-              <ng-template #editCarbs>
-                <div class="relative w-20">
-                  <input
-                    type="number"
-                    matInput
-                    [(ngModel)]="macros.carbs"
-                    class="w-full bg-white px-3 py-1 rounded-lg border border-teal-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent pr-8"
-                  />
-                  <span class="absolute right-2 top-1 text-teal-400 text-sm">g</span>
-                </div>
-              </ng-template>
-            </li>
-            <li class="flex justify-between items-center">
-              <span class="text-teal-700">Proteínas:</span>
-              <ng-container *ngIf="!editMode; else editProteins">
-                <strong class="text-teal-700 font-bold">{{ macros.protein }} g</strong>
-              </ng-container>
-              <ng-template #editProteins>
-                <div class="relative w-20">
-                  <input
-                    type="number"
-                    matInput
-                    [(ngModel)]="macros.protein"
-                    class="w-full bg-white px-3 py-1 rounded-lg border border-teal-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent pr-8"
-                  />
-                  <span class="absolute right-2 top-1 text-teal-400 text-sm">g</span>
-                </div>
-              </ng-template>
-            </li>
-            <li class="flex justify-between items-center">
-              <span class="text-teal-700">Grasas:</span>
-              <ng-container *ngIf="!editMode; else editFats">
-                <strong class="text-teal-700 font-bold">{{ macros.fats }} g</strong>
-              </ng-container>
-              <ng-template #editFats>
-                <div class="relative w-20">
-                  <input
-                    type="number"
-                    matInput
-                    [(ngModel)]="macros.fats"
-                    class="w-full bg-white px-3 py-1 rounded-lg border border-teal-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent pr-8"
-                  />
-                  <span class="absolute right-2 top-1 text-teal-400 text-sm">g</span>
-                </div>
-              </ng-template>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="space-y-4">
-        <h2 class="text-xl font-bold text-green-700 mb-2 flex items-center">
-          <mat-icon class="mr-2 text-green-600">kitchen</mat-icon>
-          Ingredientes
-        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
 
-        <div *ngIf="editMode">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Seleccionar ingrediente</mat-label>
-            <mat-select [(value)]="selectedIngredient" (selectionChange)="onIngredientSelect($event)">
-              <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient">
-                {{ ingredient.name }} ({{ ingredient.calories }} kcal)
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <div class="mt-4 border border-green-200 rounded-lg overflow-hidden bg-white">
-            <div *ngFor="let ing of ingredientsByRecipeIngredientId; let i = index"
-                 class="p-4 flex justify-between items-center border-b border-green-100 hover:bg-green-50">
-              <div>
-                <p class="font-medium text-green-800">{{ ing.name }}</p>
-                <p class="text-sm text-green-600">Cal: {{ ing.calories }} kcal | C: {{ ing.carbs }}g P: {{ ing.protein }}g F: {{ ing.fats }}g</p>
+          <div class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-3xl p-8 shadow-xl border border-orange-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <h3 class="font-bold text-orange-800 mb-4 flex items-center text-lg">
+              <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center mr-3 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                </svg>
               </div>
-              <div class="flex items-center gap-2">
-                <input type="number" [(ngModel)]="ing.quantity" [ngModelOptions]="{ standalone: true }"
-                       class="w-20 border border-green-200 px-2 py-1 rounded text-sm focus:ring-2 focus:ring-green-500" />
-                <button mat-icon-button color="warn" (click)="removeIngredient(ing.id)" class="hover:bg-red-50">
-                  <mat-icon class="text-red-500">delete</mat-icon>
-                </button>
+              Calorías Totales
+            </h3>
+            <ng-container *ngIf="!editMode; else editCals">
+              <p class="text-4xl font-black text-orange-600 mb-1">{{ recipe.calories }}</p>
+              <p class="text-lg font-semibold text-orange-500">kilocalorías</p>
+            </ng-container>
+            <ng-template #editCals>
+              <div class="relative">
+                <input
+                  type="number"
+                  [(ngModel)]="recipe.calories"
+                  class="w-full bg-white/90 backdrop-blur-sm px-6 py-4 rounded-2xl border border-orange-200 shadow-lg focus:ring-4 focus:ring-orange-200 focus:border-orange-300 focus:outline-none transition-all duration-300 pr-16 text-xl font-bold text-orange-700"
+                />
+                <span class="absolute right-4 top-5 text-orange-400 font-semibold">kcal</span>
+              </div>
+            </ng-template>
+          </div>
+
+
+          <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 shadow-xl border border-emerald-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <h3 class="font-bold text-emerald-800 mb-4 flex items-center text-lg">
+              <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mr-3 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                </svg>
+              </div>
+              Macronutrientes
+            </h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center p-3 bg-white/60 backdrop-blur-sm rounded-xl">
+                <span class="text-emerald-700 font-semibold">Carbohidratos:</span>
+                <ng-container *ngIf="!editMode; else editCarbs">
+                  <div class="flex items-center">
+                    <strong class="text-2xl font-bold text-emerald-600 mr-1">{{macros.carbs}}</strong>
+                    <span class="text-emerald-500 font-medium">g</span>
+                  </div>
+                </ng-container>
+                <ng-template #editCarbs>
+                  <div class="relative w-24">
+                    <input
+                      type="number"
+                      [(ngModel)]="macros.carbs"
+                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                    />
+                    <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-white/60 backdrop-blur-sm rounded-xl">
+                <span class="text-emerald-700 font-semibold">Proteínas:</span>
+                <ng-container *ngIf="!editMode; else editProteins">
+                  <div class="flex items-center">
+                    <strong class="text-2xl font-bold text-emerald-600 mr-1">{{ macros.protein }}</strong>
+                    <span class="text-emerald-500 font-medium">g</span>
+                  </div>
+                </ng-container>
+                <ng-template #editProteins>
+                  <div class="relative w-24">
+                    <input
+                      type="number"
+                      [(ngModel)]="macros.protein"
+                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                    />
+                    <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-white/60 backdrop-blur-sm rounded-xl">
+                <span class="text-emerald-700 font-semibold">Grasas:</span>
+                <ng-container *ngIf="!editMode; else editFats">
+                  <div class="flex items-center">
+                    <strong class="text-2xl font-bold text-emerald-600 mr-1">{{ macros.fats }}</strong>
+                    <span class="text-emerald-500 font-medium">g</span>
+                  </div>
+                </ng-container>
+                <ng-template #editFats>
+                  <div class="relative w-24">
+                    <input
+                      type="number"
+                      [(ngModel)]="macros.fats"
+                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                    />
+                    <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
+                  </div>
+                </ng-template>
               </div>
             </div>
           </div>
         </div>
 
-        <table *ngIf="!editMode && ingredientsByRecipeIngredientId.length > 0;" mat-table
-               [dataSource]="ingredientsByRecipeIngredientId" class="min-w-full border border-green-200 mt-4">
 
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Nombre </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="font-medium text-green-700">{{ element.name }}</span>
-            </td>
-          </ng-container>
+        <div class="space-y-6">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+            <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            Ingredientes
+          </h2>
 
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Cantidad </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="text-green-600">{{ element.quantity }} g</span>
-            </td>
-          </ng-container>
 
-          <ng-container matColumnDef="calories">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Calorías </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="text-green-600 font-medium">{{ element.calories }} kcal</span>
-            </td>
-          </ng-container>
+          <div *ngIf="editMode">
 
-          <ng-container matColumnDef="carbs">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Carbs </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="text-teal-600">{{ element.carbs }} g</span>
-            </td>
-          </ng-container>
+            <mat-form-field  appearance="outline" class="w-full mb-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl border border-violet-100">
+              <label class="block text-sm font-bold text-slate-700 mb-3">Seleccionar ingrediente</label>
+              <mat-select [(value)]="selectedIngredient" (selectionChange)="onIngredientSelect($event)" class="w-full bg-white/90 backdrop-blur-sm border border-violet-200 rounded-2xl shadow-lg py-4 px-6 focus:outline-none focus:ring-4 focus:ring-violet-200 focus:border-violet-300 text-slate-700 font-medium transition-all duration-300">
+                <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient">
+                  {{ ingredient.name }} ({{ ingredient.calories }} kcal)
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <ng-container matColumnDef="proteins">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Proteínas </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="text-teal-600">{{ element.proteins }} g</span>
-            </td>
-          </ng-container>
+            <div class="space-y-3">
+              <div *ngFor="let ing of ingredientsByRecipeIngredientId; let i = index"
+                   class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-violet-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                <div class="flex justify-between items-center">
+                  <div class="flex-1">
+                    <p class="font-bold text-violet-800 text-lg mb-1">{{ ing.name }}</p>
+                    <p class="text-sm text-violet-600 font-medium">Cal: {{ ing.calories }} kcal | C: {{ ing.carbs }}g P: {{ ing.protein }}g F: {{ ing.fats }}g</p>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                      <input type="number" [(ngModel)]="ing.quantity" [ngModelOptions]="{ standalone: true }"
+                             class="w-24 border border-violet-200 px-4 py-2 rounded-xl text-center font-bold focus:ring-2 focus:ring-violet-300 focus:outline-none transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm" />
+                      <span class="text-violet-500 font-medium">g</span>
+                    </div>
+                    <button (click)="removeIngredient(ing.id)" class="p-3 text-red-500 hover:text-white hover:bg-red-500 rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <ng-container matColumnDef="fats">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Grasas </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-              <span class="text-teal-600">{{ element.fats }} g</span>
-            </td>
-          </ng-container>
 
-          <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Categoría </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
-                  {{ element.category }}
-                </span>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="available">
-            <th mat-header-cell *matHeaderCellDef class="font-bold text-green-800 bg-green-50 px-4 py-3"> Disponible </th>
-            <td mat-cell *matCellDef="let element" class="px-4 py-3 border-t border-green-100">
-                <span
-                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                  [ngClass]="element.available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
-                >
-                  {{ element.available ? 'Disponible' : 'Agotado' }}
-                </span>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="h-12"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumns;"
-            class="hover:bg-green-50 transition-colors"
-          ></tr>
-        </table>
+          <div *ngIf="!editMode && ingredientsByRecipeIngredientId.length > 0;" class="overflow-hidden rounded-3xl shadow-2xl border border-slate-100">
+            <div class="overflow-x-auto">
+              <table class="min-w-full">
+                <thead class="bg-gradient-to-r from-slate-50 to-slate-100">
+                <tr>
+                  <th scope="col" class="px-8 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Nombre</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Cantidad</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Calorías</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Carbs</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Proteínas</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Grasas</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Categoría</th>
+                  <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Disponible</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white/80 backdrop-blur-sm">
+                <tr *ngFor="let element of ingredientsByRecipeIngredientId; let i = index"
+                    class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
+                    [ngClass]="{'bg-slate-50': i % 2 === 0, 'bg-white': i % 2 !== 0}">
+                  <td class="px-8 py-6 whitespace-nowrap">
+                    <span class="font-bold text-slate-800 text-lg">{{ element.name }}</span>
+                  </td>
+                  <td class="px-6 py-6 whitespace-nowrap">
+                    <span class="font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">{{ element.quantity }} g</span>
+                  </td>
+                  <td class="px-6 py-6 whitespace-nowrap">
+                    <span class="font-bold text-orange-600 bg-orange-50 px-3 py-1 rounded-full">{{ element.calories }} kcal</span>
+                  </td>
+                  <td class="px-3 py-6 whitespace-nowrap">
+                    <span class="font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">{{ element.carbs }} g</span>
+                  </td>
+                  <td class="px-3 py-6 whitespace-nowrap">
+                    <span class="font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">{{ element.protein }} g</span>
+                  </td>
+                  <td class="px-3 py-6 whitespace-nowrap">
+                    <span class="font-semibold text-amber-600 bg-amber-50 px-3 py-1 rounded-full">{{ element.fats }} g</span>
+                  </td>
+                  <td class="px-6 py-6 whitespace-nowrap">
+                      <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-800 shadow-sm">
+                        {{ element.category }}
+                      </span>
+                  </td>
+                  <td class="px-3 py-6 whitespace-nowrap">
+                      <span
+                        class="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold shadow-sm"
+                        [ngClass]="element.available ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800' : 'bg-gradient-to-r from-red-100 to-pink-100 text-red-800'"
+                      >
+                        {{ element.available ? 'Disponible' : 'Agotado' }}
+                      </span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </mat-card-content>
 
-    <mat-card-actions *ngIf="isNutricionist" class="p-6 pt-0 flex justify-end gap-3">
-      <ng-container *ngIf="!editMode; else editingButtons">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="editMode = true"
-          class="flex items-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-md"
-        >
-          <mat-icon class="mr-1">edit</mat-icon>
-          Editar Receta
-        </button>
-      </ng-container>
-      <ng-template #editingButtons>
-        <button
-          mat-raised-button
-          color="accent"
-          (click)="saveChanges()"
-          class="flex items-center bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-md"
-        >
-          <mat-icon class="mr-1">save</mat-icon>
-          Guardar Cambios
-        </button>
-        <button
-          mat-raised-button
-          color="warn"
-          (click)="cancelEdit()"
-          class="flex items-center bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-md"
-        >
-          <mat-icon class="mr-1">cancel</mat-icon>
-          Cancelar
-        </button>
-      </ng-template>
-    </mat-card-actions>
-  </mat-card>
+
+      <div *ngIf="isNutricionist" class="bg-gradient-to-r from-slate-50 to-slate-100 p-8 flex justify-end gap-4">
+        <ng-container *ngIf="!editMode; else editingButtons">
+          <button
+            (click)="editMode = true"
+            class="flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            Editar Receta
+          </button>
+        </ng-container>
+        <ng-template #editingButtons>
+          <button
+            (click)="saveChanges()"
+            class="flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Guardar Cambios
+          </button>
+          <button
+            (click)="cancelEdit()"
+            class="flex items-center px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Cancelar
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </div>
