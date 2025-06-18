@@ -17,7 +17,7 @@ interface UserData {
 })
 export class UserService {
 
-  private userId: number = 2;
+  private userId: number = 1;
 
   currentUser: UserData = {
     nombre: 'Usuario Ejemplo',
