@@ -200,7 +200,8 @@ export class RegisterPageComponent {
     console.log('Datos de registro:', formData);
     if (this.termsAccepted && this.privacyAccepted && this.registerForm?.valid) {
       const user: any = {
-        name: formData.firstName + ' ' + formData.lastName,
+        name: formData.name + ' ',
+        lastName: formData.lastName + ' ',
         email: formData.email,
         password: formData.password,
         role: formData.role,
