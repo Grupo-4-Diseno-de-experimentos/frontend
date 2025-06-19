@@ -20,8 +20,8 @@ export class UserService {
   private userId: number = 1;
 
   currentUser: UserData = {
-    nombre: 'Usuario Ejemplo',
-    email: 'usuario@ejemplo.com',
+    nombre: 'Daniel Rodrigo Chirinos Arevalo',
+    email: 'Daniel-741@hotmail.com',
     sexo: 'Hombre',
     edad: 30,
     altura: 175,
@@ -37,6 +37,10 @@ export class UserService {
 
   setUserId(id:number): void{
     this.userId = id;
+  }
+
+  setRole(role: 'client' | 'nutritionist'): void {
+    this.currentUser.role = role;
   }
 
   getUserId(): number {
