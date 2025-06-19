@@ -1,6 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import {FormsModule, NgForm} from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { User } from '../../../meal-plan/model/meal-plan.entity';
 import { AuthService } from '../../services/auth.service';
@@ -202,6 +202,9 @@ export class RegisterPageComponent {
       const user: any = {
         name: formData.name.trim(),
         lastName: formData.lastName.trim(),
+    if (this.termsAccepted && this.privacyAccepted && this.registerForm?.valid) {
+      const user: any = {
+        name: formData.name,
         email: formData.email,
         password: formData.password,
         role: formData.role,
@@ -223,6 +226,22 @@ export class RegisterPageComponent {
     } else{
       alert('Debes aceptar los Términos y Condiciones y la Política de Privacidad para registrarte.');
     }
+            this.router.navigate(['/profile']);
+          } else {
+            this.router.navigate(['/start-objectives']);
+          }
+        },
+        error: (err) => {
+          console.error('Error al registrar usuario', err);
+        }
+      });
+    } else {
+      alert('Debes aceptar los Términos y Condiciones y la Política de Privacidad para registrarte.');
+    }
+  }
+
+  canRegister() {
+    return this.termsAccepted && this.privacyAccepted && this.registerForm?.valid;
   }
 
   canRegister() {
