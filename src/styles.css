@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+/* Personalizar el color del caret y el indicador de enfoque activo */
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  caret-color: orange; /* Color del caret */
+}
+
+.mat-form-field-appearance-fill.mat-focused .mat-form-field-ripple {
+  background-color: red; /* Color del indicador de enfoque activo */
+}

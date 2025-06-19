@@ -1,0 +1,25 @@
+<mat-card class="recipe-card">
+  <mat-card-header>
+    <div class="recipe-header">
+      <mat-card-title class="recipe-title">
+        {{ recipe.title }}
+      </mat-card-title>
+      <mat-card-subtitle class="recipe-subtitle">
+        {{ recipe.description }}
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content class="recipe-content">
+    <p class="recipe-instructions">{{ recipe.instructions }}</p>
+    <div class="recipe-meta">
+      <span class="calories">Calorías: {{ recipe.calories }}Kcal</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="recipe-actions">
+    <button mat-button class="favorite-btn" (click)="addFavorite()">
+      <span class="btn-icon">♥</span> Añadir a Favoritos
+    </button>
+  </mat-card-actions>
+</mat-card>

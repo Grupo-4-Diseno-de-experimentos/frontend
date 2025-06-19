@@ -1,9 +1,11 @@
-<header class="bg-white shadow-md flex items-center justify-between px-6 py-3">
-  <h1 class="text-xl font-semibold text-gray-800">NutriSmart</h1>
-  <div class="flex gap-4 items-center">
-    <span class="text-gray-600">¡Hola, Usuario!</span>
-    <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
+<header class="main-header">
+  <div class="header-content">
+    <h1 class="logo">NutriSmart</h1>
+    <div class="user-section">
+      <span class="welcome-msg">¡Bienvenido!</span>
+      <button class="profile-btn">
+        <mat-icon class="profile-icon" routerLink="/profile">account_circle</mat-icon>
+      </button>
+    </div>
   </div>
 </header>

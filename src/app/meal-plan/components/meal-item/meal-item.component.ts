@@ -18,6 +18,7 @@ import {Router, RouterLink} from '@angular/router';
     RouterLink,
   ],
   templateUrl: './meal-item.component.html',
+  standalone: true,
   styleUrl: './meal-item.component.css'
 })
 export class MealItemComponent {
@@ -26,6 +27,6 @@ export class MealItemComponent {
   constructor(private router: Router) {}
 
   goToDetail(): void {
-    this.router.navigate(['/meal_plan/plandetail', this.plan.id]);
+    this.router.navigate(['meal_plan/plandetail', this.plan.id]);
   }
 }
