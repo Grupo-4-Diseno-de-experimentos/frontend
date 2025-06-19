@@ -4,31 +4,46 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-  private mockUser = {
-    id: 1,
-    role: 'nutricionist',
-    name: 'Jorge',
-  };
+  private user: any = null;
 
-  constructor() {}
+  constructor() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+  }
 
-  getUser() {
-    return this.mockUser;
+  setUser(user: any): void {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUser(): any {
+    return this.user;
   }
 
   getUserId(): number {
-    return this.mockUser.id;
+    return this.user?.id;
   }
 
   getUserRole(): string {
-    return this.mockUser.role;
+    return this.user?.role;
   }
 
   isNutricionist(): boolean {
-    return this.mockUser.role === 'nutricionist';
+    return this.getUserRole() === 'nutricionist';
   }
 
-  isCustomer(): boolean {
-    return this.mockUser.role === 'customer';
+  isUser(): boolean {
+    return this.getUserRole() === 'user';
+  }
+
+  logout(): void {
+    this.user = null;
+    localStorage.removeItem('user');
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.user;
   }
 }
