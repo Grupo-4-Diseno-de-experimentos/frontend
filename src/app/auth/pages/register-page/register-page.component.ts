@@ -202,9 +202,6 @@ export class RegisterPageComponent {
       const user: any = {
         name: formData.name.trim(),
         lastName: formData.lastName.trim(),
-    if (this.termsAccepted && this.privacyAccepted && this.registerForm?.valid) {
-      const user: any = {
-        name: formData.name,
         email: formData.email,
         password: formData.password,
         role: formData.role,
@@ -223,19 +220,7 @@ export class RegisterPageComponent {
           console.error('Error al registrar un usuario', err);
         }
       });
-    } else{
-      alert('Debes aceptar los Términos y Condiciones y la Política de Privacidad para registrarte.');
-    }
-            this.router.navigate(['/profile']);
-          } else {
-            this.router.navigate(['/start-objectives']);
-          }
-        },
-        error: (err) => {
-          console.error('Error al registrar usuario', err);
-        }
-      });
-    } else {
+    }else{
       alert('Debes aceptar los Términos y Condiciones y la Política de Privacidad para registrarte.');
     }
   }
@@ -243,9 +228,4 @@ export class RegisterPageComponent {
   canRegister() {
     return this.termsAccepted && this.privacyAccepted && this.registerForm?.valid;
   }
-
-  canRegister() {
-    return this.termsAccepted && this.privacyAccepted && this.registerForm?.valid;
-  }
-
 }
