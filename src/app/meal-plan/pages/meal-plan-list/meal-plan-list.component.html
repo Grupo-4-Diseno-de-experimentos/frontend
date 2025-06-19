@@ -1,0 +1,48 @@
+<section class="max-w-screen-xl mx-auto p-6">
+  <h2 class="text-3xl font-bold mb-8 text-center">Planes de Comida</h2>
+
+  <div class="flex gap-4">
+    <div class="mb-4">
+      <label for="goalFilter" class="block text-sm font-medium text-gray-700">Filtrar por Categoría</label>
+      <select id="goalFilter" [(ngModel)]="selectedCategory" (change)="filterByCategory()" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        <option value="">Todos</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="goalFilter" class="block text-sm font-medium text-gray-700">Filtrar por Objetivo</label>
+      <select id="goalFilter" [(ngModel)]="selectedGoal" (change)="filterByGoal()" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        <option value="">Todos</option>
+        <option *ngFor="let goal of goals" [value]="goal">{{ goal }}</option>
+      </select>
+    </div>
+    <div *ngIf="isNutricionist" class="mb-6 flex gap-4">
+      <button
+        (click)="filterByNutritionist()"
+        class="px-4 py-2 bg-teal-100 hover:bg-teal-200 text-teal-800 font-medium rounded-lg transition-all duration-200 border border-teal-200 hover:border-teal-300 shadow-sm hover:shadow-md cursor-pointer"
+      >
+        Mis Planes
+      </button>
+
+      <button
+        (click)="resetFilters()"
+        class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg transition-all duration-200 border border-slate-200 hover:border-slate-300 shadow-sm hover:shadow-md cursor-pointer"
+      >
+        Todos los Planes
+      </button>
+
+      <button
+        (click)="goToCreateMealPlan()"
+        class="px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium rounded-lg transition-all duration-200 border border-indigo-200 hover:border-indigo-300 cursor-pointer shadow-sm hover:shadow-md flex items-center gap-1"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Nuevo Plan
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-meal-item  *ngFor="let plan of filteredMealPlans" [plan]="plan"></app-meal-item>
+  </div>
+</section>

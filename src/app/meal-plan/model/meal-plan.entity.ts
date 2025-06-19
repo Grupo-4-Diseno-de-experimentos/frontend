@@ -3,6 +3,7 @@ export class User {
   constructor(
     public id: number,
     public name: string,
+    public lastName: string,
     public email: string,
     public password: string,
     public role: string,
@@ -41,9 +42,9 @@ export class Ingredient {
     public id: number,
     public name: string,
     public quantity: number,
-    public calorie: number,
+    public calories: number,
     public carbs: number,
-    public protein: number,
+    public proteins: number,
     public fats: number,
     public category: string,
     public available: boolean
@@ -60,18 +61,12 @@ export class Recipe {
     public nutricionist_id: number
   ) {}
 }
-// recipe-ingredient.entity.ts
-export class RecipeIngredient {
-  constructor(
-    public ingredient_id: number,
-    public recipe_id: number
-  ) {}
-}
+
 // macros.entity.ts
 export class Macros {
   constructor(
     public carbs: number,
-    public protein: number,
+    public proteins: number,
     public fats: number,
     public recipe_id: number
   ) {}
@@ -96,9 +91,8 @@ export class MealPlan {
     public max_bmi: number,
     public min_age: number,
     public max_age: number,
-    public calories_per_day: number,
-    public nutricionist_id: number,
-    public created_at: string
+    public calories_per_d: number,
+    public nutricionist_id: number
   ) {}
 
 /*  isValidForUser(bmi: number, age: number): boolean {
@@ -113,7 +107,7 @@ export class MealPlan {
 // meal-plan-recipe.entity.ts
 export class MealPlanRecipe {
   constructor(
-    public id: number,
+    public id: number | undefined,
     public day: string,
     public meal_time: string,
     public recipe_id: number,

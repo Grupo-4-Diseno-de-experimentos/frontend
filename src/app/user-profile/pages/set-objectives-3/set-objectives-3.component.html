@@ -1,0 +1,67 @@
+<div class="set-goal-container">
+  <div class="header">
+    <button class="back-button" routerLink="/set-objectives-2">
+      <img src="https://i.postimg.cc/bvgMQ9T1/back.png" alt="Flecha de Retroceso">
+    </button>
+    <div class="progress-bar">
+      <div class="progress-indicator" style="width: 60%;"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="icon-container">
+      <img src="https://i.postimg.cc/jSwNjLJK/image.png" alt="Icono Sobre Ti">
+    </div>
+    <h2>Sobre ti</h2>
+    <p class="subtitle">Esta información nos ayudará a calcular tus calorías objetivo</p>
+
+    <form (ngSubmit)="continue()" #profileForm="ngForm">
+      <div class="input-group">
+        <label for="sexo">Sexo</label>
+        <div class="select-wrapper">
+          <select id="sexo" name="sexo" [(ngModel)]="sexo" required>
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+            <option value="otro">Otro</option>
+          </select>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M15.793 7.707a1 1 0 010 1.414l-3.732 3.732 3.732 3.732a1 1 0 11-1.414 1.414l-4.44-4.44a1 1 0 010-1.414l4.44-4.44a1 1 0 011.414 0zM6 12a1 1 0 011-1h10a1 1 0 110 2H7a1 1 0 01-1-1z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div *ngIf="profileForm.controls['sexo']?.invalid && (profileForm.controls['sexo']?.dirty || profileForm.controls['sexo']?.touched)" class="error-message">
+          Por favor, selecciona tu sexo.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" name="edad" [(ngModel)]="edad" min="10" max="100" required>
+        <span>años</span>
+        <div *ngIf="profileForm.controls['edad']?.invalid && (profileForm.controls['edad']?.dirty || profileForm.controls['edad']?.touched)" class="error-message">
+          Por favor, introduce una edad válida (10-100 años).
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="altura">Altura</label>
+        <input type="number" id="altura" name="altura" [(ngModel)]="altura" min="100" max="250" required>
+        <span>cm</span>
+        <div *ngIf="profileForm.controls['altura']?.invalid && (profileForm.controls['altura']?.dirty || profileForm.controls['altura']?.touched)" class="error-message">
+          Por favor, introduce una altura válida (100-250 cm).
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="peso">Peso</label>
+        <input type="number" id="peso" name="peso" [(ngModel)]="peso" min="30" max="300" required>
+        <span>kg</span>
+        <div *ngIf="profileForm.controls['peso']?.invalid && (profileForm.controls['peso']?.dirty || profileForm.controls['peso']?.touched)" class="error-message">
+          Por favor, introduce un peso válido (30-300 kg).
+        </div>
+      </div>
+
+      <button type="submit" class="continue-button" [disabled]="profileForm.invalid">Continuar</button>
+    </form>
+  </div>
+</div>
