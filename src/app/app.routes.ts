@@ -9,6 +9,7 @@ import { SetObjectives3Component } from './user-profile/pages/set-objectives-3/s
 import { SetObjectives4Component } from './user-profile/pages/set-objectives-4/set-objectives-4.component';
 import { SetObjectives5Component } from './user-profile/pages/set-objectives-5/set-objectives-5.component';
 import { ProfileComponent } from './user-profile/pages/profile/profile.component';
+import {DashboardComponent} from './public/components/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      {path: '', component: DashboardComponent},
       { path: 'profile', component: ProfileComponent }, // Mueve la ruta del perfil aquí
       {
         path: 'meal_plan',

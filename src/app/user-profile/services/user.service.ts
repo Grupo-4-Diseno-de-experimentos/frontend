@@ -17,13 +17,15 @@ interface UserData {
 })
 export class UserService {
 
+  private userId: number = 1;
+
   currentUser: UserData = {
     nombre: 'Usuario Ejemplo',
     email: 'usuario@ejemplo.com',
     sexo: 'Hombre',
     edad: 30,
     altura: 175,
-    role: 'client',
+    role: 'nutritionist',
     peso: 70
   };
 
@@ -33,8 +35,12 @@ export class UserService {
     return of(this.currentUser);
   }
 
-  getUserId(): string {
-    return '12345'; // simulacion
+  setUserId(id:number): void{
+    this.userId = id;
+  }
+
+  getUserId(): number {
+    return this.userId;
   }
   isNutricionist(): boolean {
     return this.currentUser.role === 'nutritionist';

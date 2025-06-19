@@ -13,9 +13,10 @@ import {UserService} from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-recipe-create',
-  imports: [ FormsModule,  MatAutocomplete,  MatOption,  MatCardContent,  MatCardModule,  MatCardHeader,  ReactiveFormsModule,  MatInput,  NgIf,  MatIconButton,
-    MatIcon,  MatButton,  MatAutocompleteTrigger,  MatFormField,  MatFormFieldModule,  NgForOf ],
+  imports: [FormsModule, MatAutocomplete, MatOption, MatCardContent, MatCardModule, MatCardHeader, ReactiveFormsModule, MatInput, NgIf, MatIconButton,
+    MatIcon, MatButton, MatAutocompleteTrigger, MatFormField, MatFormFieldModule, NgForOf],
   templateUrl: './recipe-create.component.html',
+  standalone: true,
   styleUrl: './recipe-create.component.css'
 })
 export class RecipeCreateComponent implements OnInit{
@@ -32,7 +33,7 @@ export class RecipeCreateComponent implements OnInit{
       instructions: ['', Validators.required],
       calories: ['', [Validators.required, Validators.min(0)]],
       carbs: ['', [Validators.required, Validators.min(0)]],
-      proteins: ['', [Validators.required, Validators.min(0)]],
+      protein: ['', [Validators.required, Validators.min(0)]],
       fats: ['', [Validators.required, Validators.min(0)]]
     });
   }
@@ -73,39 +74,37 @@ export class RecipeCreateComponent implements OnInit{
   }
 
   updateNutritionalValues(): void {
-    // se calcula valores nutricionales sumando los ingredientes
     const totals = this.selectedIngredients.reduce((acc, ing) => {
-      const factor = ing.quantity / 100; // se asumie valores nutricionales por 100g
+      const factor = ing.quantity / 100;
       return {
         calories: acc.calories + (ing.calories * factor),
         carbs: acc.carbs + (ing.carbs * factor),
-        proteins: acc.proteins + (ing.proteins * factor),
+        proteins: acc.proteins + (ing.protein * factor),
         fats: acc.fats + (ing.fats * factor)
       };
     }, { calories: 0, carbs: 0, proteins: 0, fats: 0 });
 
-    // actualizaciion el formulario
     this.recipeForm.patchValue({
       calories: Math.round(totals.calories),
       carbs: Math.round(totals.carbs),
-      proteins: Math.round(totals.proteins),
+      protein: Math.round(totals.proteins),
       fats: Math.round(totals.fats)
     });
   }
 
-/*  onSubmit(): void {
-    if (this.recipeForm.valid) {
-      const recipeData = {
-        ...this.recipeForm.value,
-        ingredients: this.selectedIngredients.map(ing => ({
-          id: ing.id,
-          quantity: ing.quantity
-        }))
-      };
-      console.log('Receta a guardar:', recipeData);
+  /*  onSubmit(): void {
+      if (this.recipeForm.valid) {
+        const recipeData = {
+          ...this.recipeForm.value,
+          ingredients: this.selectedIngredients.map(ing => ({
+            id: ing.id,
+            quantity: ing.quantity
+          }))
+        };
+        console.log('Receta a guardar:', recipeData);
 
-    }
-  }*/
+      }
+    }*/
 
   onSubmit(): void {
     if (this.recipeForm.valid) {
@@ -114,29 +113,30 @@ export class RecipeCreateComponent implements OnInit{
         description: this.recipeForm.value.description,
         instructions: this.recipeForm.value.instructions,
         calories: this.recipeForm.value.calories,
-        nutricionist_id: this.userService.getUserId(),
+        macros: {
+          carbs: this.recipeForm.value.carbs,
+          protein: this.recipeForm.value.protein,
+          fats: this.recipeForm.value.fats,
+          recipe_id: 0
+        },
+        ingredientIds: this.selectedIngredients.map(ingredient => ingredient.id)
       };
 
-      const macros:any = {
-        carbs: this.recipeForm.value.carbs,
-        proteins: this.recipeForm.value.proteins,
-        fats: this.recipeForm.value.fats
-      };
 
-      // se guarda la receta para obtener el id primero
       this.recipeService.saveRecipe(recipe).subscribe({
         next: (savedRecipe) => {
           const recipeId = savedRecipe.id;
-
-          // asociamos el id de la receta a los ingredientes
+          console.log('Recipe sent to backend:', recipe);
           const recipeIngredients = this.selectedIngredients.map(ingredient => ({
             recipe_id: recipeId,
             ingredient_id: ingredient.id,
             quantity: ingredient.quantity
           }));
-
-          // se guardan los ingredientes en RecipeIngredient
-          this.recipeService.saveRecipeIngredients(recipeIngredients)
+          console.log('RecipeIngredients sent to backend:', recipeIngredients);
+          this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
+            next: () => console.log('Ingredientes guardados correctamente'),
+            error: err => console.error('Error al guardar ingredientes:', err)
+          });
         },
         error: (err) => {
           console.error('Error al guardar la receta:', err);

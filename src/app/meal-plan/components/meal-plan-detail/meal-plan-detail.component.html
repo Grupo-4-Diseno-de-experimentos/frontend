@@ -1,161 +1,110 @@
-<div class="p-6 bg-green-50 min-h-screen">
-  <mat-card class="bg-white rounded-2xl shadow-xl overflow-hidden border border-green-100">
-
-
-    <div class="bg-gradient-to-r from-green-600 to-green-500 p-6 text-white">
-      <mat-card-title class="text-3xl font-bold mb-2 flex items-center">
-        <mat-icon class="mr-2">restaurant_menu</mat-icon>
-        Detalles del Plan de Comidas
-      </mat-card-title>
-      <mat-card-subtitle class="text-green-100 opacity-90">
-        Visualiza o edita la información del plan nutricional
-      </mat-card-subtitle>
+<div class="p-6 max-w-4xl mx-auto bg-green-50 rounded-2xl shadow-lg">
+  <div class="bg-white rounded-xl shadow p-6">
+    <div class="mb-6 border-b pb-4 border-green-300">
+      <h2 class="text-2xl font-bold text-green-700">
+        🍽️ Detalles del Plan de Comidas
+      </h2>
+      <p class="text-green-600">Visualiza o edita la información del plan nutricional</p>
     </div>
 
-    <mat-card-content class="p-6 space-y-8">
-
-
-      <section class="bg-green-50 rounded-xl p-6 border-l-4 border-green-500 shadow-sm">
-        <div class="flex items-center mb-4">
-          <mat-icon class="text-green-600 mr-2">info</mat-icon>
-          <h2 class="text-xl font-semibold text-green-800">Información del Plan</h2>
+    <div>
+      <!-- Información del plan -->
+      <section class="mb-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">ℹ️</span>
+          <h3 class="text-xl font-semibold text-green-700">Información del Plan</h3>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Título del Plan</mat-label>
-            <input matInput [(ngModel)]="mealPlan.name" [readonly]="!isEditing"
-                   class="bg-white text-green-900" />
-            <mat-icon matSuffix class="text-green-500">title</mat-icon>
-          </mat-form-field>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-green-800 font-medium mb-1">Título del Plan</label>
+            <input type="text" [(ngModel)]="mealPlan.name" [readonly]="!isEditing" class="border border-green-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400" />
+          </div>
 
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Descripción</mat-label>
-            <textarea matInput rows="3" [(ngModel)]="mealPlan.description" [readonly]="!isEditing"
-                      class="bg-white text-green-800"></textarea>
-            <mat-icon matSuffix class="text-green-500">description</mat-icon>
-            <mat-hint *ngIf="isEditing" class="text-green-600">Introduce una breve descripción del plan</mat-hint>
-          </mat-form-field>
+          <div class="flex flex-col">
+            <label class="text-green-800 font-medium mb-1">Descripción</label>
+            <textarea rows="3" [(ngModel)]="mealPlan.description" [readonly]="!isEditing" class="border border-green-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+            <small *ngIf="isEditing" class="text-green-600 mt-1">Introduce una breve descripción del plan</small>
+          </div>
         </div>
       </section>
 
-
-      <section *ngIf="mealPlanRecipes.length > 0" class="bg-teal-50 rounded-xl p-6 border-l-4 border-teal-500 shadow-sm">
-        <div class="flex items-center mb-4">
-          <mat-icon class="text-teal-600 mr-2">schedule</mat-icon>
-          <h2 class="text-xl font-semibold text-teal-800">Recetas Programadas</h2>
+      <!-- Recetas programadas -->
+      <section *ngIf="mealPlanRecipes.length > 0" class="mb-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">⏰</span>
+          <h3 class="text-xl font-semibold text-green-700">Recetas Programadas</h3>
         </div>
 
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <mat-card *ngFor="let recipe of mealPlanRecipes; let i = index"
-                    class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-green-100">
-            <mat-card-header class="flex items-start">
-              <div class="bg-teal-100 p-2 rounded-full mr-3">
-                <mat-icon class="text-teal-600">event</mat-icon>
-              </div>
-              <div class="flex flex-col justify-center flex-grow">
-                <mat-card-title class="text-lg font-medium text-green-800">
-                  <input matInput [(ngModel)]="recipe.day" [readonly]="!isEditing"
-                         class="w-full bg-transparent focus:bg-green-50 px-2 py-1 rounded"
-                         placeholder="Día (ej: Lunes)" />
-                </mat-card-title>
-                <div class="text-green-700">
-                  <input [(ngModel)]="mealPlanRecipes[i].meal_time" [readonly]="!isEditing"
-                         class="w-full bg-transparent focus:bg-green-50 px-2 py-1 rounded text-sm"
-                         placeholder="Hora de comida (ej: Almuerzo)" />
+        <div class="grid gap-4">
+          <div class="bg-green-100 p-4 rounded shadow" *ngFor="let recipe of mealPlanRecipes; let i = index">
+            <div class="flex justify-between items-start mb-2">
+              <div class="flex gap-2 items-center">
+                <span class="text-green-600">📅</span>
+                <div>
+                  <input type="text" [(ngModel)]="recipe.day" [readonly]="!isEditing" placeholder="Día (ej: Lunes)" class="mb-1 block w-full border border-green-300 rounded p-1 focus:outline-none focus:ring-green-400" />
+                  <input type="text" [(ngModel)]="mealPlanRecipes[i].meal_time" [readonly]="!isEditing" placeholder="Hora de comida (ej: Almuerzo)" class="block w-full border border-green-300 rounded p-1 focus:outline-none focus:ring-green-400" />
+
+                  <div *ngIf="isEditing" class="mt-2">
+                    <label class="text-green-800 text-sm">Seleccionar Receta</label>
+                    <select [(ngModel)]="mealPlanRecipes[i].recipe_id" class="w-full border border-green-300 rounded p-1">
+                      <option *ngFor="let recipe of AllRecipes" [value]="recipe.id">
+                        {{ recipe.title }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <h4 *ngIf="!isEditing" class="text-green-800 font-medium mt-1">
+                    {{ recipesbyPlanId[i]?.title }}
+                  </h4>
                 </div>
-
-                <mat-form-field *ngIf="isEditing" appearance="outline" class="w-full mt-2">
-                  <mat-label>Seleccionar Receta</mat-label>
-                  <mat-select [(ngModel)]="mealPlanRecipes[i].recipe_id" class="text-green-800">
-                    <mat-option *ngFor="let recipe of AllRecipes" [value]="recipe.id">
-                      {{ recipe.title }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <h2 *ngIf="!isEditing" class="text-teal-700 font-medium mt-1">
-                  {{ recipesbyPlanId[i]?.title }}
-                </h2>
               </div>
-            </mat-card-header>
-            <mat-card-actions align="end" class="p-2">
-              <button mat-icon-button color="primary" (click)="enableEdit()" *ngIf="isNutricionist && !isEditing"
-                      class="hover:bg-green-100">
-                <mat-icon class="text-green-600">edit</mat-icon>
-              </button>
-              <button (click)="deleteMealPlanRecipe(recipe)" mat-icon-button color="warn" *ngIf="isNutricionist && isEditing"
-                      class="hover:bg-red-100">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+
+<!--              <div class="flex flex-col gap-2">
+                <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="text-green-600 hover:text-green-800">✏️</button>
+                <button *ngIf="isNutricionist && isEditing" (click)="deleteMealPlanRecipe(recipe)" class="text-red-600 hover:text-red-800">🗑️</button>
+              </div>-->
+            </div>
+          </div>
         </div>
 
-        <div *ngIf="isNutricionist && !isEditing" class="mt-6 flex justify-center">
-          <button mat-fab color="primary" aria-label="Añadir receta" (click)="goToCreateRecipe()"
-                  class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
+<!--        <div *ngIf="isNutricionist && !isEditing" class="mt-4">
+          <button (click)="goToCreateRecipe()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">➕ Añadir Receta</button>
+        </div>-->
       </section>
 
-
-      <section *ngIf="AllRecipes.length > 0" class="bg-white rounded-xl p-6 border-l-4 border-amber-500 shadow-sm">
-        <div class="flex items-center mb-4">
-          <mat-icon class="text-amber-600 mr-2">menu_book</mat-icon>
-          <h2 class="text-xl font-semibold text-amber-800">Recetas Disponibles</h2>
+      <!-- Recetas disponibles -->
+      <section *ngIf="AllRecipes.length > 0" class="mb-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">📖</span>
+          <h3 class="text-xl font-semibold text-green-700">Recetas Disponibles</h3>
         </div>
 
-        <mat-accordion class="w-full">
-          <mat-expansion-panel *ngFor="let recipe of recipesbyPlanId" class="mb-3 shadow-sm border border-gray-100">
-            <mat-expansion-panel-header class="hover:bg-amber-50">
-              <mat-panel-title class="text-green-800 font-medium">
-                {{ recipe.title }}
-              </mat-panel-title>
-              <mat-panel-description class="text-green-600">
-                <mat-icon class="mr-1">restaurant</mat-icon> Ver detalles
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="py-3 px-1 bg-amber-50">
-              <p class="text-green-700 mb-3">{{ recipe.description }}</p>
-
-              <div class="flex flex-wrap gap-2 mb-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  <mat-icon class="text-xs mr-1">local_fire_department</mat-icon>
-                  {{ recipe.calories }} kcal
-                </span>
+        <div class="divide-y divide-green-200">
+          <div *ngFor="let recipe of recipesbyPlanId" class="py-4">
+            <div class="flex justify-between items-center cursor-pointer">
+              <span class="text-green-800 font-medium">{{ recipe.title }}</span>
+              <span class="text-sm text-green-500">🍴 Ver detalles</span>
+            </div>
+            <div class="mt-2">
+              <p class="text-green-700">{{ recipe.description }}</p>
+              <div class="text-sm text-green-600 mt-1">
+                🔥 {{ recipe.calories }} kcal
               </div>
-
-              <div class="mt-4 flex justify-end">
-                <button mat-stroked-button (click)="goToRecipeDetail(recipe.id)"
-                        class="border-green-300 text-green-700 hover:bg-green-50">
-                  <mat-icon class="mr-1">visibility</mat-icon> Ver Detalles
-                </button>
+              <div class="mt-2">
+                <button (click)="goToRecipeDetail(recipe.id)" class="text-green-600 underline hover:text-green-800">👁️ Ver Detalles</button>
               </div>
             </div>
-          </mat-expansion-panel>
-        </mat-accordion>
+          </div>
+        </div>
       </section>
-    </mat-card-content>
+    </div>
 
-
-    <mat-card-actions class="p-6 bg-green-50 flex flex-wrap justify-end gap-4 border-t border-green-100">
-      <button mat-raised-button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()"
-              class="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white">
-        <mat-icon class="mr-1">edit</mat-icon> Editar Plan
-      </button>
-
-      <button mat-raised-button *ngIf="isNutricionist && isEditing" (click)="saveChanges()"
-              class="bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-700 hover:to-teal-600 text-white">
-        <mat-icon class="mr-1">save</mat-icon> Guardar Cambios
-      </button>
-
-      <button mat-raised-button *ngIf="isNutricionist && isEditing" (click)="cancelEdit()"
-              class="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white">
-        <mat-icon class="mr-1">close</mat-icon> Cancelar
-      </button>
-    </mat-card-actions>
-  </mat-card>
+    <!-- Botones del plan -->
+<!--    <div class="flex justify-end gap-4 mt-6">
+      <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">✏️ Editar Plan</button>
+      <button *ngIf="isNutricionist && isEditing" (click)="saveChanges()" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">💾 Guardar Cambios</button>
+      <button *ngIf="isNutricionist && isEditing" (click)="cancelEdit()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">❌ Cancelar</button>
+    </div>-->
+  </div>
 </div>

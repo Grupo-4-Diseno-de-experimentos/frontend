@@ -32,9 +32,8 @@ export class MealPlanAssembler {
       max_bmi: response.max_bmi,
       min_age: response.min_age,
       max_age: response.max_age,
-      calories_per_day: response.calories_per_day,
-      nutricionist_id: response.nutricionist_id,
-      created_at: response.created_at,
+      calories_per_d: response.calories_per_d,
+      nutricionist_id: response.nutricionist_id
     };
   }
 }
@@ -70,17 +69,18 @@ export class RecipeAssembler {
 }
 
 export class MealPlanRecipeAssembler {
-  static toEntityFromResponseArray(responseArray: MealPlanRecipeResponse[]): MealPlanRecipe[] {
-    return responseArray.map((response) =>
-      this.toEntityFromResponse(response));
+  static toEntityFromResponseArray(data: MealPlanRecipeResponse[]): MealPlanRecipe[] {
+    const entities = data.map(d => this.toEntityFromResponse(d));
+    console.log('Entities parseadas:', entities); // <-- Agrega esto
+    return entities;
   }
   static toEntityFromResponse(response: MealPlanRecipeResponse): MealPlanRecipe {
     return new MealPlanRecipe(
-      response.id,
+      undefined,
       response.day,
-      response.meal_time,
-      response.recipe_id,
-      response.meal_plan_id
+      response.mealTime,
+      response.recipe.id,
+      response.mealPlan.id
     );
   }
 }

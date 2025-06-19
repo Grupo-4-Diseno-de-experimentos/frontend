@@ -2,33 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {Recipe} from '../../model/meal-plan.entity';
+import {MealPlan, Recipe} from '../../model/meal-plan.entity';
 import {UserService} from '../../../user/services/user.service';
 import {MealPlanService} from '../../services/meal-plan.service';
 import {MatIcon} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-plan',
   imports: [MatCardModule, ReactiveFormsModule, MatSelectModule, MatInputModule, NgForOf,
-    MatButton, MatFormFieldModule, MatIcon, MatExpansionModule, MatIconButton],
+    MatButton, MatFormFieldModule, MatIcon, MatExpansionModule, MatIconButton, NgIf, NgClass],
   templateUrl: './create-plan.component.html',
+  standalone: true,
   styleUrl: './create-plan.component.css'
 })
 export class CreatePlanComponent implements OnInit {
   mealPlanForm: FormGroup;
-  daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  day = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   mealTimes = ['Desayuno', 'Almuerzo', 'Cena'];
   allRecipes: Recipe[] = [];
   availableRecipes: any;
   meals: any;
   days:any;
 
-  constructor(private fb: FormBuilder,private userService: UserService, private mealPlanService: MealPlanService) {
+  constructor(private fb: FormBuilder,private userService: UserService, private mealPlanService: MealPlanService,private router: Router) {
     this.mealPlanForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -38,7 +40,7 @@ export class CreatePlanComponent implements OnInit {
       max_bmi: ['', [Validators.required, Validators.max(60)]],
       min_age: ['', [Validators.required, Validators.min(1)]],
       max_age: ['', [Validators.required, Validators.max(120)]],
-      calories_per_day: ['', Validators.required],
+      calories_per_d: ['', Validators.required],
       recipesByDay: this.fb.array([])
     });
 
@@ -49,6 +51,16 @@ export class CreatePlanComponent implements OnInit {
   ngOnInit(): void {
   this.fetchAllRecipes();
   }
+  expandedDayIndex: number | null = null;
+
+  toggleDaySection(index: number): void {
+    if (this.expandedDayIndex === index) {
+      this.expandedDayIndex = null;
+    } else {
+      this.expandedDayIndex = index;
+    }
+  }
+
 
   fetchAllRecipes() {
     this.mealPlanService.getAllRecipes().subscribe({
@@ -74,18 +86,11 @@ export class CreatePlanComponent implements OnInit {
   }
 
   initRecipePlanStructure() {
-    this.daysOfWeek.forEach(day => {
+    this.day.forEach(day => {
       this.recipesByDay.push(
         this.fb.group({
           day: [day],
-          meals: this.fb.array(
-            this.mealTimes.map(meal =>
-              this.fb.group({
-                meal_time: [meal],
-                recipe_id: [null]
-              })
-            )
-          )
+          meals: this.fb.array([])
         })
       );
     });
@@ -127,45 +132,23 @@ export class CreatePlanComponent implements OnInit {
     }
   }*/
 
-onSubmit() {
-  if (this.mealPlanForm.valid) {
-    const mealPlan: any = {
-      name: this.mealPlanForm.value.name,
-      category: this.mealPlanForm.value.category,
-      description: this.mealPlanForm.value.description,
-      goal: this.mealPlanForm.value.goal,
-      min_bmi: this.mealPlanForm.value.min_bmi,
-      max_bmi: this.mealPlanForm.value.max_bmi,
-      min_age: this.mealPlanForm.value.min_age,
-      max_age: this.mealPlanForm.value.max_age,
-      calories_per_day: this.mealPlanForm.value.calories_per_day,
-      nutricionist_id: this.userService.getUserId(),
-    };
-
-    this.mealPlanService.saveMealPlan(mealPlan).subscribe({
-      next: (savedMealPlan) => {
-        const mealPlanId = savedMealPlan.id;
-        const recipesByDay: any[] = [];
-
-        this.mealPlanForm.value.recipesByDay.forEach((day: any) => {
-          day.meals.forEach((meal: any) => {
-            recipesByDay.push({
-              day: day.day,
-              meal_time: meal.meal_time,
-              recipe_id: meal.recipe_id,
-              meal_plan_id: mealPlanId,
-            });
-          });
-        });
-
-        this.mealPlanService.saveRecipesByDay(recipesByDay)
-      },
-      error: (err) => {
-        console.error('Error al guardar el plan de comidas:', err);
-      },
-    });
-  } else {
-    this.mealPlanForm.markAllAsTouched();
+  onSubmit(): void {
+    if (this.mealPlanForm.valid) {
+      const mealPlan = this.mealPlanForm.value;
+      console.log('Request enviado al backend:', mealPlan);
+      this.mealPlanService.createMealPlan(mealPlan).subscribe({
+        next: (response) => {
+          console.log('Meal plan created successfully:', response);
+          alert('Meal plan created successfully!');
+          this.router.navigate(['/meal-plans']);
+        },
+        error: (error) => {
+          console.error('Error creating meal plan:', error);
+          alert('Error creating meal plan.');
+        }
+      });
+    } else {
+      this.mealPlanForm.markAllAsTouched();
+    }
   }
-}
 }

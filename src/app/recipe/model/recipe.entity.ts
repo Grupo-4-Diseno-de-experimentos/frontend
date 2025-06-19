@@ -6,7 +6,7 @@ export class Ingredient {
     public quantity: number,
     public calories: number,
     public carbs: number,
-    public proteins: number,
+    public protein: number,
     public fats: number,
     public category: string,
     public available: boolean
@@ -20,7 +20,9 @@ export class Recipe {
     public instructions: string,
     public calories: number,
     public nutricionist_id: number,
-    public id: number
+    public id: number,
+    public macros: Macros,
+    public ingredientsIds: Array<number>
   ) {}
 }
 // recipe-ingredient.entity.ts
@@ -36,7 +38,7 @@ export class RecipeIngredient {
 export class Macros {
   constructor(
     public carbs: number,
-    public proteins: number,
+    public protein: number,
     public fats: number,
     public recipe_id: number
   ) {}
@@ -45,7 +47,7 @@ export class Macros {
 export class FavoriteRecipe {
   constructor(
     public id: number,
-    public user_id: number,
-    public recipe_id: number
+    public userId: number,
+    public recipeId: number
   ) {}
 }

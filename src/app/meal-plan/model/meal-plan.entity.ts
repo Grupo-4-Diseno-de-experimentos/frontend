@@ -91,9 +91,8 @@ export class MealPlan {
     public max_bmi: number,
     public min_age: number,
     public max_age: number,
-    public calories_per_day: number,
-    public nutricionist_id: number,
-    public created_at: string
+    public calories_per_d: number,
+    public nutricionist_id: number
   ) {}
 
 /*  isValidForUser(bmi: number, age: number): boolean {
@@ -108,7 +107,7 @@ export class MealPlan {
 // meal-plan-recipe.entity.ts
 export class MealPlanRecipe {
   constructor(
-    public id: number,
+    public id: number | undefined,
     public day: string,
     public meal_time: string,
     public recipe_id: number,

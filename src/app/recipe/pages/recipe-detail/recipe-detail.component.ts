@@ -18,10 +18,11 @@ import {forkJoin} from 'rxjs';
 @Component({
   selector: 'app-recipe-detail',
   imports: [
-    MatCard, MatCardModule, MatButton, MatTable,  FormsModule,  MatInput,  NgIf,  MatCardActions,  MatCardContent,  MatFormFieldModule,  MatAutocompleteModule,
-    MatIconModule,  MatIconButton,  NgForOf,  MatColumnDef,  MatHeaderCell,  MatCell,  MatCellDef,  MatHeaderCellDef,  NgClass,  MatHeaderRow,  MatHeaderRowDef,
-    MatRow,  MatRowDef,  MatSelectModule,  MatTableModule ],
+    MatCard, MatCardModule, MatButton, MatTable, FormsModule, MatInput, NgIf, MatCardActions, MatCardContent, MatFormFieldModule, MatAutocompleteModule,
+    MatIconModule, MatIconButton, NgForOf, MatColumnDef, MatHeaderCell, MatCell, MatCellDef, MatHeaderCellDef, NgClass, MatHeaderRow, MatHeaderRowDef,
+    MatRow, MatRowDef, MatSelectModule, MatTableModule],
   templateUrl: './recipe-detail.component.html',
+  standalone: true,
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent implements OnInit {
@@ -49,35 +50,36 @@ export class RecipeDetailComponent implements OnInit {
   loadData(): void {
     forkJoin({
       recipe: this.recipeService.getRecipeById(this.recipeId),
-      recipeIngredients: this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId),
       allIngredients: this.recipeService.getAllIngredients(),
-      allMacros: this.recipeService.getAllMacros()
+      recipeIngredients: this.recipeService.getRecipeIngredientsByRecipeId(this.recipeId)
     }).subscribe({
-      next: ({ recipe, recipeIngredients, allIngredients, allMacros }) => {
+      next: ({ recipe, allIngredients, recipeIngredients }) => {
         this.recipe = recipe;
-        this.recipeIngredients = recipeIngredients;
         this.allIngredients = allIngredients;
+        this.recipeIngredients = recipeIngredients;
 
-        // id de ingredientes asociados a esta receta
-        this.ingredientsIdsByRecipesIngredient = recipeIngredients.map(ri => ri.ingredient_id.toString());
+        // Mapear los RecipeIngredient con su información de ingrediente
+        this.ingredientsByRecipeIngredientId = this.recipeIngredients.map(ri => {
+          const ingredient = allIngredients.find(i => i.id === ri.ingredient_id);
+          if (ingredient) {
+            return {
+              ...ingredient,
+              quantity: ri.quantity
+            };
+          }
+          return null;
+        }).filter(i => i !== null) as Ingredient[];
 
-        // solo los ingredientes usados en esta receta se guardan
-        this.ingredientsByRecipeIngredientId = this.allIngredients.filter(ingredient =>
-          this.ingredientsIdsByRecipesIngredient.includes(ingredient.id.toString())
+        // Macros
+        this.macros = recipe.macros;
 
-        );
-        console.log('Filtered ingredients:', this.ingredientsIdsByRecipesIngredient);
-
-        // filtro de macros
-        const macro = allMacros.find(m => m.recipe_id.toString() === this.recipeId);
-        if (macro) this.macros = macro;
-
-        // Filtrado inicial
+        // Inicializar búsqueda
         this.filteredIngredients = [...this.ingredientsByRecipeIngredientId];
-        console.log('Todos los datos cargados:', {
+
+        console.log('Datos cargados correctamente:', {
           recipe,
           recipeIngredients,
-          ingredientsByRecipe: this.ingredientsByRecipeIngredientId,
+          ingredients: this.ingredientsByRecipeIngredientId,
           macros: this.macros
         });
       },
@@ -138,20 +140,20 @@ export class RecipeDetailComponent implements OnInit {
           quantity: ingredient.quantity
         } as RecipeIngredient;
     });
+    // crear nuevos
+    const ingredientsToCreate = updatedIngredients.filter(ri => !ri.id);
+    if (ingredientsToCreate.length > 0) {
+      this.recipeService.saveRecipeIngredients(ingredientsToCreate).subscribe({
+        next: () => console.log('Ingredientes creados:', ingredientsToCreate),
+        error: (err) => console.error('Error al crear ingredientes:', err)
+      });
+    }
 
     // actualizar
     updatedIngredients.filter(ri => ri.id).forEach(ri => {
-      this.recipeService.updateRecipeIngredient(ri.id!.toString(), { recipeIngredient: ri }).subscribe({
+      this.recipeService.updateRecipeIngredient(ri.id!.toString(), ri).subscribe({
         next: () => console.log('Actualizado:', ri),
         error: (err) => console.error('Error actualizando:', err)
-      });
-    });
-
-    // crear nuevos
-    updatedIngredients.filter(ri => !ri.id).forEach(ri => {
-      this.recipeService.createRecipeIngredient(ri).subscribe({
-        next: () => console.log('Creado:', ri),
-        error: (err) => console.error('Error creando:', err)
       });
     });
 
