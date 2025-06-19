@@ -12,6 +12,7 @@ import { ProfileComponent } from './user-profile/pages/profile/profile.component
 import {DashboardComponent} from './public/components/dashboard/dashboard.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'start-objectives', component: StartObjectivesComponent },
