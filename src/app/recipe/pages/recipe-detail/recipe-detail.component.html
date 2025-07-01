@@ -1,11 +1,11 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-8 px-4">
+<div class="min-h-screen py-8 px-4">
   <div class="max-w-6xl mx-auto">
-    <div class="bg-white/80 backdrop-blur-sm shadow-2xl rounded-3xl overflow-hidden border border-white/20">
+    <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl rounded-3xl overflow-hidden border border-white/20 dark:border-gray-700">
 
-      <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-8">
+    <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 p-8">
         <div class="mb-6">
           <ng-container *ngIf="!editMode; else editTitle">
-            <h1 class="text-4xl font-black text-white mb-3 drop-shadow-lg">{{ recipe.title }}</h1>
+            <h1 class="text-4xl font-black text-white dark:text-white mb-3 drop-shadow-lg">{{ recipe.title }}</h1>
           </ng-container>
           <ng-template #editTitle>
             <input
@@ -33,7 +33,7 @@
       <div class="p-8">
 
         <div class="mb-10">
-          <h2 class="text-2xl font-bold text-slate-800 mb-4 pb-3 border-b-2 border-gradient-to-r from-blue-200 to-purple-200 flex items-center">
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-gray-100 border-b-2 border-blue-200 dark:border-blue-800 mb-4 pb-3 border-b-2 border-gradient-to-r from-blue-200 to-purple-200 flex items-center">
             <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
@@ -42,7 +42,7 @@
             Instrucciones
           </h2>
           <ng-container *ngIf="!editMode; else editInstr">
-            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-blue-100 shadow-inner">
               <p class="text-slate-700 whitespace-pre-line leading-relaxed font-medium">{{ recipe.instructions }}</p>
             </div>
           </ng-container>
@@ -59,7 +59,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
 
-          <div class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-3xl p-8 shadow-xl border border-orange-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-3xl p-8 shadow-xl border border-orange-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <h3 class="font-bold text-orange-800 mb-4 flex items-center text-lg">
               <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center mr-3 shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -69,7 +69,7 @@
               Calorías Totales
             </h3>
             <ng-container *ngIf="!editMode; else editCals">
-              <p class="text-4xl font-black text-orange-600 mb-1">{{ recipe.calories }}</p>
+              <p class="text-4xl font-black text-orange-600 dark:text-orange-300 mb-1">{{ recipe.calories }}</p>
               <p class="text-lg font-semibold text-orange-500">kilocalorías</p>
             </ng-container>
             <ng-template #editCals>
@@ -85,7 +85,7 @@
           </div>
 
 
-          <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 shadow-xl border border-emerald-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-3xl p-8 shadow-xl border border-emerald-100/50 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <h3 class="font-bold text-emerald-800 mb-4 flex items-center text-lg">
               <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mr-3 shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -108,7 +108,7 @@
                     <input
                       type="number"
                       [(ngModel)]="macros.carbs"
-                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                      class="w-full bg-white/95 dark:bg-gray-700 text-slate-800 dark:text-gray-100 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
                     />
                     <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
                   </div>
@@ -127,7 +127,7 @@
                     <input
                       type="number"
                       [(ngModel)]="macros.protein"
-                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                      class="w-full bg-white/95 dark:bg-gray-700 text-slate-800 dark:text-gray-100  backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
                     />
                     <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
                   </div>
@@ -146,7 +146,7 @@
                     <input
                       type="number"
                       [(ngModel)]="macros.fats"
-                      class="w-full bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
+                      class="w-full bg-white/90 dark:bg-gray-700 backdrop-blur-sm px-3 py-2 dark:text-gray-100 rounded-xl border border-emerald-200 shadow-sm focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 focus:outline-none transition-all duration-300 pr-6 text-center font-bold"
                     />
                     <span class="absolute right-2 top-2.5 text-emerald-400 text-sm font-medium">g</span>
                   </div>
@@ -158,7 +158,7 @@
 
 
         <div class="space-y-6">
-          <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-gray-100 border-b-2 border-blue-200 dark:border-blue-800 mb-4 flex items-center">
             <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
@@ -171,9 +171,9 @@
 
           <div *ngIf="editMode">
 
-            <mat-form-field  appearance="outline" class="w-full mb-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl border border-violet-100">
+            <mat-form-field  appearance="outline" class="w-full mb-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 rounded-2xl border border-violet-100">
               <label class="block text-sm font-bold text-slate-700 mb-3">Seleccionar ingrediente</label>
-              <mat-select [(value)]="selectedIngredient" (selectionChange)="onIngredientSelect($event)" class="w-full bg-white/90 backdrop-blur-sm border border-violet-200 rounded-2xl shadow-lg py-4 px-6 focus:outline-none focus:ring-4 focus:ring-violet-200 focus:border-violet-300 text-slate-700 font-medium transition-all duration-300">
+              <mat-select [(value)]="selectedIngredient" (selectionChange)="onIngredientSelect($event)" class="w-full bg-white/90 dark:bg-gray-800 text-slate-700 dark:text-gray-200 backdrop-blur-sm border border-violet-200 rounded-2xl shadow-lg py-4 px-6 focus:outline-none focus:ring-4 focus:ring-violet-200 focus:border-violet-300 text-slate-700 font-medium transition-all duration-300">
                 <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient">
                   {{ ingredient.name }} ({{ ingredient.calories }} kcal)
                 </mat-option>
@@ -209,9 +209,9 @@
           <div *ngIf="!editMode && ingredientsByRecipeIngredientId.length > 0;" class="overflow-hidden rounded-3xl shadow-2xl border border-slate-100">
             <div class="overflow-x-auto">
               <table class="min-w-full">
-                <thead class="bg-gradient-to-r from-slate-50 to-slate-100">
-                <tr>
-                  <th scope="col" class="px-8 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Nombre</th>
+                <thead class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-700">
+                <tr >
+                  <th scope="col" class="px-8 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider ">Nombre</th>
                   <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Cantidad</th>
                   <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Calorías</th>
                   <th scope="col" class="px-6 py-6 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Carbs</th>
@@ -225,7 +225,7 @@
                 <tr *ngFor="let element of ingredientsByRecipeIngredientId; let i = index"
                     class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
                     [ngClass]="{'bg-slate-50': i % 2 === 0, 'bg-white': i % 2 !== 0}">
-                  <td class="px-8 py-6 whitespace-nowrap">
+                  <td class="px-8 py-6 whitespace-nowrap dark:text-gray-200">
                     <span class="font-bold text-slate-800 text-lg">{{ element.name }}</span>
                   </td>
                   <td class="px-6 py-6 whitespace-nowrap">
@@ -265,11 +265,11 @@
       </div>
 
 
-      <div *ngIf="isNutricionist" class="bg-gradient-to-r from-slate-50 to-slate-100 p-8 flex justify-end gap-4">
+      <div *ngIf="isNutricionist" class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-gray-800 dark:to-gray-900 p-8 flex justify-end gap-4">
         <ng-container *ngIf="!editMode; else editingButtons">
           <button
             (click)="editMode = true"
-            class="flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+            class="flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-800 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

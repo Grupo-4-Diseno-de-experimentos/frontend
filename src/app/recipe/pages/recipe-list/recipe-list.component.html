@@ -1,7 +1,7 @@
 <section class="max-w-screen-xl mx-auto p-6">
-  <h2 class="text-3xl font-bold mb-8 text-center">Lista de Recetas</h2>
+  <h2 class="text-3xl text-center font-bold mb-8 dark:text-white">Lista de Recetas</h2>
   <div *ngIf="isNutricionist" class="mt-4">
-    <button (click)="goToCreateRecipe()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">➕ Añadir Receta</button>
+    <button (click)="goToCreateRecipe()" class="bg-green-600 text-white px-4 py-2 mb-4 rounded hover:bg-green-700">➕ Añadir Receta</button>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <app-recipe-item  *ngFor="let recipe of recipes" [recipe]="recipe" (recipeSelected)="onRecipeSelected($event)"></app-recipe-item>

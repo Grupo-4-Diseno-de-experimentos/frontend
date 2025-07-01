@@ -14,5 +14,16 @@ import {RouterLink} from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  toggleDarkMode(): void {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      localStorage['theme'] = 'light';
+    } else {
+      html.classList.add('dark');
+      localStorage['theme'] = 'dark';
+    }
+  }
+
 
 }

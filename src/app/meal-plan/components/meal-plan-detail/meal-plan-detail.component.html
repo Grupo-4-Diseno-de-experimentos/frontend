@@ -1,10 +1,10 @@
-<div class="p-6 max-w-4xl mx-auto bg-green-50 rounded-2xl shadow-lg">
-  <div class="bg-white rounded-xl shadow p-6">
-    <div class="mb-6 border-b pb-4 border-green-300">
-      <h2 class="text-2xl font-bold text-green-700">
+<div class="p-6 max-w-4xl mx-auto bg-green-50 dark:bg-gray-900 rounded-2xl shadow-lg transition-colors duration-300">
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+    <div class="mb-6 border-b pb-4 border-green-300 dark:border-gray-600">
+      <h2 class="text-2xl font-bold text-green-700 dark:text-green-300">
         🍽️ Detalles del Plan de Comidas
       </h2>
-      <p class="text-green-600">Visualiza o edita la información del plan nutricional</p>
+      <p class="text-green-600 dark:text-green-400">Visualiza o edita la información del plan nutricional</p>
     </div>
 
     <div>
@@ -12,19 +12,21 @@
       <section class="mb-8">
         <div class="flex items-center gap-2 mb-4">
           <span class="text-xl">ℹ️</span>
-          <h3 class="text-xl font-semibold text-green-700">Información del Plan</h3>
+          <h3 class="text-xl font-semibold text-green-700 dark:text-green-300">Información del Plan</h3>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex flex-col">
-            <label class="text-green-800 font-medium mb-1">Título del Plan</label>
-            <input type="text" [(ngModel)]="mealPlan.name" [readonly]="!isEditing" class="border border-green-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400" />
+            <label class="text-green-800 dark:text-green-200 font-medium mb-1">Título del Plan</label>
+            <input type="text" [(ngModel)]="mealPlan.name" [readonly]="!isEditing"
+                   class="border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400" />
           </div>
 
           <div class="flex flex-col">
-            <label class="text-green-800 font-medium mb-1">Descripción</label>
-            <textarea rows="3" [(ngModel)]="mealPlan.description" [readonly]="!isEditing" class="border border-green-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
-            <small *ngIf="isEditing" class="text-green-600 mt-1">Introduce una breve descripción del plan</small>
+            <label class="text-green-800 dark:text-green-200 font-medium mb-1">Descripción</label>
+            <textarea rows="3" [(ngModel)]="mealPlan.description" [readonly]="!isEditing"
+                      class="border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+            <small *ngIf="isEditing" class="text-green-600 dark:text-green-400 mt-1">Introduce una breve descripción del plan</small>
           </div>
         </div>
       </section>
@@ -33,78 +35,70 @@
       <section *ngIf="mealPlanRecipes.length > 0" class="mb-8">
         <div class="flex items-center gap-2 mb-4">
           <span class="text-xl">⏰</span>
-          <h3 class="text-xl font-semibold text-green-700">Recetas Programadas</h3>
+          <h3 class="text-xl font-semibold text-green-700 dark:text-green-300">Recetas Programadas</h3>
         </div>
 
         <div class="grid gap-4">
-          <div class="bg-green-100 p-4 rounded shadow" *ngFor="let recipe of mealPlanRecipes; let i = index">
+          <div class="bg-green-100 dark:bg-gray-700 p-4 rounded shadow" *ngFor="let recipe of mealPlanRecipes; let i = index">
             <div class="flex justify-between items-start mb-2">
               <div class="flex gap-2 items-center">
-                <span class="text-green-600">📅</span>
+                <span class="text-green-600 dark:text-green-300">📅</span>
                 <div>
-                  <input type="text" [(ngModel)]="recipe.day" [readonly]="!isEditing" placeholder="Día (ej: Lunes)" class="mb-1 block w-full border border-green-300 rounded p-1 focus:outline-none focus:ring-green-400" />
-                  <input type="text" [(ngModel)]="mealPlanRecipes[i].meal_time" [readonly]="!isEditing" placeholder="Hora de comida (ej: Almuerzo)" class="block w-full border border-green-300 rounded p-1 focus:outline-none focus:ring-green-400" />
+                  <input type="text" [(ngModel)]="recipe.day" [readonly]="!isEditing"
+                         placeholder="Día (ej: Lunes)"
+                         class="mb-1 block w-full border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-1 rounded focus:outline-none focus:ring-green-400" />
+                  <input type="text" [(ngModel)]="mealPlanRecipes[i].meal_time" [readonly]="!isEditing"
+                         placeholder="Hora de comida (ej: Almuerzo)"
+                         class="block w-full border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-1 rounded focus:outline-none focus:ring-green-400" />
 
                   <div *ngIf="isEditing" class="mt-2">
-                    <label class="text-green-800 text-sm">Seleccionar Receta</label>
-                    <select [(ngModel)]="mealPlanRecipes[i].recipe_id" class="w-full border border-green-300 rounded p-1">
+                    <label class="text-green-800 dark:text-green-200 text-sm">Seleccionar Receta</label>
+                    <select [(ngModel)]="mealPlanRecipes[i].recipe_id"
+                            class="w-full border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-1 rounded">
                       <option *ngFor="let recipe of AllRecipes" [value]="recipe.id">
                         {{ recipe.title }}
                       </option>
                     </select>
                   </div>
 
-                  <h4 *ngIf="!isEditing" class="text-green-800 font-medium mt-1">
+                  <h4 *ngIf="!isEditing" class="text-green-800 dark:text-green-200 font-medium mt-1">
                     {{ recipesbyPlanId[i]?.title }}
                   </h4>
                 </div>
               </div>
-
-<!--              <div class="flex flex-col gap-2">
-                <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="text-green-600 hover:text-green-800">✏️</button>
-                <button *ngIf="isNutricionist && isEditing" (click)="deleteMealPlanRecipe(recipe)" class="text-red-600 hover:text-red-800">🗑️</button>
-              </div>-->
             </div>
           </div>
         </div>
-
-<!--        <div *ngIf="isNutricionist && !isEditing" class="mt-4">
-          <button (click)="goToCreateRecipe()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">➕ Añadir Receta</button>
-        </div>-->
       </section>
 
       <!-- Recetas disponibles -->
       <section *ngIf="AllRecipes.length > 0" class="mb-8">
         <div class="flex items-center gap-2 mb-4">
           <span class="text-xl">📖</span>
-          <h3 class="text-xl font-semibold text-green-700">Recetas Disponibles</h3>
+          <h3 class="text-xl font-semibold text-green-700 dark:text-green-300">Recetas Disponibles</h3>
         </div>
 
-        <div class="divide-y divide-green-200">
+        <div class="divide-y divide-green-200 dark:divide-gray-600">
           <div *ngFor="let recipe of recipesbyPlanId" class="py-4">
             <div class="flex justify-between items-center cursor-pointer">
-              <span class="text-green-800 font-medium">{{ recipe.title }}</span>
-              <span class="text-sm text-green-500">🍴 Ver detalles</span>
+              <span class="text-green-800 dark:text-green-200 font-medium">{{ recipe.title }}</span>
+              <span class="text-sm text-green-500 dark:text-green-400">🍴 Ver detalles</span>
             </div>
             <div class="mt-2">
-              <p class="text-green-700">{{ recipe.description }}</p>
-              <div class="text-sm text-green-600 mt-1">
+              <p class="text-green-700 dark:text-green-300">{{ recipe.description }}</p>
+              <div class="text-sm text-green-600 dark:text-green-400 mt-1">
                 🔥 {{ recipe.calories }} kcal
               </div>
               <div class="mt-2">
-                <button (click)="goToRecipeDetail(recipe.id)" class="text-green-600 underline hover:text-green-800">👁️ Ver Detalles</button>
+                <button (click)="goToRecipeDetail(recipe.id)"
+                        class="text-green-600 dark:text-green-300 underline hover:text-green-800 dark:hover:text-green-100">
+                  👁️ Ver Detalles
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
     </div>
-
-    <!-- Botones del plan -->
-<!--    <div class="flex justify-end gap-4 mt-6">
-      <button *ngIf="isNutricionist && !isEditing" (click)="enableEdit()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">✏️ Editar Plan</button>
-      <button *ngIf="isNutricionist && isEditing" (click)="saveChanges()" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">💾 Guardar Cambios</button>
-      <button *ngIf="isNutricionist && isEditing" (click)="cancelEdit()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">❌ Cancelar</button>
-    </div>-->
   </div>
 </div>

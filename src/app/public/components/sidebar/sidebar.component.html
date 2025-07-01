@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<!--<aside class="sidebar">
   <nav class="sidebar-nav">
     <a routerLink="/dashboard" class="nav-item">
       <mat-icon class="nav-icon">dashboard</mat-icon>
@@ -21,4 +21,34 @@
       <span class="nav-text">Perfil</span>
     </a>
   </nav>
+</aside>-->
+
+<aside class="sidebar w-60 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 shadow transition-colors duration-300">
+  <nav class="space-y-2 p-4">
+    <a routerLink="/dashboard" class="flex items-center gap-2 p-3 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      <mat-icon class="text-xl text-gray-500 dark:text-gray-300">dashboard</mat-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <a routerLink="/meal_plan" class="flex items-center gap-2 p-3 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      <mat-icon class="text-xl text-gray-500 dark:text-gray-300">restaurant_menu</mat-icon>
+      <span class="font-medium">Plan de Comidas</span>
+    </a>
+
+    <a routerLink="/recipe/recipe-list" class="flex items-center gap-2 p-3 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      <mat-icon class="text-xl text-gray-500 dark:text-gray-300">book</mat-icon>
+      <span class="font-medium">Recetas</span>
+    </a>
+
+    <a routerLink="/recipe/favorite-recipe" class="flex items-center gap-2 p-3 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      <mat-icon class="text-xl text-gray-500 dark:text-gray-300">favorite</mat-icon>
+      <span class="font-medium">Favoritos</span>
+    </a>
+
+    <a routerLink="/profile" class="flex items-center gap-2 p-3 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      <mat-icon class="text-xl text-gray-500 dark:text-gray-300">person</mat-icon>
+      <span class="font-medium">Perfil</span>
+    </a>
+  </nav>
 </aside>
+
