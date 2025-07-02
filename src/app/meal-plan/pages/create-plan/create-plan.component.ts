@@ -12,6 +12,7 @@ import {MealPlanService} from '../../services/meal-plan.service';
 import {MatIcon} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-create-plan',
@@ -30,7 +31,7 @@ export class CreatePlanComponent implements OnInit {
   meals: any;
   days:any;
 
-  constructor(private fb: FormBuilder,private userService: UserService, private mealPlanService: MealPlanService,private router: Router) {
+  constructor(private fb: FormBuilder,private userService: UserService, private mealPlanService: MealPlanService,private router: Router, private notificationService: NotificationService) {
     this.mealPlanForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -139,7 +140,7 @@ export class CreatePlanComponent implements OnInit {
       this.mealPlanService.createMealPlan(mealPlan).subscribe({
         next: (response) => {
           console.log('Meal plan created successfully:', response);
-          alert('Meal plan created successfully!');
+          this.notificationService.add('Plan de comida creado correctamente.');
           this.router.navigate(['/meal-plans']);
         },
         error: (error) => {

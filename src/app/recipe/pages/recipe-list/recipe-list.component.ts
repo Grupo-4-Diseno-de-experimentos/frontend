@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {UserService} from "../../../user-profile/services/user.service";
 import {Recipe} from '../../model/recipe.entity';
 import {RecipeItemComponent} from '../../components/recipe-item/recipe-item.component';
+import {NotificationService} from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,7 +20,7 @@ import {RecipeItemComponent} from '../../components/recipe-item/recipe-item.comp
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   userId!: string;
-  constructor(private recipeService: RecipeService, private userService: UserService, private router: Router) {
+  constructor(private recipeService: RecipeService, private userService: UserService, private router: Router, private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class RecipeListComponent implements OnInit {
     this.recipeService.saveFavoriteRecipe(favoriteRecipe).subscribe({
         next: (response) => {
           console.log('Recipe saved as favorite:', response);
+          this.notificationService.add('Receta guardada como favorita.');
         },
         error: (err) => {
           console.error('Error saving recipe as favorite:', err);

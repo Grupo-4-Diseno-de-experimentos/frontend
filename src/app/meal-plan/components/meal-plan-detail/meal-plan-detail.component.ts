@@ -12,6 +12,7 @@ import {MatFormField, MatInput, MatLabel, MatInputModule} from '@angular/materia
 import {  MatAccordion,  MatExpansionPanel,  MatExpansionPanelDescription,  MatExpansionPanelTitle,  MatExpansionModule} from '@angular/material/expansion';
 import {MatIcon} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {NotificationService} from '../../../shared/services/notification.service';
 @Component({
   selector: 'app-meal-plan-detail',
   imports: [

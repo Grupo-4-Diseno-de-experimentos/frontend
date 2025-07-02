@@ -10,6 +10,7 @@ import {Ingredient} from '../../model/recipe.entity';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {RecipeService} from '../../services/recipe.service';
 import {UserService} from '../../../user/services/user.service';
+import {NotificationService} from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-recipe-create',
@@ -26,7 +27,7 @@ export class RecipeCreateComponent implements OnInit{
   allIngredients: Ingredient[] = [];
   filteredIngredients: Ingredient[] = [];
 
-  constructor(private fb: FormBuilder, private recipeService: RecipeService, private userService: UserService) {
+  constructor(private fb: FormBuilder, private recipeService: RecipeService, private userService: UserService, private notificationService: NotificationService) {
     this.recipeForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -133,8 +134,12 @@ export class RecipeCreateComponent implements OnInit{
             quantity: ingredient.quantity
           }));
           console.log('RecipeIngredients sent to backend:', recipeIngredients);
+
           this.recipeService.saveRecipeIngredients(recipeIngredients).subscribe({
-            next: () => console.log('Ingredientes guardados correctamente'),
+            next: () => {
+              console.log('Ingredientes guardados correctamente');
+              this.notificationService.add('Receta creada correctamente.');
+            },
             error: err => console.error('Error al guardar ingredientes:', err)
           });
         },

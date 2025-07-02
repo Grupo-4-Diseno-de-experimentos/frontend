@@ -14,6 +14,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {forkJoin} from 'rxjs';
+import {NotificationService} from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -41,7 +42,7 @@ export class RecipeDetailComponent implements OnInit {
   selectedIngredient: Ingredient | null = null;
   macros!: Macros;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService, private notificationService: NotificationService,) {}
   ngOnInit() {
     this.recipeId = this.route.snapshot.paramMap.get('id')!;
     this.loadData();
@@ -162,6 +163,7 @@ export class RecipeDetailComponent implements OnInit {
       recipe: this.recipe
     }).subscribe({
       next: () => {
+        this.notificationService.add('Receta guardada correctamente.');
         console.log('Recipe actualizada con éxito');
         alert('¡Recipe actualizada exitosamente!');
       },
