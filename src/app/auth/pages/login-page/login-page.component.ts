@@ -25,13 +25,16 @@ export class LoginPageComponent {
     this.authService.login(formData).subscribe({
       next: (response: any) => {
         console.log('Login exitoso: ', response);
+
         if (formData.affiliateCode) {
           console.log('Código de afiliado:', formData.affiliateCode);
-
-          this.router.navigate(['/']);
+          this.router.navigate(['/meal_plan']).then(() => {
+            console.log('Navegación exitosa');
+          });
         } else {
-
-          this.router.navigate(['/']);
+          this.router.navigate(['/meal_plan']).then(() => {
+            console.log('Navegación exitosa');
+          });
         }
       },
       error: (err) => {
