@@ -25,4 +25,8 @@ export class CustomerService {
   createCustomer(userId: number, customerData: CustomerRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/customer/${userId}`, customerData);
   }
+
+  getCustomer(userId: number): Observable<CustomerRequest> {
+    return this.http.get<CustomerRequest>(`${this.baseUrl}/customer/1`);
+  }
 }

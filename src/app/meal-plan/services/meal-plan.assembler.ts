@@ -75,12 +75,13 @@ export class MealPlanRecipeAssembler {
     return entities;
   }
   static toEntityFromResponse(response: MealPlanRecipeResponse): MealPlanRecipe {
+    console.log('⚠️ response recibido en assembler:', response);
     return new MealPlanRecipe(
       undefined,
       response.day,
       response.mealTime,
-      response.recipe.id,
-      response.mealPlan.id
+      response.recipe?.id,
+      response.mealPlan ? response.mealPlan.id : undefined
     );
   }
 }

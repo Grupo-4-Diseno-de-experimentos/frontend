@@ -95,11 +95,18 @@ export class MealPlanDetailComponent implements OnInit{
     this.mealPlanService.getMealPlanRecipesByplanId(this.planId).subscribe({
       next: (plans) => {
         console.log('Meal plan recipes:', plans);
-        console.log('mealPlanRecipes:', this.mealPlanRecipes);
         this.mealPlanRecipes = plans;
-        //adquiero todos los ids de las recetas que solo estan en los planes
-        plans.forEach(plan => this.recipesIdsByMealPlanRecipes.push(plan.recipe_id))
-        //una vez que tengo los ids de las recetas que solo estan en los planes, llamo a la funcion que me trae las recetas por id
+
+        this.recipesIdsByMealPlanRecipes = []; // asegurarse de reiniciar el array
+
+        // Adquiero todos los ids de las recetas que están en los planes
+        plans.forEach(plan => {
+          if (plan.recipe_id && plan.recipe_id) {
+            this.recipesIdsByMealPlanRecipes.push(plan.recipe_id);
+          }
+        });
+
+        // Una vez que tengo los ids de las recetas, llamo a la función que trae las recetas por id
         this.fetchRecipeByPlanId();
       },
       error: (err) => {

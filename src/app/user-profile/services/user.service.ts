@@ -8,14 +8,13 @@ import { Customer, User } from '../../meal-plan/model/meal-plan.entity';
 export interface UserData {
   id?: number;
   _id?: number;
-  nombre?: string;
+  name?: string;
   email?: string;
   sexo?: string;
   edad?: number;
   altura?: number;
   peso?: number;
   role?: string;
-  name?: string;
   lastname?: string;
 }
 
@@ -58,7 +57,7 @@ export class UserService {
     return this.http.get<UserData>(`${this.baseUrl}/${userId}`).pipe(
       switchMap((user) =>
         // Luego llamamos a /customer/{id} y combinamos
-        this.http.get<any>(`${environment.apiUrl}/customer/${userId}`).pipe(
+        this.http.get<any>(`${environment.apiUrl}/customer/1`).pipe(
           map((customer) => ({
             id: user.id,
             email: user.email,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserData, UserService} from '../../services/user.service';
+import { UserData, UserService } from '../../services/user.service';
 import { ObjectiveService } from '../../services/objective.service';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {CustomerService} from '../../services/customer.service';
 
 interface UserObjectives {
   objetivoPrincipal?: string;
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private objectiveService: ObjectiveService
+    private objectiveService: ObjectiveService,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.userData = data;
         this.editedUserData = { ...data };
+
+        if (this.userData && this.userData.id) {
+          this.loadCustomerObjectives(this.userData.id);
+        }
       },
       (error) => {
         console.error('Error al cargar la información del usuario', error);
@@ -52,36 +58,41 @@ export class ProfileComponent implements OnInit {
   loadUserObjectives(): void {
     this.objectiveService.getUserObjectives().subscribe(
       (data) => {
+        console.log('🎯 Datos RAW desde backend:', data);
+        this.userObjectives = this.normalizeObjectives(data);
+        console.log('🎯 userObjectives normalizado:', this.userObjectives);
+      },
+      (error) => {
+        console.error('Error al cargar los objetivos', error);
+      }
+    );
+  }
+  loadCustomerObjectives(userId: number): void {
+    this.customerService.getCustomer(userId).subscribe(
+      (data) => {
+        console.log('🎯 Datos desde backend (customer):', data);
         this.userObjectives = this.normalizeObjectives(data);
       },
       (error) => {
-        console.error('Error al cargar los objetivos del usuario', error);
+        console.error('Error al cargar los objetivos del cliente', error);
       }
     );
   }
 
-  normalizeObjectives(objectives: UserObjectives): UserObjectives {
+  normalizeObjectives(raw: any): UserObjectives {
     const normalized: UserObjectives = {};
 
-    if (objectives.objetivoPrincipal) {
-      normalized.objetivoPrincipal = objectives.objetivoPrincipal
-        .toLowerCase()
-        .replace(/_/g, '-');
+    if (raw.goal) {
+      normalized.objetivoPrincipal = raw.goal.toLowerCase();
     }
-    if (objectives.metodoPreferido) {
-      normalized.metodoPreferido = objectives.metodoPreferido
-        .toLowerCase()
-        .replace(/_/g, '-');
+    if (raw.method) {
+      normalized.metodoPreferido = raw.method.toLowerCase();
     }
-    if (objectives.nivelActividad) {
-      normalized.nivelActividad = objectives.nivelActividad
-        .toLowerCase()
-        .replace(/_/g, '-');
+    if (raw.activityLevel) {
+      normalized.nivelActividad = raw.activityLevel.toLowerCase();
     }
-    if (objectives.dietaPreferida) {
-      normalized.dietaPreferida = objectives.dietaPreferida
-        .toLowerCase()
-        .replace(/_/g, '-');
+    if (raw.dietType) {
+      normalized.dietaPreferida = raw.dietType.toLowerCase();
     }
 
     return normalized;
@@ -141,20 +152,20 @@ export class ProfileComponent implements OnInit {
     switch (key) {
       case 'objetivoPrincipal':
         switch (value) {
-          case 'perder-grasa':
+          case 'perder_grasa':
             return 'Perder Grasa';
-          case 'ganar-musculo':
+          case 'ganar_musculo':
             return 'Ganar Músculo';
-          case 'mantener-peso':
+          case 'mantener_peso':
             return 'Mantener Peso';
           default:
             return value;
         }
       case 'metodoPreferido':
         switch (value) {
-          case 'plan-nutricional':
+          case 'plan_nutricional':
             return 'Necesito un plan nutricional';
-          case 'contar-calorias':
+          case 'contar_calorias':
             return 'Necesito contar mis calorías';
           default:
             return value;
@@ -163,13 +174,13 @@ export class ProfileComponent implements OnInit {
         switch (value) {
           case 'sedentario':
             return 'Sedentario';
-          case 'ligeramente-activo':
+          case 'ligeramente_activo':
             return 'Ligeramente Activo';
-          case 'moderadamente-activo':
+          case 'moderadamente_activo':
             return 'Moderadamente Activo';
-          case 'muy-activo':
+          case 'muy_activo':
             return 'Muy Activo';
-          case 'atleta-profesional':
+          case 'atleta_profesional':
             return 'Atleta Profesional';
           default:
             return value;
@@ -178,13 +189,13 @@ export class ProfileComponent implements OnInit {
         switch (value) {
           case 'recomendada':
             return 'Recomendada';
-          case 'alta-proteinas':
+          case 'alta_proteinas':
             return 'Alta en Proteínas';
-          case 'baja-carbohidratos':
+          case 'baja_carbohidratos':
             return 'Baja en Carbohidratos';
           case 'keto':
             return 'Keto';
-          case 'baja-grasas':
+          case 'baja_grasas':
             return 'Baja en Grasas';
           default:
             return value;
