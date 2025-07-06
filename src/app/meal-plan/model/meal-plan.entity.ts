@@ -110,8 +110,8 @@ export class MealPlanRecipe {
     public id: number | undefined,
     public day: string,
     public meal_time: string,
-    public recipe_id: number,
-    public meal_plan_id: number
+    public recipe_id: number | undefined,
+    public meal_plan_id: number | undefined
   ) {}
 
   isBreakfast(): boolean {
