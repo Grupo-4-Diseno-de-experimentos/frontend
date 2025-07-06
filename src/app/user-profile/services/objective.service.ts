@@ -15,8 +15,6 @@ interface UserObjectives {
 })
 export class ObjectiveService {
 
-  private apiUrl = 'TU_URL_DEL_BACKEND/api/objectives'; // Reemplaza con la URL de tu backend
-
   userObjectives: UserObjectives = {
     objetivoPrincipal: '',
     metodoPreferido: '',

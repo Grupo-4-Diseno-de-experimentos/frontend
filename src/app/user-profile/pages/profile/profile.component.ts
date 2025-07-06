@@ -1,19 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import {UserData, UserService} from '../../services/user.service';
 import { ObjectiveService } from '../../services/objective.service';
 import { NgIf } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms'; // Importa FormsModule
-
-
-interface UserData {
-  nombre?: string;
-  email?: string;
-  sexo?: string;
-  edad?: number;
-  altura?: number;
-  peso?: number;
-}
+import { FormsModule } from '@angular/forms';
 
 interface UserObjectives {
   objetivoPrincipal?: string;
@@ -33,12 +23,14 @@ export class ProfileComponent implements OnInit {
   userObjectives: UserObjectives | null = null;
   isEditingProfile: boolean = false;
   editedUserData: UserData = {};
+  isEditingObjectives: boolean = false;
+  editedObjectives: UserObjectives = {};
 
   constructor(
     private router: Router,
     private userService: UserService,
     private objectiveService: ObjectiveService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -46,7 +38,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadUserData(): void {
-    this.userService.getCurrentUser().subscribe(
+    this.userService.getFullUserData().subscribe(
       (data) => {
         this.userData = data;
         this.editedUserData = { ...data };
@@ -60,12 +52,39 @@ export class ProfileComponent implements OnInit {
   loadUserObjectives(): void {
     this.objectiveService.getUserObjectives().subscribe(
       (data) => {
-        this.userObjectives = data;
+        this.userObjectives = this.normalizeObjectives(data);
       },
       (error) => {
         console.error('Error al cargar los objetivos del usuario', error);
       }
     );
+  }
+
+  normalizeObjectives(objectives: UserObjectives): UserObjectives {
+    const normalized: UserObjectives = {};
+
+    if (objectives.objetivoPrincipal) {
+      normalized.objetivoPrincipal = objectives.objetivoPrincipal
+        .toLowerCase()
+        .replace(/_/g, '-');
+    }
+    if (objectives.metodoPreferido) {
+      normalized.metodoPreferido = objectives.metodoPreferido
+        .toLowerCase()
+        .replace(/_/g, '-');
+    }
+    if (objectives.nivelActividad) {
+      normalized.nivelActividad = objectives.nivelActividad
+        .toLowerCase()
+        .replace(/_/g, '-');
+    }
+    if (objectives.dietaPreferida) {
+      normalized.dietaPreferida = objectives.dietaPreferida
+        .toLowerCase()
+        .replace(/_/g, '-');
+    }
+
+    return normalized;
   }
 
   openEditProfileModal(): void {
@@ -80,25 +99,15 @@ export class ProfileComponent implements OnInit {
   saveProfileChanges(): void {
     this.userService.updateUserProfile(this.editedUserData).subscribe(
       () => {
-        console.log('Perfil actualizado con éxito');
+        console.log('Perfil actualizado');
         this.loadUserData();
         this.closeEditProfileModal();
       },
       (error) => {
-        console.error('Error al actualizar el perfil', error);
-
+        console.error('Error al actualizar perfil', error);
       }
     );
   }
-
-  navigateToStartObjectives(): void {
-    this.router.navigate(['/start-objectives']);
-  }
-
-
-
-  isEditingObjectives: boolean = false;
-  editedObjectives: UserObjectives = {};
 
   openEditObjectivesModal(): void {
     this.isEditingObjectives = true;
@@ -196,4 +205,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  navigateToStartObjectives(): void {
+    this.router.navigate(['/start-objectives']);
+  }
 }

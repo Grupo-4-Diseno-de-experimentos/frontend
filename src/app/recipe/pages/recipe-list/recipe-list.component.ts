@@ -36,7 +36,7 @@ export class RecipeListComponent implements OnInit {
     this.router.navigate(['/recipe/recipedetail', id]);
     }
   get isNutricionist() {
-    return this.userService.isNutricionist();
+    return this.userService.isNutritionist();
   }
   goToCreateRecipe(){
     this.router.navigate(['/recipe/create-recipe']);

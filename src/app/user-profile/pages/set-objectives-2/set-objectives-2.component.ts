@@ -8,20 +8,34 @@ import { ObjectiveService } from '../../services/objective.service'; // Importa 
   imports: [
     RouterLink
   ],
+  standalone: true,
   styleUrls: ['./set-objectives-2.component.css']
 })
 export class SetObjectives2Component {
-  constructor(private router: Router, private objectiveService: ObjectiveService) {} // Inyecta el servicio
+  constructor(private router: Router, private objectiveService: ObjectiveService) {}
 
   selectMethod(method: string) {
-    console.log('Método seleccionado:', method);
-    this.objectiveService.setPreferredMethod(method).subscribe( // Llama al método del servicio
+    let backendMethod = '';
+    switch (method) {
+      case 'plan-nutricional':
+        backendMethod = 'PLAN_NUTRICIONAL';
+        break;
+      case 'contar-calorias':
+        backendMethod = 'CONTAR_CALORIAS';
+        break;
+      default:
+        backendMethod = 'PLAN_NUTRICIONAL';
+    }
+
+    console.log('Método seleccionado (backend):', backendMethod);
+
+    // Guardar en memoria usando ObjectiveService
+    this.objectiveService.setPreferredMethod(backendMethod).subscribe(
       () => {
         this.router.navigate(['/set-objectives-3']);
       },
       (error) => {
         console.error('Error al guardar el método preferido', error);
-        // Manejar el error
       }
     );
   }

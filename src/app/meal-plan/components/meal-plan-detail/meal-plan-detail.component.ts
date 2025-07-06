@@ -37,7 +37,7 @@ export class MealPlanDetailComponent implements OnInit{
   private router: Router) {}
 
   get isNutricionist() {
-    return this.userService.isNutricionist();
+    return this.userService.isNutritionist();
   }
 
   goToRecipeDetail(id: number): void {

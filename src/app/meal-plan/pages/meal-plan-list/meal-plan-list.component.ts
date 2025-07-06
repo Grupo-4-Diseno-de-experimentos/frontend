@@ -42,7 +42,7 @@ export class MealPlanListComponent implements OnInit {
     })
   }
   get isNutricionist() {
-    return this.userService.isNutricionist();
+    return this.userService.isNutritionist();
   }
   goToCreateMealPlan(): void {
     this.router.navigate(['/meal_plan/create-plan']);
