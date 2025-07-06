@@ -90,7 +90,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   get isNutricionist() {
-    return this.userService.isNutricionist();
+    return this.userService.isNutritionist();
   }
   removeIngredient(index: number): void {
     this.ingredientsByRecipeIngredientId.splice(index, 1);

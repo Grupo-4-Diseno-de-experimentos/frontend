@@ -6,7 +6,7 @@
     <br>
     <div class="info-item">
       <label>Nombre:</label>
-      <span>{{ userData.nombre || 'No especificado' }}</span>
+      <span>{{ userData.name || 'No especificado' }}</span>
     </div>
     <div class="info-item">
       <label>Email:</label>
@@ -41,10 +41,9 @@
 
     <div class="objective-detail-card">
       <div class="objective-icon">
-        <img src="https://i.postimg.cc/hvXTCKqK/image.png" alt="Icono Perder Grasa" *ngIf="userObjectives?.objetivoPrincipal === 'perder-grasa'">
-
-        <img src="https://i.postimg.cc/FsKB4ShK/image.png " alt= "Icono Ganar Músculo" *ngIf="userObjectives?.objetivoPrincipal === 'ganar-musculo'">
-        <svg viewBox="0 0 24 24" fill="currentColor" *ngIf="userObjectives?.objetivoPrincipal === 'mantener-peso'">
+        <img src="https://i.postimg.cc/hvXTCKqK/image.png" alt="Icono Perder Grasa" *ngIf="userObjectives?.objetivoPrincipal === 'perder_grasa'">
+        <img src="https://i.postimg.cc/FsKB4ShK/image.png" alt="Icono Ganar Músculo" *ngIf="userObjectives?.objetivoPrincipal === 'ganar_musculo'">
+        <svg viewBox="0 0 24 24" fill="currentColor" *ngIf="userObjectives?.objetivoPrincipal === 'mantener_peso'">
           <path fill-rule="evenodd" d="M3 12a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
         </svg>
       </div>
@@ -56,8 +55,8 @@
 
     <div class="objective-detail-card">
       <div class="objective-icon">
-        <img src="https://i.postimg.cc/gkY9HpkC/image.png" alt="Icono Plan Nutricional" *ngIf="userObjectives?.metodoPreferido === 'plan-nutricional'">
-        <img src="https://i.postimg.cc/HnqyHnNL/image.png" alt="Icono Contar Calorías" *ngIf="userObjectives?.metodoPreferido === 'contar-calorias'">
+        <img src="https://i.postimg.cc/gkY9HpkC/image.png" alt="Icono Plan Nutricional" *ngIf="userObjectives?.metodoPreferido === 'plan_nutricional'">
+        <img src="https://i.postimg.cc/HnqyHnNL/image.png" alt="Icono Contar Calorías" *ngIf="userObjectives?.metodoPreferido === 'contar_calorias'">
       </div>
       <div class="objective-text">
         <h3>Método Preferido</h3>
@@ -68,10 +67,10 @@
     <div class="objective-detail-card">
       <div class="objective-icon">
         <img src="https://i.postimg.cc/6qcSTMg7/image.png" alt="Icono Sedentario" *ngIf="userObjectives?.nivelActividad === 'sedentario'">
-        <img src="https://i.postimg.cc/C5cPwznk/image.png" alt="Icono Ligeramente Activo" *ngIf="userObjectives?.nivelActividad === 'ligeramente-activo'">
-        <img src="https://i.postimg.cc/gjjyq4rL/image.png" alt="Icono Moderadamente Activo" *ngIf="userObjectives?.nivelActividad === 'moderadamente-activo'">
-        <img src="https://i.postimg.cc/9MMwv02v/image.png" alt="Icono Muy Activo" *ngIf="userObjectives?.nivelActividad === 'muy-activo'">
-        <img src="https://i.postimg.cc/Kjhk4NBy/image.png" alt="Icono Atleta Profesional" *ngIf="userObjectives?.nivelActividad === 'atleta-profesional'">
+        <img src="https://i.postimg.cc/C5cPwznk/image.png" alt="Icono Ligeramente Activo" *ngIf="userObjectives?.nivelActividad === 'ligeramente_activo'">
+        <img src="https://i.postimg.cc/gjjyq4rL/image.png" alt="Icono Moderadamente Activo" *ngIf="userObjectives?.nivelActividad === 'moderadamente_activo'">
+        <img src="https://i.postimg.cc/9MMwv02v/image.png" alt="Icono Muy Activo" *ngIf="userObjectives?.nivelActividad === 'muy_activo'">
+        <img src="https://i.postimg.cc/Kjhk4NBy/image.png" alt="Icono Atleta Profesional" *ngIf="userObjectives?.nivelActividad === 'atleta_profesional'">
       </div>
       <div class="objective-text">
         <h3>Nivel de Actividad Física</h3>
@@ -82,10 +81,10 @@
     <div class="objective-detail-card">
       <div class="objective-icon">
         <img src="https://i.postimg.cc/k58tCzRy/image.png" alt="Icono Recomendada" *ngIf="userObjectives?.dietaPreferida === 'recomendada'">
-        <img src="https://i.postimg.cc/1zPygjYB/image.png" alt="Icono Alta en Proteínas" *ngIf="userObjectives?.dietaPreferida === 'alta-proteinas'">
-        <img src="https://i.postimg.cc/Fs5F5zgw/image.png" alt="Icono Baja en Carbohidratos" *ngIf="userObjectives?.dietaPreferida === 'baja-carbohidratos'">
+        <img src="https://i.postimg.cc/1zPygjYB/image.png" alt="Icono Alta en Proteínas" *ngIf="userObjectives?.dietaPreferida === 'alta_proteinas'">
+        <img src="https://i.postimg.cc/Fs5F5zgw/image.png" alt="Icono Baja en Carbohidratos" *ngIf="userObjectives?.dietaPreferida === 'baja_carbohidratos'">
         <img src="https://i.postimg.cc/ZY3ZcZtH/image.png" alt="Icono Keto" *ngIf="userObjectives?.dietaPreferida === 'keto'">
-        <img src="https://i.postimg.cc/bwrBmHSP/image.png" alt="Icono Baja en Grasas" *ngIf="userObjectives?.dietaPreferida === 'baja-grasas'">
+        <img src="https://i.postimg.cc/bwrBmHSP/image.png" alt="Icono Baja en Grasas" *ngIf="userObjectives?.dietaPreferida === 'baja_grasas'">
       </div>
       <div class="objective-text">
         <h3>Dieta Preferida</h3>
@@ -103,9 +102,9 @@
         <label for="objetivoPrincipal">Objetivo Principal:</label>
         <select id="objetivoPrincipal" name="objetivoPrincipal" [(ngModel)]="editedObjectives.objetivoPrincipal" required>
           <option value="" disabled selected>Seleccionar</option>
-          <option value="perder-grasa">Perder Grasa</option>
-          <option value="ganar-musculo">Ganar Músculo</option>
-          <option value="mantener-peso">Mantener Peso</option>
+          <option value="perder_grasa">Perder Grasa</option>
+          <option value="ganar_musculo">Ganar Músculo</option>
+          <option value="mantener_peso">Mantener Peso</option>
         </select>
       </div>
 
@@ -113,8 +112,8 @@
         <label for="metodoPreferido">Método Preferido:</label>
         <select id="metodoPreferido" name="metodoPreferido" [(ngModel)]="editedObjectives.metodoPreferido" required>
           <option value="" disabled selected>Seleccionar</option>
-          <option value="plan-nutricional">Necesito un plan nutricional</option>
-          <option value="contar-calorias">Necesito contar mis calorías</option>
+          <option value="plan_nutricional">Necesito un plan nutricional</option>
+          <option value="contar_calorias">Necesito contar mis calorías</option>
         </select>
       </div>
 
@@ -123,10 +122,10 @@
         <select id="nivelActividad" name="nivelActividad" [(ngModel)]="editedObjectives.nivelActividad" required>
           <option value="" disabled selected>Seleccionar</option>
           <option value="sedentario">Sedentario</option>
-          <option value="ligeramente-activo">Ligeramente Activo</option>
-          <option value="moderadamente-activo">Moderadamente Activo</option>
-          <option value="muy-activo">Muy Activo</option>
-          <option value="atleta-profesional">Atleta Profesional</option>
+          <option value="ligeramente_activo">Ligeramente Activo</option>
+          <option value="moderadamente_activo">Moderadamente Activo</option>
+          <option value="muy_activo">Muy Activo</option>
+          <option value="atleta_profesional">Atleta Profesional</option>
         </select>
       </div>
 
@@ -135,10 +134,10 @@
         <select id="dietaPreferida" name="dietaPreferida" [(ngModel)]="editedObjectives.dietaPreferida" required>
           <option value="" disabled selected>Seleccionar</option>
           <option value="recomendada">Recomendada</option>
-          <option value="alta-proteinas">Alta en Proteínas</option>
-          <option value="baja-carbohidratos">Baja en Carbohidratos</option>
+          <option value="alta_proteinas">Alta en Proteínas</option>
+          <option value="baja_carbohidratos">Baja en Carbohidratos</option>
           <option value="keto">Keto</option>
-          <option value="baja-grasas">Baja en Grasas</option>
+          <option value="baja_grasas">Baja en Grasas</option>
         </select>
       </div>
 
@@ -155,7 +154,7 @@
     <form (ngSubmit)="saveProfileChanges()" #editProfileForm="ngForm">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" [(ngModel)]="editedUserData.nombre" required>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="editedUserData.name" required>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>

@@ -31,11 +31,6 @@ export class RecipeService {
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
   }
-  /*getMealPlanRecipesByplanId(id: string): Observable<MealPlanRecipe[]> {
-    return this.http.get<MealPlanRecipeResponse[]>(`${env.apiUrl}meal_plan_recipes`).pipe(
-      map(data => MealPlanRecipeAssembler.toEntityFromResponseArray(data).filter(recipe => recipe.meal_plan_id.toString() === id))
-    );
-  }*/
   getRecipeByPlanId(id: string): Observable<Recipe[]> {
     return this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
       map(data => RecipeAssembler.toEntityFromResponseArray(data).filter(recipe => recipe.id.toString() === id))
