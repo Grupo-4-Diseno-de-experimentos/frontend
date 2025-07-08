@@ -140,7 +140,7 @@ export class CreatePlanComponent implements OnInit {
         next: (response) => {
           console.log('Meal plan created successfully:', response);
           alert('Meal plan created successfully!');
-          this.router.navigate(['/meal-plans']);
+          this.router.navigate(['/meal-plan']);
         },
         error: (error) => {
           console.error('Error creating meal plan:', error);

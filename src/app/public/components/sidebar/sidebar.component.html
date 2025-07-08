@@ -16,9 +16,13 @@
       <mat-icon class="nav-icon">favorite</mat-icon>
       <span class="nav-text">Favoritos</span>
     </a>
-    <a routerLink="/profile" class="nav-item">
+    <a routerLink="/profile" class="nav-item" *ngIf="!isNutritionist">
       <mat-icon class="nav-icon">person</mat-icon>
       <span class="nav-text">Perfil</span>
+    </a>
+    <a (click)="logout()" class="nav-item">
+      <mat-icon class="nav-icon">logout</mat-icon>
+      <span class="nav-text">Cerrar sesión</span>
     </a>
   </nav>
 </aside>

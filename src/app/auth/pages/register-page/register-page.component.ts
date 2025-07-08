@@ -211,7 +211,7 @@ export class RegisterPageComponent {
         next: () => {
           console.log('Usuario registrado');
           if (user.role.toLowerCase() === 'nutricionist') {
-            this.router.navigate(['/profile']); // Redirige a la pantalla de perfil
+            this.router.navigate(['/dashboard']); // Redirige a la pantalla de perfil
           } else {
             this.router.navigate(['/start-objectives']); // Redirige a la pantalla de objetivos
           }
