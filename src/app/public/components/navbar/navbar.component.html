@@ -3,7 +3,7 @@
     <h1 class="logo">NutriSmart</h1>
     <div class="user-section">
       <span class="welcome-msg">¡Bienvenido!</span>
-      <button class="profile-btn">
+      <button class="profile-btn" *ngIf="!isNutritionist">
         <mat-icon class="profile-icon" routerLink="/profile">account_circle</mat-icon>
       </button>
     </div>

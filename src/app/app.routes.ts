@@ -10,6 +10,7 @@ import { SetObjectives4Component } from './user-profile/pages/set-objectives-4/s
 import { SetObjectives5Component } from './user-profile/pages/set-objectives-5/set-objectives-5.component';
 import { ProfileComponent } from './user-profile/pages/profile/profile.component';
 import {DashboardComponent} from './public/components/dashboard/dashboard.component';
+import {AuthGuard} from './shared/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: '', component: DashboardComponent},
       { path: 'profile', component: ProfileComponent }, // Mueve la ruta del perfil aquí

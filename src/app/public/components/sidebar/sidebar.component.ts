@@ -3,6 +3,7 @@ import {Router, RouterLink} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {UserService} from '../../../user-profile/services/user.service';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +18,7 @@ import {CommonModule} from '@angular/common';
 })
 export class SidebarComponent {
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService,private authService:AuthService) {
   }
 
   get isNutritionist(): boolean {
@@ -25,7 +26,7 @@ export class SidebarComponent {
   }
 
   logout() {
-    localStorage.clear();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }
