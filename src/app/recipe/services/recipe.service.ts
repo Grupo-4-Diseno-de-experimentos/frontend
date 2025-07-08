@@ -31,7 +31,6 @@ export class RecipeService {
       map(data => RecipeAssembler.toEntityFromResponse(data))
     );
   }
-
   getRecipeByPlanId(id: string): Observable<Recipe[]> {
     return this.http.get<RecipeResponse[]>(`${env.apiUrl}recipes`).pipe(
       map(data => RecipeAssembler.toEntityFromResponseArray(data).filter(recipe => recipe.id.toString() === id))
